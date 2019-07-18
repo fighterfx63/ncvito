@@ -18,7 +18,7 @@ public class Apartment {
     private String address;
 
     @Setter
-    private long square;
+    private double square;
 
     @Setter
     private int roomCount;
@@ -29,7 +29,7 @@ public class Apartment {
     public Apartment() {
     }
 
-    public Apartment(String adress, long square, int roomCount, int floor) {
+    public Apartment(String adress, double square, int roomCount, int floor) {
 
         this.address = adress;
         this.square = square;

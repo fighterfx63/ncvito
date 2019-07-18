@@ -2,33 +2,28 @@ package ru.valeev.course.controller;
 
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.valeev.course.Entity.Announcement;
-import ru.valeev.course.repo.AnnouncementRepo;
+import ru.valeev.course.service.AnnouncementService;
 
 import java.util.List;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping({ "/announcements" })
+@RequestMapping({"/announcements"})
 
 
-public class  AnnouncementController {
+public class AnnouncementController {
+    private final AnnouncementService announcementService;
 
-    private final AnnouncementRepo announcementRepo;
-
-    @Autowired
-
-    public AnnouncementController(AnnouncementRepo announcementRepo) {
-        this.announcementRepo = announcementRepo;
+    public AnnouncementController(AnnouncementService announcementService) {
+        this.announcementService = announcementService;
     }
-
 
     @GetMapping
     public List<Announcement> list() {
-        return announcementRepo.findAll();
+        return announcementService.findAll();
     }
 
     @GetMapping("{id}")
@@ -38,7 +33,7 @@ public class  AnnouncementController {
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Announcement announcement) {
-        announcementRepo.delete(announcement);
+        announcementService.delete(announcement);
     }
 
     @PutMapping("{id}")
@@ -46,17 +41,18 @@ public class  AnnouncementController {
             @PathVariable("id") Announcement announcementFromDb,
             @RequestBody Announcement announcement
     ) {
-        BeanUtils.copyProperties(announcement, announcementFromDb, "id");
-        return announcementRepo.save(announcementFromDb);
+        return announcementService.update(announcementFromDb,announcement);
 
 
     }
 
     @PostMapping
     public Announcement create(@RequestBody Announcement announcement) {
-        return announcementRepo.save(announcement);
+        return announcementService.create(announcement);
     }
 }
+
+
 
 
 

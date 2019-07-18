@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table
@@ -25,15 +26,21 @@ public class Announcement {
    private  Apartment apartment;
 
    @Setter
-   boolean isSale;
+   private boolean isSale;
 
    @Setter
-   boolean isFavorites;
+    private  String description;
 
    @Setter
    private long price;
 
    private LocalDateTime creationDate;
+
+   @Setter
+   @ElementCollection(targetClass = Status.class,fetch = FetchType.EAGER)
+   @CollectionTable(name = "announcement_status",joinColumns = @JoinColumn(name = "announcement_id"))
+   @Enumerated(EnumType.STRING)
+   private Set<Status> status;
 
    public Announcement() {
    }
@@ -44,6 +51,7 @@ public class Announcement {
       this.isSale = isSale;
       this.price = price;
       this.creationDate = creationDate;
+
    }
 
 
