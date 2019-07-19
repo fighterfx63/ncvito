@@ -7,5 +7,5 @@ maven-build:
   stage: build
   script: "mvn package -B"
   artifacts:
-  paths:
-    - target/*.jar
+    paths:
+      - target/*.jar
