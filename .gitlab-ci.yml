@@ -9,4 +9,3 @@ maven-build:
   artifacts:
   paths:
     - target/*.jar
-    
