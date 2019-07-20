@@ -1,17 +1,16 @@
-package ru.valeev.course.controller;
+package nc.students.ncvito.controller;
 
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
-import ru.valeev.course.Entity.Announcement;
-import ru.valeev.course.service.AnnouncementService;
+import nc.students.ncvito.entity.Announcement;
+import nc.students.ncvito.service.AnnouncementService;
 
 import java.util.List;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping({"/announcements"})
+@RequestMapping("/announcements")
 
 
 public class AnnouncementController {
@@ -41,7 +40,7 @@ public class AnnouncementController {
             @PathVariable("id") Announcement announcementFromDb,
             @RequestBody Announcement announcement
     ) {
-        return announcementService.update(announcementFromDb,announcement);
+        return announcementService.update(announcementFromDb, announcement);
 
 
     }

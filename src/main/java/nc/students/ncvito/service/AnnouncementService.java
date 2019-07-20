@@ -1,10 +1,10 @@
-package ru.valeev.course.service;
+package nc.students.ncvito.service;
 
 
+import nc.students.ncvito.entity.Announcement;
+import nc.students.ncvito.repo.AnnouncementRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import ru.valeev.course.Entity.Announcement;
-import ru.valeev.course.repo.AnnouncementRepo;
 
 import java.util.List;
 
@@ -24,7 +24,6 @@ public class AnnouncementService {
     }
 
 
-
     public void delete(Announcement announcement) {
         announcementRepo.delete(announcement);
     }
@@ -36,7 +35,7 @@ public class AnnouncementService {
     }
 
 
-    public Announcement create (Announcement announcement) {
+    public Announcement create(Announcement announcement) {
         return announcementRepo.save(announcement);
     }
 }

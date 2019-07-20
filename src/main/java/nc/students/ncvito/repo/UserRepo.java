@@ -1,7 +1,7 @@
-package ru.valeev.course.repo;
+package nc.students.ncvito.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.valeev.course.Entity.User;
+import nc.students.ncvito.entity.User;
 
 public interface UserRepo extends JpaRepository<User, Long> {
 }

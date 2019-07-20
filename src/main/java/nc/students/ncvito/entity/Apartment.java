@@ -1,4 +1,4 @@
-package ru.valeev.course.Entity;
+package nc.students.ncvito.entity;
 
 
 import lombok.Getter;
@@ -9,21 +9,14 @@ import javax.persistence.*;
 @Entity
 @Table
 @Getter
+@Setter
 public class Apartment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Setter
     private String address;
-
-    @Setter
     private double square;
-
-    @Setter
     private int roomCount;
-
-    @Setter
     private int floor;
 
     public Apartment() {
