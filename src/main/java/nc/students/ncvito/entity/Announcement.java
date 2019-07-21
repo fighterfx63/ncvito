@@ -18,7 +18,7 @@ public class Announcement {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private User autor;
+    private User author;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "apartment_id")
@@ -37,8 +37,8 @@ public class Announcement {
     public Announcement() {
     }
 
-    public Announcement(User autor, Apartment apartment, boolean isSale, long price, LocalDateTime creationDate) {
-        this.autor = autor;
+    public Announcement(User author, Apartment apartment, boolean isSale, long price, LocalDateTime creationDate) {
+        this.author = author;
         this.apartment = apartment;
         this.isSale = isSale;
         this.price = price;
