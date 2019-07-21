@@ -1,0 +1,50 @@
+package nc.students.ncvito.entity;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Set;
+
+@Entity
+@Table
+@Getter
+@Setter
+public class Announcement {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User autor;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "apartment_id")
+    private Apartment apartment;
+
+    private boolean isSale;
+    private String description;
+    private long price;
+    private LocalDateTime creationDate;
+
+    @ElementCollection(targetClass = Status.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "announcement_status", joinColumns = @JoinColumn(name = "announcement_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Status> status;
+
+    public Announcement() {
+    }
+
+    public Announcement(User autor, Apartment apartment, boolean isSale, long price, LocalDateTime creationDate) {
+        this.autor = autor;
+        this.apartment = apartment;
+        this.isSale = isSale;
+        this.price = price;
+        this.creationDate = creationDate;
+
+    }
+
+
+}
