@@ -68,6 +68,7 @@ public class Script {
         String query;
         for (int i = 0; i < arr.length; i++) {
             query = "TRUNCATE TABLE  " + arr[i] + " CASCADE;";
+
             try (PreparedStatement pstmt = cn.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS)) {
 
@@ -125,7 +126,6 @@ public class Script {
                         + " VALUES (" + (i + 1) + ", '" + first_name + "', '" + last_name + "', '" + email + "', '" + pas + "', '" + phone + "', '" + login + "')";
             }
 
-            //System.out.println(SQL);
             try (PreparedStatement pstmt = cn.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS)) {
 
@@ -149,7 +149,7 @@ public class Script {
             role = genUserRole();
             query = "INSERT INTO user_role (user_id, role)"
                     + " VALUES (" + (i + 1) + ", '" + role + "')";
-            //System.out.println(SQL);
+
             try (PreparedStatement pstmt = cn.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS)) {
 
@@ -180,7 +180,7 @@ public class Script {
 
             query = "INSERT INTO apartment (id, address, floor, room_count, square)"
                     + " VALUES (" + (i + 1) + ", '" + address + "', " + floor + ", " + room_count + ", " + square + ")";
-            //System.out.println(SQL);
+
             try (PreparedStatement pstmt = cn.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS)) {
 
@@ -215,7 +215,7 @@ public class Script {
 
             query = "INSERT INTO announcement (id, user_id, apartment_id, price, creation_date, is_sale, description)"
                     + " VALUES (" + (i + 1) + ", " + user_id + ", " + apartment_id + ", " + price + ", '" + creation_date + "', " + is_sale + ", '" + description + "')";
-            //System.out.println(SQL);
+
             try (PreparedStatement pstmt = cn.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS)) {
 
@@ -241,7 +241,7 @@ public class Script {
             announcement_id = rnd.nextInt(10) + 1;
             query = "INSERT INTO favorites (id, user_id, announcement_id)"
                     + " VALUES (" + (i + 1) + ", " + user_id + ", " + announcement_id + ")";
-            //System.out.println(SQL);
+
             try (PreparedStatement pstmt = cn.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS)) {
 
@@ -265,7 +265,7 @@ public class Script {
             status = genAnStatus();
             query = "INSERT INTO announcement_status (announcement_id, status)"
                     + " VALUES (" + (i + 1) + ", '" + status + "')";
-            //System.out.println(SQL);
+
             try (PreparedStatement pstmt = cn.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS)) {
 
