@@ -1,2 +1,7 @@
 .idea
-/target/
+/nbproject/
+/build/
+/test/
+/out/
+*.iml
+*.jar
