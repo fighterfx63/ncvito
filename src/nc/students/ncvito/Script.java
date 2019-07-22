@@ -1,5 +1,8 @@
-package mainpackage;
+package nc.students.ncvito;
 
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.util.Scanner;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,20 +10,44 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
 
-public class Main {
+public class Script {
 
-    //private static final String url = "jdbc:postgresql://localhost/postgres";
-    private static final String url = "jdbc:postgresql://localhost/ncvito";
-    private static final String user = "postgres";
-    private static final String password = "123";
-    //private static final String password = "NCpsql";
+    private static String url;
+    private static String user;
+    private static String password;
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws FileNotFoundException {
+        defineConnectionProperties();
         Connection con = connect();
 
         concateAllTables(con);
 
-        fillTables(con, 15);
+        int tableRowsCount = 15;
+        fillTables(con, tableRowsCount);
+
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void defineConnectionProperties() throws FileNotFoundException {
+        File properties = new File(System.getProperty("user.dir") + "/src/main/resources/application.properties");
+        Scanner scan = new Scanner(properties);
+        String currentRow;
+        while (scan.hasNextLine()) {
+            currentRow = scan.nextLine();
+            if (currentRow.substring(0, currentRow.indexOf("=")).equals("spring.datasource.url")) {
+                url = currentRow.substring(currentRow.indexOf("=") + 1, currentRow.length());
+            } else if (currentRow.substring(0, currentRow.indexOf("=")).equals("spring.datasource.username")) {
+                user = currentRow.substring(currentRow.indexOf("=") + 1, currentRow.length());
+            } else if (currentRow.substring(0, currentRow.indexOf("=")).equals("spring.datasource.password")) {
+                password = currentRow.substring(currentRow.indexOf("=") + 1, currentRow.length());
+            }
+        }
+        scan.close();
     }
 
     public static Connection connect() {
@@ -38,10 +65,10 @@ public class Main {
     public static void concateAllTables(Connection cn) {
         System.out.println("Произвожу очистку таблиц: favorites, announcement_status, user_role, announcement, apartment, users ...");
         String[] arr = {"favorites", "announcement_status", "user_role", "announcement", "apartment", "users"};
-        String SQL;
+        String query;
         for (int i = 0; i < arr.length; i++) {
-            SQL = "TRUNCATE TABLE  " + arr[i] + " CASCADE;";
-            try (PreparedStatement pstmt = cn.prepareStatement(SQL,
+            query = "TRUNCATE TABLE  " + arr[i] + " CASCADE;";
+            try (PreparedStatement pstmt = cn.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS)) {
 
                 pstmt.execute();
@@ -79,7 +106,7 @@ public class Main {
 
         boolean is_banned;
 
-        String SQL;
+        String query;
         for (int i = 0; i < count; i++) {
             first_name = genFname();
             last_name = genLname();
@@ -91,15 +118,15 @@ public class Main {
             if (is_banned) { // если юзер забанен - заполняем поля ban_expired и ban_reason
                 ban_expired = genTimeStamp();
                 ban_reason = "Reason_" + rnd.nextInt(100) + 1;
-                SQL = "INSERT INTO users (id, first_name, last_name, email, password, phone, login, ban_expired, ban_reason)"
+                query = "INSERT INTO users (id, first_name, last_name, email, password, phone, login, ban_expired, ban_reason)"
                         + " VALUES (" + (i + 1) + ", '" + first_name + "', '" + last_name + "', '" + email + "', '" + pas + "', '" + phone + "', '" + login + "', '" + ban_expired + "', '" + ban_reason + "')";
             } else { // если юзер "на свободе" - поля ban_expired и ban_reason НЕ заполняются (я предполагаю, что они == NULL в таком случае)
-                SQL = "INSERT INTO users (id, first_name, last_name, email, password, phone, login)"
+                query = "INSERT INTO users (id, first_name, last_name, email, password, phone, login)"
                         + " VALUES (" + (i + 1) + ", '" + first_name + "', '" + last_name + "', '" + email + "', '" + pas + "', '" + phone + "', '" + login + "')";
             }
 
             //System.out.println(SQL);
-            try (PreparedStatement pstmt = cn.prepareStatement(SQL,
+            try (PreparedStatement pstmt = cn.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS)) {
 
                 pstmt.execute();
@@ -117,13 +144,13 @@ public class Main {
 
         String role;
 
-        String SQL;
+        String query;
         for (int i = 0; i < count; i++) {
             role = genUserRole();
-            SQL = "INSERT INTO user_role (user_id, role)"
+            query = "INSERT INTO user_role (user_id, role)"
                     + " VALUES (" + (i + 1) + ", '" + role + "')";
             //System.out.println(SQL);
-            try (PreparedStatement pstmt = cn.prepareStatement(SQL,
+            try (PreparedStatement pstmt = cn.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS)) {
 
                 pstmt.execute();
@@ -144,17 +171,17 @@ public class Main {
         int room_count;
         int floor;
 
-        String SQL;
+        String query;
         for (int i = 0; i < count; i++) {
             address = genFname();
             room_count = rnd.nextInt(5) + 1;
             square = (room_count * (rnd.nextInt(26) + 20)) + "." + rnd.nextInt(100);
             floor = rnd.nextInt(10) + 1;
 
-            SQL = "INSERT INTO apartment (id, address, floor, room_count, square)"
+            query = "INSERT INTO apartment (id, address, floor, room_count, square)"
                     + " VALUES (" + (i + 1) + ", '" + address + "', " + floor + ", " + room_count + ", " + square + ")";
             //System.out.println(SQL);
-            try (PreparedStatement pstmt = cn.prepareStatement(SQL,
+            try (PreparedStatement pstmt = cn.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS)) {
 
                 pstmt.execute();
@@ -177,7 +204,7 @@ public class Main {
         boolean is_sale;
         String description;
 
-        String SQL;
+        String query;
         for (int i = 0; i < count; i++) {
             user_id = rnd.nextInt(count) + 1;
             apartment_id = rnd.nextInt(count) + 1;
@@ -186,10 +213,10 @@ public class Main {
             is_sale = genBoolean(rnd.nextInt(2));
             description = "Description_" + rnd.nextInt(1000);
 
-            SQL = "INSERT INTO announcement (id, user_id, apartment_id, price, creation_date, is_sale, description)"
+            query = "INSERT INTO announcement (id, user_id, apartment_id, price, creation_date, is_sale, description)"
                     + " VALUES (" + (i + 1) + ", " + user_id + ", " + apartment_id + ", " + price + ", '" + creation_date + "', " + is_sale + ", '" + description + "')";
             //System.out.println(SQL);
-            try (PreparedStatement pstmt = cn.prepareStatement(SQL,
+            try (PreparedStatement pstmt = cn.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS)) {
 
                 pstmt.execute();
@@ -208,14 +235,14 @@ public class Main {
         int user_id;
         int announcement_id;
 
-        String SQL;
+        String query;
         for (int i = 0; i < count; i++) {
             user_id = rnd.nextInt(10) + 1;
             announcement_id = rnd.nextInt(10) + 1;
-            SQL = "INSERT INTO favorites (id, user_id, announcement_id)"
+            query = "INSERT INTO favorites (id, user_id, announcement_id)"
                     + " VALUES (" + (i + 1) + ", " + user_id + ", " + announcement_id + ")";
             //System.out.println(SQL);
-            try (PreparedStatement pstmt = cn.prepareStatement(SQL,
+            try (PreparedStatement pstmt = cn.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS)) {
 
                 pstmt.execute();
@@ -233,13 +260,13 @@ public class Main {
 
         String status;
 
-        String SQL;
+        String query;
         for (int i = 0; i < count; i++) {
             status = genAnStatus();
-            SQL = "INSERT INTO announcement_status (announcement_id, status)"
+            query = "INSERT INTO announcement_status (announcement_id, status)"
                     + " VALUES (" + (i + 1) + ", '" + status + "')";
             //System.out.println(SQL);
-            try (PreparedStatement pstmt = cn.prepareStatement(SQL,
+            try (PreparedStatement pstmt = cn.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS)) {
 
                 pstmt.execute();
