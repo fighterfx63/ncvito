@@ -1,26 +1,32 @@
 package nc.students.ncvito;
 
 
-        import org.junit.Test;
-        import org.junit.runner.RunWith;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-        import org.springframework.boot.test.context.SpringBootTest;
-        import org.springframework.test.context.junit4.SpringRunner;
-        import org.springframework.test.web.servlet.MockMvc;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
-        import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
-        import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-        import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-        import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-        import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-        import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-        import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@TestPropertySource("/application-test.properties")
+@Sql(value = {"/create..sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class LoginTest {
 
     @Autowired
@@ -28,7 +34,7 @@ public class LoginTest {
 
 
     @Test
-    public void accessDeniedTest() throws Exception {
+    public void accessDenied() throws Exception {
         this.mockMvc.perform(get("/announcements"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
@@ -44,7 +50,7 @@ public class LoginTest {
     }
 
     @Test
-    public void correctLoginTest() throws Exception {
+    public void correctLogin() throws Exception {
         this.mockMvc.perform(formLogin().user("admin").password("admin"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
@@ -53,9 +59,8 @@ public class LoginTest {
     }
 
     @Test
-    public void registrationTest() throws Exception {
-        this.mockMvc.perform(post(("/registration")).with(csrf()).param("login", "testUser2").param("password", "testPassword2"))
-                .andDo(print())
+    public void registration() throws Exception {
+        this.mockMvc.perform(post(("/registration")).with(csrf()).param("login", "testUser").param("password", "testPassword"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/login"));
     }

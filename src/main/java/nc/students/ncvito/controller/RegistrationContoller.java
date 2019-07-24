@@ -2,22 +2,19 @@ package nc.students.ncvito.controller;
 
 import nc.students.ncvito.entity.Role;
 import nc.students.ncvito.entity.User;
-import nc.students.ncvito.repo.UserRepo;
+import nc.students.ncvito.repo.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collections;
-import java.util.Date;
-import java.util.Map;
 
 @Controller
 public class RegistrationContoller {
-    private final UserRepo userRepo;
+    private final UserRepository userRepository;
 
-    public RegistrationContoller(UserRepo userRepo) {
-        this.userRepo = userRepo;
+    public RegistrationContoller(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/registration")
@@ -28,14 +25,14 @@ public class RegistrationContoller {
     @PostMapping("/registration")
     public String addUser(User user) {
 
-        User userFromDb = userRepo.findByLogin(user.getLogin());
+        User userFromDb = userRepository.findByLogin(user.getLogin());
 
         if (userFromDb != null) {
             return "registration";
         }
 
         user.setRole(Collections.singleton(Role.USER));
-        userRepo.save(user);
+        userRepository.save(user);
 
         return "redirect:/login";
     }
