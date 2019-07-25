@@ -5,7 +5,6 @@ import nc.students.ncvito.entity.User;
 import nc.students.ncvito.repo.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Collections;
@@ -18,11 +17,6 @@ public class RegistrationController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/registration")
-    public String registration() {
-        return "registration";
-    }
-
 
     @PostMapping("/registration")
     public ResponseEntity addUser(User user) {
@@ -30,7 +24,7 @@ public class RegistrationController {
         User userFromDb = userRepository.findByLogin(user.getLogin());
 
         if (userFromDb != null) {
-           return ResponseEntity.badRequest().body("User already exists");
+            return ResponseEntity.badRequest().body("User already exists");
         }
 
         user.setRole(Collections.singleton(Role.USER));
