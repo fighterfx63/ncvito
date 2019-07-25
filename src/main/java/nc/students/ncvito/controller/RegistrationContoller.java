@@ -34,6 +34,6 @@ public class RegistrationContoller {
         user.setRole(Collections.singleton(Role.USER));
         userRepository.save(user);
 
-        return "redirect:/login";
+        return "login";
     }
 }

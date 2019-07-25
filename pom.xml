@@ -79,11 +79,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>8.22</version>
-        </dependency>
 
     </dependencies>
 
