@@ -62,6 +62,8 @@ public class LoginTest {
     public void registration() throws Exception {
         this.mockMvc.perform(post(("/registration")).with(csrf()).param("login", "testUser").param("password", "testPassword"))
                 .andExpect(status().is2xxSuccessful());
+
+
     }
 
 
