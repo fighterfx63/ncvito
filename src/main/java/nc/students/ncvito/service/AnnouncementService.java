@@ -2,41 +2,40 @@ package nc.students.ncvito.service;
 
 
 import nc.students.ncvito.entity.Announcement;
-import nc.students.ncvito.repo.AnnouncementRepo;
+import nc.students.ncvito.repo.AnnouncementRepository;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @Service
 public class AnnouncementService {
-    private final AnnouncementRepo announcementRepo;
+    private final AnnouncementRepository announcementRepository;
 
 
-    public AnnouncementService(AnnouncementRepo announcementRepo) {
-        this.announcementRepo = announcementRepo;
+    public AnnouncementService(AnnouncementRepository announcementRepository) {
+        this.announcementRepository = announcementRepository;
     }
 
 
-    public List<Announcement> findAll() {
-        return announcementRepo.findAll();
+    public Page<Announcement> findAll(Pageable pegeable) {
+        return announcementRepository.findAll(pegeable);
     }
 
 
     public void delete(Announcement announcement) {
-        announcementRepo.delete(announcement);
+        announcementRepository.delete(announcement);
     }
 
 
     public Announcement update(Announcement announcementFromDb, Announcement announcement) {
         BeanUtils.copyProperties(announcement, announcementFromDb, "id");
-        return announcementRepo.save(announcementFromDb);
+        return announcementRepository.save(announcementFromDb);
     }
 
-
     public Announcement create(Announcement announcement) {
-        return announcementRepo.save(announcement);
+        return announcementRepository.save(announcement);
     }
 }
 
