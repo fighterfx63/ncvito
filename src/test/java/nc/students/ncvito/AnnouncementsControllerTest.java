@@ -35,9 +35,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class AnnouncementsControllerTest {
-    User user = new User();
-    Apartment apartment = new Apartment();
-    Announcement announcement = new Announcement();
 
 
     @Autowired
@@ -68,15 +65,20 @@ public class AnnouncementsControllerTest {
     @Test
     public void add() throws Exception {
 
+        User user = new User();
+
         user.setLogin("qwe");
         user.setPassword("qwe");
         user.setRole(Collections.singleton(Role.USER));
 
+        Apartment apartment = new Apartment();
 
         apartment.setAddress("qwe");
         apartment.setFloor(1);
         apartment.setRoomCount(1);
         apartment.setSquare(1);
+
+        Announcement announcement = new Announcement();
 
         announcement.setAuthor(user);
         announcement.setApartment(apartment);
@@ -93,3 +95,4 @@ public class AnnouncementsControllerTest {
                 .andExpect(content().string(containsString(user.getLogin())));
     }
 }
+
