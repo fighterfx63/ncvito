@@ -77,9 +77,8 @@ public class LoginTest {
 
         this.mockMvc.perform(post(("/registration")).param("login", login).param("password", password).with(csrf()))
                 .andDo(print())
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$.login").value(login))
-                .andExpect(jsonPath("$.password").value(password));
+                .andExpect(status().is2xxSuccessful());
+
 
 
         this.mockMvc.perform(post("/login").with(csrf()).param("username", login).param("password", password))
