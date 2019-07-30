@@ -1,11 +1,13 @@
 package nc.students.ncvito.controller;
 
 
-import org.springframework.web.bind.annotation.*;
 import nc.students.ncvito.entity.Announcement;
 import nc.students.ncvito.service.AnnouncementService;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.*;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -21,12 +23,13 @@ public class AnnouncementController {
     }
 
     @GetMapping
-    public List<Announcement> list() {
-        return announcementService.findAll();
+    public Page<Announcement> getAllAnnouncements(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pegeable) {
+
+        return announcementService.findAll(Pageable.unpaged());
     }
 
     @GetMapping("{id}")
-    public Announcement getOneAnnouncement(@PathVariable("id") Announcement announcement) {
+    public Announcement getAnnouncement(@PathVariable("id") Announcement announcement) {
         return announcement;
     }
 

@@ -1,6 +1,13 @@
 package nc.students.ncvito.entity;
 
-public enum Role {
+import org.springframework.security.core.GrantedAuthority;
 
-    ANONIMUS, BANNED, USER, MODERATOR, ADMIN
+public enum Role implements GrantedAuthority {
+
+    ANONIMUS, BANNED, USER, MODERATOR, ADMIN;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }

@@ -13,14 +13,14 @@ import java.util.Set;
 @Setter
 public class Announcement {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private User autor;
+    private User author;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "apartment_id")
     private Apartment apartment;
 
@@ -37,8 +37,8 @@ public class Announcement {
     public Announcement() {
     }
 
-    public Announcement(User autor, Apartment apartment, boolean isSale, long price, LocalDateTime creationDate) {
-        this.autor = autor;
+    public Announcement(User author, Apartment apartment, boolean isSale, long price, LocalDateTime creationDate) {
+        this.author = author;
         this.apartment = apartment;
         this.isSale = isSale;
         this.price = price;
