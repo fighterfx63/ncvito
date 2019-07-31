@@ -22,9 +22,9 @@ public class Apartment {
     public Apartment() {
     }
 
-    public Apartment(String adress, double square, int roomCount, int floor) {
+    public Apartment(String address, double square, int roomCount, int floor) {
 
-        this.address = adress;
+        this.address = address;
         this.square = square;
         this.roomCount = roomCount;
         this.floor = floor;
