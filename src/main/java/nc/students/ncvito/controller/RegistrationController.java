@@ -3,6 +3,7 @@ package nc.students.ncvito.controller;
 import nc.students.ncvito.entity.Role;
 import nc.students.ncvito.entity.User;
 import nc.students.ncvito.repo.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,6 @@ public class RegistrationController {
         user.setRole(Collections.singleton(Role.USER));
         userRepository.save(user);
 
-        return ResponseEntity.ok().body(user);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }
