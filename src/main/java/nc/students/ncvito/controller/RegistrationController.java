@@ -3,8 +3,10 @@ package nc.students.ncvito.controller;
 import nc.students.ncvito.entity.Role;
 import nc.students.ncvito.entity.User;
 import nc.students.ncvito.repo.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +21,8 @@ public class RegistrationController {
         this.userRepository = userRepository;
     }
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/registration")
     public ResponseEntity addUser(@RequestBody User user) {
@@ -30,6 +34,7 @@ public class RegistrationController {
         }
 
         user.setRole(Collections.singleton(Role.USER));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
         return ResponseEntity.ok(HttpStatus.OK);
