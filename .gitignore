@@ -6,3 +6,4 @@
 /out/
 *.iml
 *.jar
+/frontend/src/node_modules
