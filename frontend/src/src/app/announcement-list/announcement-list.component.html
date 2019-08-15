@@ -1,0 +1,20 @@
+<mat-grid-list cols="2" rowHeight="4:1">
+
+  <mat-grid-tile *ngFor="let announcement of announcements">
+    <mat-card [style.width]="'100%'">
+      <app-announcement *ngIf="announcement" [announcement]="announcement"
+                        (deleteEmitter)="delete($event)"
+      >
+      </app-announcement>
+    </mat-card>
+  </mat-grid-tile>
+
+</mat-grid-list>
+<mat-paginator [length]="numberOfElements "
+               [pageSize]="sizeDefault"
+               [pageIndex]="pageDefault"
+               [pageSizeOptions]="[5, 10, 15]"
+               (page)="getData($event)">
+</mat-paginator>
+
+

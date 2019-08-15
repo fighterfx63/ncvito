@@ -5,7 +5,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from "../app-routing.module";
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
-import {MaterialModule} from "../../material-module/material.module";
 import {HttpClientModule} from "@angular/common/http";
 import {
   MatInputModule,
@@ -14,13 +13,12 @@ import {
   MatSnackBarModule,
   MatFormFieldModule,
   MatStepperModule,
-  MatMenuModule
+  MatMenuModule, MatIconModule, MatGridListModule, MatPaginatorModule
 } from '@angular/material'
 
 const modules = [
   CommonModule,
   ReactiveFormsModule,
-  MaterialModule,
   BrowserAnimationsModule,
   AppRoutingModule,
   HttpClientModule,
@@ -32,7 +30,10 @@ const modules = [
   MatSnackBarModule,
   MatFormFieldModule,
   MatStepperModule,
-  MatMenuModule
+  MatMenuModule,
+  MatIconModule,
+  MatGridListModule,
+  MatPaginatorModule,
 ];
 
 @NgModule({

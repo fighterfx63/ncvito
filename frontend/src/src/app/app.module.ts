@@ -1,20 +1,23 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {SignUpComponent} from "./sign-up/sign-up.component";
-
+import {AnnouncementComponent} from "./announcement/announcement.component";
 import {SharedModule} from "./shared/shared.module";
-
+import {AnnouncementListComponent} from "./announcement-list/announcement-list.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpComponent
+    SignUpComponent,
+    AnnouncementComponent,
+    AnnouncementListComponent,
   ],
   imports: [SharedModule],
-  exports:[],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

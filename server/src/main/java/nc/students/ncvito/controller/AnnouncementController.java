@@ -23,9 +23,9 @@ public class AnnouncementController {
     }
 
     @GetMapping
-    public Page<Announcement> getAllAnnouncements(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pegeable) {
+    public Page<Announcement> getAllAnnouncements(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
 
-        return announcementService.findAll(Pageable.unpaged());
+        return announcementService.findAll(pageable);
     }
 
     @GetMapping("{id}")
