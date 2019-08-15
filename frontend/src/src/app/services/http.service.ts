@@ -33,9 +33,12 @@ export class HttpService {
 
 
   post(url: string, object: Object): Observable<typeof object> {
-    return this.http.post<typeof object>(environment.url + url, object)
+
+    const headers= new HttpHeaders({Authorization: 'Basic' + sessionStorage.getItem('token')});
+    return this.http.post<typeof object>(environment.url + url, object, {headers})
       .pipe(
         catchError(this.handleError)
       );
   }
+
 }

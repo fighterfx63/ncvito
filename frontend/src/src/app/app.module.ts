@@ -1,18 +1,16 @@
 import { NgModule } from '@angular/core';
 
-import {SharedModule} from "./shared/shared.module";
-
 import { AppComponent } from './app.component';
-import { NavComponent } from './nav/nav.component';
-import { PlaceholderComponent } from './placeholder/placeholder.component';
+import {SignUpComponent} from "./sign-up/sign-up.component";
+
+import {SharedModule} from "./shared/shared.module";
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
-    PlaceholderComponent
+    SignUpComponent
   ],
   imports: [SharedModule],
   exports:[],

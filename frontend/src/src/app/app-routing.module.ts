@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router } from '@angular/router';
-import {PlaceholderComponent} from "./placeholder/placeholder.component";
 import {APP_BASE_HREF} from "@angular/common";
-
+import {SignUpComponent} from "./sign-up/sign-up.component";
 
 const routes: Routes = [
   {
-    path:'advertisements', component:PlaceholderComponent
-  },
-  {
-    path:'profile', component:PlaceholderComponent
+    path: 'sign-up', component: SignUpComponent
   }
 ];
 
