@@ -24,9 +24,6 @@ public class RegistrationController {
         this.userRepository = userRepository;
     }
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @PostMapping("/registration")
     public ResponseEntity addUser(@RequestBody User user) {
 

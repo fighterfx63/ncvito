@@ -56,11 +56,8 @@ public class LoginTest {
     AnnouncementService announcementService;
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Before
-
     public void createObjects() {
         User user = new User();
 
