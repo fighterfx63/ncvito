@@ -42,12 +42,12 @@ export class SignInComponent {
       data => {
         this.router.navigate([
           this.loginService.getRedirectUrl()
-        ])
+        ]);
         this.invalidLogin = false;
       },
       error => {
         this.openSnackBar('It was unable to sign inc. Please, try again later', 'OK');
-        this.invalidLogin = true
+        this.invalidLogin = true;
         this.isClicked = false;
       }
     );
@@ -68,7 +68,7 @@ export class SignInComponent {
     if (this.form.get('password').value === '') {
       return 'Password is required to sign in.';
     } else {
-      return 'Password must be six characters or longer.'
+      return 'Password must be six characters or longer.';
     }
   }
 }
