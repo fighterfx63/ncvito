@@ -1,12 +1,12 @@
 import {TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {HttpService} from './http.service';
-import {User} from "../sign-up/user";
+import {UserModel} from "../sign-up/user.model";
 
 describe('HttpService', () => {
   let service: HttpService;
   let httpMock: HttpTestingController;
-  let theUser: User;
+  let theUser: UserModel;
   let url: string;
 
   beforeEach(() => {
@@ -23,7 +23,7 @@ describe('HttpService', () => {
   beforeEach(() => {
       service = TestBed.get(HttpService);
       httpMock = TestBed.get(HttpTestingController);
-      theUser = new User('testFname', 'testSname', 'testLogin', 'testPassword', 'testEmail', 'testPhone');
+      theUser = new UserModel('testFname', 'testSname', 'testLogin', 'testPassword', 'testEmail', 'testPhone');
       url = "/registration";
     }
   )
