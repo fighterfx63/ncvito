@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserModel} from "./user.model";
-import {Router} from "@angular/router";
-import {HttpService} from "../services/http.service";
-import {MatSnackBar} from "@angular/material";
+import {UserModel} from './user.model';
+import {Router} from '@angular/router';
+import {HttpService} from '../services/http.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'ncvito-sign-up',
@@ -16,19 +16,18 @@ export class SignUpComponent implements OnInit {
 
   isClicked: boolean;
 
-  constructor(private httpService: HttpService, private router: Router, private _snackBar: MatSnackBar) {
+  constructor(private httpService: HttpService, private router: Router, private snackBar: MatSnackBar) {
 
-  this.isClicked = false;
+    this.isClicked = false;
 
-    this.formGroup = new FormGroup( {
+    this.formGroup = new FormGroup({
         fNameF: new FormControl(''),
         lNameF: new FormControl(''),
         loginF: new FormControl(''),
         passwordF: new FormControl(''),
         emailF: new FormControl('', [Validators.email]),
-        phoneF: new FormControl('',[Validators.pattern('[6-9]\\d{9}')]),
+        phoneF: new FormControl('', [Validators.pattern('[6-9]\\d{9}')]),
       }
-
     );
   }
 
@@ -46,8 +45,8 @@ export class SignUpComponent implements OnInit {
   }
 
   getLoginErrorMessage() {
-      return this.formGroup.get('loginF').hasError('pattern') ? 'This username has been already used' :
-        '';
+    return this.formGroup.get('loginF').hasError('pattern') ? 'This username has been already used' :
+      '';
   }
 
   submit() {
@@ -59,7 +58,7 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
-    var theUser = new UserModel( this.formGroup.get('fNameF').value,
+    const theUser = new UserModel(this.formGroup.get('fNameF').value,
       this.formGroup.get('lNameF').value,
       this.formGroup.get('loginF').value,
       this.formGroup.get('passwordF').value,
@@ -69,17 +68,17 @@ export class SignUpComponent implements OnInit {
 
     this.httpService.post('/registration', theUser).subscribe(
       () => {
-        console.log("You have been signed up successfully");
-        this.openSnackBar("You have been signed up successfully", "OK");
-        this.router.navigateByUrl("/");
+        console.log('You have been signed up successfully');
+        this.openSnackBar('You have been signed up successfully', 'OK');
+        this.router.navigateByUrl('/');
         this.isClicked = false;
       },
       response => {
         console.log(response);
-        if (response === "User already exists") {
+        if (response === 'User already exists') {
           this.formGroup.get('loginF').setErrors({'pattern': true});
         } else {
-          this.openSnackBar("It was unable to sign up. Please, try again later", "OK");
+          this.openSnackBar('It was unable to sign up. Please, try again later', 'OK');
         }
         this.isClicked = false;
       }
@@ -87,7 +86,7 @@ export class SignUpComponent implements OnInit {
   }
 
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
+    this.snackBar.open(message, action, {
       duration: 3000
     });
   }

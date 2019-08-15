@@ -27,16 +27,16 @@ import java.util.Arrays;
 @EnableConfigurationProperties
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    public WebSecurityConfig(UserService userService) {
+        this.userService = userService;
+    }
+
     @Autowired
     private final UserService userService;
 
     @Bean
-    public PasswordEncoder getPasswordEncoder(){
+    public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder(8);
-    }
-
-    public WebSecurityConfig(UserService userService) {
-        this.userService = userService;
     }
 
 
@@ -46,22 +46,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .cors().and()
                 .authorizeRequests()
-                .antMatchers( "/registration","/login").permitAll()
+                .antMatchers("/registration", "/login").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic()
                 .and().sessionManagement().disable();
     }
-  /* @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:4200/");
-                        //.allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD","OPTIONS");
-            }
-        };
-    }
-*/
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(getPasswordEncoder());
