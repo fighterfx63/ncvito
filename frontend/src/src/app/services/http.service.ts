@@ -41,4 +41,11 @@ export class HttpService {
       );
   }
 
+  get(url: string, data: any) {
+
+    return this.http.get<typeof data>(url)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 }

@@ -1,7 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import { SignUpComponent } from './sign-up.component';
+
 import {AppRoutingModule} from "../app-routing.module";
+
+import { SignUpComponent } from './sign-up.component';
+import {AdInfoCardComponent} from "../ad-info-card/ad-info-card.component";
+import {AdPhotosComponent} from "../ad-photos/ad-photos.component";
 
 import {DebugElement} from "@angular/core";
 import {By} from "@angular/platform-browser";
@@ -15,7 +19,7 @@ describe('SignUpComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SignUpComponent],
+      declarations: [ SignUpComponent, AdInfoCardComponent, AdPhotosComponent],
       imports: [
         HttpClientTestingModule,
         AppRoutingModule,
