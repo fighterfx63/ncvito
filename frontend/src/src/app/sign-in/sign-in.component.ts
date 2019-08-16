@@ -14,21 +14,20 @@ export class SignInComponent {
 
   constructor(
     private loginService: LoginService,
-    private router: Router,
-    private snackBar: MatSnackBar
+    private router: Router
   ) {
   }
 
-  form: FormGroup = new FormGroup({
+  private form: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
 
-  user: CredentialsModel;
-  isClicked = false;
-  invalidLogin: boolean;
+  private user: CredentialsModel;
+  private isClicked = false;
+  private invalidLogin: boolean;
 
-  submit() {
+  private submit() {
     if (this.form.valid && !this.isClicked) {
       this.isClicked = true;
       this.user = this.form.value;
@@ -37,7 +36,7 @@ export class SignInComponent {
     }
   }
 
-  checkLogin(): void {
+  private checkLogin(): void {
     this.loginService.authenticate(this.user.username, this.user.password).subscribe(
       data => {
         this.router.navigate([
@@ -46,25 +45,19 @@ export class SignInComponent {
         this.invalidLogin = false;
       },
       error => {
-        this.openSnackBar('It was unable to sign in. Please, try again later', 'OK');
+        this.loginService.openSnackBar('It was unable to sign in. Please, try again later', 'OK');
         this.invalidLogin = true;
         this.isClicked = false;
       }
     );
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 3000
-    });
-  }
 
-
-  getUsernameErrorMessage() {
+  private getUsernameErrorMessage() {
     return 'Write username!';
   }
 
-  getPasswordErrorMessage() {
+  private getPasswordErrorMessage() {
     if (this.form.get('password').value === '') {
       return 'Password is required to sign in.';
     } else {

@@ -4,6 +4,7 @@ import {catchError} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {LoginService} from './login.service';
+import {MatSnackBar} from '@angular/material';
 
 
 @Injectable({
@@ -11,7 +12,13 @@ import {LoginService} from './login.service';
 })
 export class HttpService {
 
-  constructor(private http: HttpClient, private loginService: LoginService) {
+  public openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000
+    });
+  }
+
+  constructor(private http: HttpClient, private loginService: LoginService, private snackBar: MatSnackBar) {
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -30,7 +37,7 @@ export class HttpService {
     // return an observable with a user-facing error message
     return throwError(
       'Error!\nSomething bad happened; please try again later.');
-  };
+  }
 
 
   post(url: string, object: object): Observable<typeof object> {
@@ -47,4 +54,24 @@ export class HttpService {
       );
   }
 
+  // first 'if' statement is case of using get request for authentication
+  get(url: string, object: object = null, httpHeaders: HttpHeaders = null): Observable<typeof object> {
+    if (httpHeaders) {
+      return this.http.post<typeof object>(environment.url + url, {httpHeaders})
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+    if (this.loginService.isLoggedIn()) {
+      const headers = new HttpHeaders({Authorization: 'Basic' + sessionStorage.getItem('token')});
+      return this.http.post<typeof object>(environment.url + url, object, {headers})
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+    return this.http.post<typeof object>(environment.url + url, object)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 }
