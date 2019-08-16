@@ -1,42 +1,42 @@
-<mat-vertical-stepper linear #stepper >
+<mat-vertical-stepper linear #stepper class="announcement-stepper__input" >
 
 
   <mat-step [stepControl]="firstFormGroup" errorMessage="Apartment is required" >  Please provide us the following
-    information
+    information:
     <form [formGroup]="firstFormGroup" >
       <ng-template matStepLabel>Fill out apartment info</ng-template>
 
       <div >
-        <mat-form-field  style="margin-top: 10px">
+        <mat-form-field class="announcement-stepper__input">
           <input matInput [(ngModel)]="announcement.apartment.address"   placeholder="Address" formControlName="firstCtrl"
                  required id="address">
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field>
+        <mat-form-field class="announcement-stepper__input">
           <input matInput [(ngModel)]="announcement.apartment.floor" type="number"   placeholder="Floor" formControlName="secondCtrl" required>
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field>
+        <mat-form-field class="announcement-stepper__input">
           <input matInput [(ngModel)]="announcement.apartment.roomCount" type="number"  placeholder="Room count" formControlName="thirdCtrl" required >
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field>
+        <mat-form-field class="announcement-stepper__input">
           <input matInput [(ngModel)]="announcement.apartment.square" type="number"   placeholder="Apartment square"
                  formControlName="fourthCtrl" required>
         </mat-form-field>
       </div>
       <div>
-        <button mat-raised-button color="primary" matStepperNext>Next</button>
+        <button mat-raised-button class="announcement-stepper__button" matStepperNext>Next</button>
       </div>
 
     </form>
   </mat-step>
 
 
-  <mat-step [stepControl]="secondFormGroup" errorMessage="Description is required."> Please, choose a right statment
+  <mat-step [stepControl]="secondFormGroup" errorMessage="Description is required."> Please, choose a right statment:
 
     <form [formGroup]="secondFormGroup" >
       <ng-template matStepLabel>Announcement type</ng-template>
@@ -52,8 +52,8 @@
         </mat-radio-group>
       </div>
       <div>
-        <button mat-raised-button color="primary" style="margin: 15px" matStepperPrevious>Back</button>
-        <button mat-raised-button color="primary" style="margin: 15px" matStepperNext>Next</button>
+        <button mat-raised-button class="announcement-stepper__button" matStepperPrevious>Back</button>
+        <button mat-raised-button class="announcement-stepper__button" matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
@@ -65,13 +65,13 @@
       <form [formGroup]="thirdFormGroup">
         <ng-template matStepLabel>Announcement lease price</ng-template>
         <div>
-          <mat-form-field style="margin-top: 10px">
+          <mat-form-field class="announcement-stepper__input">
             <input matInput [(ngModel)]="announcement.price" type="number" placeholder="Price" formControlName="firstCtrl" required >
           </mat-form-field>
         </div>
         <div>
-          <button mat-raised-button color="primary" style="margin: 15px" matStepperPrevious>Back</button>
-          <button mat-raised-button color="primary" style="margin: 15px" matStepperNext>Next</button>
+          <button mat-raised-button class="announcement-stepper__button" matStepperPrevious>Back</button>
+          <button mat-raised-button class="announcement-stepper__button" matStepperNext>Next</button>
 
         </div>
       </form>
@@ -84,13 +84,13 @@
       <form [formGroup]="thirdFormGroup">
         <ng-template matStepLabel>Announcement sell price</ng-template>
         <div>
-          <mat-form-field style="margin-top: 10px">
+          <mat-form-field class="announcement-stepper__input">
             <input matInput [(ngModel)]="announcement.price" type="number" placeholder="Price" formControlName="firstCtrl"  required>
           </mat-form-field>
         </div>
         <div>
-          <button mat-raised-button color="primary" style="margin: 15px" matStepperPrevious>Back</button>
-          <button mat-raised-button color="primary" style="margin: 15px"matStepperNext>Next</button>
+          <button mat-raised-button class="announcement-stepper__button" matStepperPrevious>Back</button>
+          <button mat-raised-button class="announcement-stepper__button" matStepperNext>Next</button>
 
         </div>
       </form>
@@ -102,15 +102,15 @@
     <form [formGroup]="fourthFormGroup">
       <ng-template matStepLabel>Announcement description</ng-template>
       <div>
-        <mat-form-field style="margin-top: 10px">
+        <mat-form-field class="announcement-stepper__input">
           <input  matInput [(ngModel)]="announcement.description" placeholder="description" formControlName="firstCtrl"
                   required id="description">
         </mat-form-field>
       </div>
       <div>
 
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-raised-button class="announcement-stepper__button">Back</button>
+        <button mat-raised-button class="announcement-stepper__button">Next</button>
       </div>
     </form>
   </mat-step>
@@ -120,9 +120,9 @@
     <ng-template matStepLabel>Done</ng-template>
     You are now done.
     <div>
-      <button mat-raised-button color="primary" style="margin: 15px" matStepperPrevious>Back</button>
-      <button mat-raised-button color="primary" style="margin: 15px" (click)="stepper.reset()">Reset</button>
-      <button mat-raised-button color="primary" style="margin: 15px" (click)="create()">Create</button>
+      <button mat-raised-button class="announcement-stepper__button" matStepperPrevious>Back</button>
+      <button mat-raised-button class="announcement-stepper__button" (click)="stepper.reset()">Reset</button>
+      <button mat-raised-button class="announcement-stepper__button" (click)="create()">Create</button>
     </div>
   </mat-step>
 </mat-vertical-stepper>

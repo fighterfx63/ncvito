@@ -3,6 +3,8 @@ import {Apartment} from "../models/apartment.model";
 import {Announcement} from "../models/announcement.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpClientService} from "../services/http-client.service";
+import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'ncvito-announcement-stepper',
@@ -20,7 +22,7 @@ export class AnnouncementStepperComponent implements OnInit {
   fourthFormGroup: FormGroup;
 
 
-  constructor(private _formBuilder: FormBuilder, private httpClientService: HttpClientService) {
+  constructor(private _formBuilder: FormBuilder, private httpClientService: HttpClientService , private router: Router, private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -41,11 +43,17 @@ export class AnnouncementStepperComponent implements OnInit {
     });
   }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000
+    });
+  }
 
   create(): void {
     this.httpClientService.createAnnouncements(this.announcement)
       .subscribe(data => {
-        alert('Announcement successfully created.');
+        this.openSnackBar("You have been created successfully", "OK");
+        this.router.navigateByUrl("/");
       });
 
   };

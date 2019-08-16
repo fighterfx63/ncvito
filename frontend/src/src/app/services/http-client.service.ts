@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Announcement} from '../models/announcement.model';
 
 import {HttpClient} from '@angular/common/http';
+import {environment} from "../../environments/environment";
 
 
 @Injectable({
@@ -14,20 +15,19 @@ export class HttpClientService {
   }
 
   public getAllAnnouncements(page, size) {
-    console.log('test call');
-    return this.httpClient.get('http://localhost:8080/announcements?page=' + page + '&size=' + size);
+    return this.httpClient.get(environment.url + 'announcements?page=' + page + '&size=' + size);
   }
 
   public createAnnouncements(announcement) {
-    return this.httpClient.post<Announcement>('http://localhost:8080/announcements', announcement);
+    return this.httpClient.post<Announcement>(environment.url + '/announcements', announcement);
   }
 
   public getAll() {
-    return this.httpClient.get('http://localhost:8080/announcements');
+    return this.httpClient.get(environment.url + 'announcements');
   }
 
 
   public deleteAnnouncements(announcement) {
-    return this.httpClient.delete('http://localhost:8080/announcements/' + announcement.id);
+    return this.httpClient.delete(environment.url + 'announcement/' + announcement.id);
   }
 }
