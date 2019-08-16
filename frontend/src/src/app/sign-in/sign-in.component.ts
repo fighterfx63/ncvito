@@ -3,7 +3,7 @@ import {LoginService} from '../services/login.service';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CredentialsModel} from '../models/credentials.model';
+import {CredentialsModel} from './credentials.model';
 
 @Component({
   selector: 'ncvito-sign-in',
@@ -46,7 +46,7 @@ export class SignInComponent {
         this.invalidLogin = false;
       },
       error => {
-        this.openSnackBar('It was unable to sign inc. Please, try again later', 'OK');
+        this.openSnackBar('It was unable to sign in. Please, try again later', 'OK');
         this.invalidLogin = true;
         this.isClicked = false;
       }
