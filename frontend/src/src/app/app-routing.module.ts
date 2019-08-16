@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule, Router } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Router, RouterModule, Routes} from '@angular/router';
 import {APP_BASE_HREF} from "@angular/common";
 import {SignUpComponent} from "./sign-up/sign-up.component";
-import {AnnouncementListComponent} from "./announcement-list/announcement-list.component";
+import {AnnouncementStepperComponent} from "./announcement-stepper/announcement-stepper.component";
 
 const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
-  {path: 'announcements', component: AnnouncementListComponent},
+  {path: 'create', component: AnnouncementStepperComponent},
 ];
 
 @NgModule({
@@ -16,9 +16,8 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 
-  constructor(private router: Router){}
-
-  goTo(url) {
-    this.router.navigateByUrl(url);
+  constructor(private router: Router) {
   }
+
+
 }

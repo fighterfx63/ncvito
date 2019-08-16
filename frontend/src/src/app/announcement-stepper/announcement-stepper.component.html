@@ -1,0 +1,130 @@
+<mat-vertical-stepper linear #stepper >
+
+
+  <mat-step [stepControl]="firstFormGroup" errorMessage="Apartment is required" >  Please provide us the following
+    information
+    <form [formGroup]="firstFormGroup" >
+      <ng-template matStepLabel>Fill out apartment info</ng-template>
+
+      <div >
+        <mat-form-field  style="margin-top: 10px">
+          <input matInput [(ngModel)]="announcement.apartment.address"   placeholder="Address" formControlName="firstCtrl"
+                 required id="address">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput [(ngModel)]="announcement.apartment.floor" type="number"   placeholder="Floor" formControlName="secondCtrl" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput [(ngModel)]="announcement.apartment.roomCount" type="number"  placeholder="Room count" formControlName="thirdCtrl" required >
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput [(ngModel)]="announcement.apartment.square" type="number"   placeholder="Apartment square"
+                 formControlName="fourthCtrl" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" matStepperNext>Next</button>
+      </div>
+
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]="secondFormGroup" errorMessage="Description is required."> Please, choose a right statment
+
+    <form [formGroup]="secondFormGroup" >
+      <ng-template matStepLabel>Announcement type</ng-template>
+      <div>
+        <mat-radio-group aria-label="Select an option" class="radio-group"  [(ngModel)]="announcement.sale" [ngModelOptions]="{standalone: true}" name="fieldName" ngDefaultControl>
+          <div>
+            <mat-radio-button class="radio-button" [value]="true" > I want to sell my apartment </mat-radio-button>
+          </div>
+          <div>
+
+            <mat-radio-button class="radio-button" [value]="false" >I want to lease my apartment</mat-radio-button>
+          </div>
+        </mat-radio-group>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" style="margin: 15px" matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" style="margin: 15px" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <div *ngIf="announcement.sale==false">
+    <mat-step [stepControl]="thirdFormGroup" errorMessage="Announcement price is required."> You want to lease an
+      apartment.Your price?
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Announcement lease price</ng-template>
+        <div>
+          <mat-form-field style="margin-top: 10px">
+            <input matInput [(ngModel)]="announcement.price" type="number" placeholder="Price" formControlName="firstCtrl" required >
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" style="margin: 15px" matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" style="margin: 15px" matStepperNext>Next</button>
+
+        </div>
+      </form>
+    </mat-step>
+  </div>
+
+  <div *ngIf="announcement.sale==true">
+    <mat-step [stepControl]="thirdFormGroup" errorMessage="Announcement price is required."> You want to sell an
+      apartment.Your price?
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Announcement sell price</ng-template>
+        <div>
+          <mat-form-field style="margin-top: 10px">
+            <input matInput [(ngModel)]="announcement.price" type="number" placeholder="Price" formControlName="firstCtrl"  required>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" style="margin: 15px" matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" style="margin: 15px"matStepperNext>Next</button>
+
+        </div>
+      </form>
+    </mat-step>
+  </div>
+
+
+  <mat-step [stepControl]="fourthFormGroup" errorMessage="Description is required.">Additional information about the apartment
+    <form [formGroup]="fourthFormGroup">
+      <ng-template matStepLabel>Announcement description</ng-template>
+      <div>
+        <mat-form-field style="margin-top: 10px">
+          <input  matInput [(ngModel)]="announcement.description" placeholder="description" formControlName="firstCtrl"
+                  required id="description">
+        </mat-form-field>
+      </div>
+      <div>
+
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-raised-button color="primary" style="margin: 15px" matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" style="margin: 15px" (click)="stepper.reset()">Reset</button>
+      <button mat-raised-button color="primary" style="margin: 15px" (click)="create()">Create</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+
+
