@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -29,10 +31,16 @@ public class AnnouncementController {
     }
 
     @GetMapping("{id}")
-    public Announcement getAnnouncement(@PathVariable("id") Announcement announcement) {
-        return announcement;
-    }
+    public ResponseEntity getAnnouncement(@PathVariable("id") Long id) {
+        Announcement announcementFromDb = announcementService.findbyId(id);
 
+
+        if (announcementFromDb != null) {
+            return ResponseEntity.ok().body(announcementFromDb);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
     @DeleteMapping("{id}")
     public void delete(@PathVariable("id") Announcement announcement) {
         announcementService.delete(announcement);

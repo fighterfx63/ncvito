@@ -6,6 +6,7 @@ import nc.students.ncvito.entity.Role;
 import nc.students.ncvito.entity.User;
 import nc.students.ncvito.service.AnnouncementService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @TestPropertySource("/application-test.properties")
 
-
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
