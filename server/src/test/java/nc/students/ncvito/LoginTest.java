@@ -98,7 +98,6 @@ public class LoginTest {
 
     @Test
     public void correctLogin() throws Exception {
-
         this.mockMvc.perform(get("/login").with(httpBasic("admin", "admin")))
                 .andDo(print())
                 .andExpect(status().isOk());

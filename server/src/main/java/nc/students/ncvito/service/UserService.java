@@ -20,7 +20,6 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         System.out.println("You are login");
         return userRepository.findByLogin(login);
-
     }
 
 }
