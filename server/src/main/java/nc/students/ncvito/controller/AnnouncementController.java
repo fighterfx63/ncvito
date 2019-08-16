@@ -29,8 +29,8 @@ public class AnnouncementController {
     }
 
     @GetMapping("{id}")
-    public Announcement getAnnouncement(@PathVariable("id") Announcement announcement) {
-        return announcement;
+    public Announcement getAnnouncement(@PathVariable("id") long id) {
+        return announcementService.findById(id);
     }
 
     @DeleteMapping("{id}")
