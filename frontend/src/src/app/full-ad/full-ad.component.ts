@@ -5,7 +5,7 @@ import {Advertisement} from "../models/advertisement";
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'ncvito-ad-info-card',
+  selector: 'ncvito-full-ad',
   templateUrl: './full-ad.component.html',
   styleUrls: ['./full-ad.component.less']
 })
@@ -28,6 +28,8 @@ export class FullAdComponent implements OnInit {
   HeartFill: string;
   isHeartLocked: boolean;
 
+  roomOrRooms: string;
+
   constructor(private _snackBar: MatSnackBar, private httpService: HttpService, private router: Router, private route: ActivatedRoute) {
 
     this.HeartFill = "outline";
@@ -49,10 +51,11 @@ export class FullAdComponent implements OnInit {
       this.address = this.advertisement.apartment.address;
       this.price = this.advertisement.price;
       this.square = this.advertisement.apartment.square;
-      this.roomCount = this.advertisement.apartment.roomCount;
+      this.roomCount = this.advertisement.apartment.roomCount; this.roomOrRooms = this.getRoomOrRooms(this.roomCount);
       this.floor = this.advertisement.apartment.floor;
       this.adType = this.getAdType(this.advertisement.isSale);
       this.description = this.advertisement.description;
+        // his.description = "q".repeat(255);
       this.author = this.advertisement.author.firstName + " " + this.advertisement.author.lastName;
       this.phone = this.advertisement.author.phone;
 
@@ -71,6 +74,14 @@ export class FullAdComponent implements OnInit {
       return "Selling";
     } else {
       return "Leasing";
+    }
+  }
+
+  getRoomOrRooms(roomCount: number) {
+    if (roomCount === 1) {
+      return "room";
+    } else {
+      return "rooms";
     }
   }
 

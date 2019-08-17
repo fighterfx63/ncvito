@@ -5,7 +5,7 @@ import {AppRoutingModule} from "../app-routing.module";
 
 import { SignUpComponent } from './sign-up.component';
 import {FullAdComponent} from "../full-ad/full-ad.component";
-import {AdPhotosComponent} from "../ad-photos/ad-photos.component";
+import {AdPhotosComponent} from "../full-ad/ad-photos/ad-photos.component";
 
 import {DebugElement} from "@angular/core";
 import {By} from "@angular/platform-browser";

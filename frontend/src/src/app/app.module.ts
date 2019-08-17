@@ -5,7 +5,7 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
 
 import {SharedModule} from "./shared/shared.module";
 import {FullAdComponent} from "./full-ad/full-ad.component";
-import {AdPhotosComponent} from "./ad-photos/ad-photos.component";
+import {AdPhotosComponent} from "./full-ad/ad-photos/ad-photos.component";
 
 @NgModule({
   declarations: [

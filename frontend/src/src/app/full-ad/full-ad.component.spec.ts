@@ -3,7 +3,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { FullAdComponent } from './full-ad.component';
-import {AdPhotosComponent} from "../ad-photos/ad-photos.component";
+import {AdPhotosComponent} from "./ad-photos/ad-photos.component";
 import {SignUpComponent} from "../sign-up/sign-up.component";
 
 import {SharedModule} from "../shared/shared.module";

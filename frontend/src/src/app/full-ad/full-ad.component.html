@@ -1,84 +1,84 @@
 <mat-grid-list class = "grid" cols="2">
 
-  <mat-grid-tile colspan="1">
+  <mat-grid-tile class = "grid__infoTile" colspan="1">
 
-    <mat-card class="grid__ad-info-card">
+    <mat-card class="grid__infoTile__ad-info-card">
 
-      <mat-card-title class="grid__ad-info-card__ad-name">
-        {{roomCount}} rooms, {{square}} m<sup><small>2</small></sup>, floor {{floor}}
-        <button (click)="switchHeartFill()" mat-icon-button class="grid__ad-info-card__ad-name__heart-btn" [disabled]=isHeartLocked>
+      <mat-card-title class="grid__infoTile__ad-info-card__ad-name">
+        {{roomCount}} {{roomOrRooms}}, {{square}} m<sup><small>2</small></sup>, floor {{floor}}
+        <button (click)="switchHeartFill()" mat-icon-button class="grid__infoTile__ad-info-card__ad-name__heart-btn" [disabled]=isHeartLocked>
           <mat-icon>favorite_{{HeartFill}}</mat-icon>
         </button>
 
       </mat-card-title>
 
       <br><br>
-      <div class = "grid__ad-info-card__ad-property">
+      <div class = "grid__infoTile__ad-info-card__ad-property">
         Advertisement creation date:
-        <div class = "grid__ad-info-card__ad-property__value">
+        <div class = "grid__infoTile__ad-info-card__ad-property__value">
           {{adCreationDate}}
         </div>
       </div>
 
       <br><br>
-      <div class = "grid__ad-info-card__ad-property">
+      <div class = "grid__infoTile__ad-info-card__ad-property">
         Address:
-        <div class = "grid__ad-info-card__ad-property__value">
+        <div class = "grid__infoTile__ad-info-card__ad-property__value">
           {{address}}
         </div>
       </div>
 
       <br><br>
-      <div class = "grid__ad-info-card__ad-property">
+      <div class = "grid__infoTile__ad-info-card__ad-property">
         Price:
-        <div class = "grid__ad-info-card__ad-property__value">
+        <div class = "grid__infoTile__ad-info-card__ad-property__value">
           $ {{price}}
         </div>
       </div>
 
       <br><br>
-      <div class = "grid__ad-info-card__ad-property">
+      <div class = "grid__infoTile__ad-info-card__ad-property">
         Entire apartment square:
-        <div class = "grid__ad-info-card__ad-property__value">
+        <div class = "grid__infoTile__ad-info-card__ad-property__value">
           {{square}} m<sup><small>2</small></sup>
         </div>
       </div>
 
       <br><br>
-      <div class = "grid__ad-info-card__ad-property">
+      <div class = "grid__infoTile__ad-info-card__ad-property">
         Room count:
-        <div class = "grid__ad-info-card__ad-property__value">
+        <div class = "grid__infoTile__ad-info-card__ad-property__value">
           {{roomCount}}
         </div>
       </div>
 
       <br><br>
-      <div class = "grid__ad-info-card__ad-property">
+      <div class = "grid__infoTile__ad-info-card__ad-property">
         Floor:
-        <div class = "grid__ad-info-card__ad-property__value">
+        <div class = "grid__infoTile__ad-info-card__ad-property__value">
           {{floor}}
         </div>
       </div>
 
       <br><br>
-      <div class = "grid__ad-info-card__ad-property">
+      <div class = "grid__infoTile__ad-info-card__ad-property">
         Selling/Leasing:
-        <div class = "grid__ad-info-card__ad-property__value">
+        <div class = "grid__infoTile__ad-info-card__ad-property__value">
           {{adType}}
         </div>
       </div>
 
       <br><br>
-      <div class = "grid__ad-info-card__ad-property">
+      <div class = "grid__infoTile__ad-info-card__ad-property">
         Description:
       </div>
 
-      <mat-card class="grid__ad-info-card__description-card">
+      <mat-card class="grid__infoTile__ad-info-card__description-card">
         {{description}}
       </mat-card>
 
       <br>
-      <div class = "grid__ad-info-card__author">
+      <div class = "grid__infoTile__ad-info-card__author">
         {{author}}<br>
         {{phone}}
       </div>
@@ -87,8 +87,8 @@
 
   </mat-grid-tile>
 
-  <mat-grid-tile>
-    <mat-card class="grid__photos-card">
+  <mat-grid-tile class="grid__photosTile">
+    <mat-card class="grid__photosTile__photos-card">
       <ncvito-ad-photos></ncvito-ad-photos>
     </mat-card>
   </mat-grid-tile>
