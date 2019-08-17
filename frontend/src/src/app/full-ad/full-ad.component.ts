@@ -2,14 +2,17 @@ import {Component, OnInit} from '@angular/core';
 import {MatSnackBar} from "@angular/material";
 import {HttpService} from "../services/http.service";
 import {Advertisement} from "../models/advertisement";
-import {Router} from "@angular/router";
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ncvito-ad-info-card',
-  templateUrl: './ad-info-card.component.html',
-  styleUrls: ['./ad-info-card.component.less']
+  templateUrl: './full-ad.component.html',
+  styleUrls: ['./full-ad.component.less']
 })
-export class AdInfoCardComponent implements OnInit {
+export class FullAdComponent implements OnInit {
+
+  ad_ID: string;
+  advertisement: Advertisement;
 
   adCreationDate: string;
   address: string;
@@ -25,22 +28,20 @@ export class AdInfoCardComponent implements OnInit {
   HeartFill: string;
   isHeartLocked: boolean;
 
-  advertisement: Advertisement;
-
-  constructor(private _snackBar: MatSnackBar, private httpService: HttpService, private router: Router) {
-
-    //this.initDummy();
-    this.getTheAdvertisement();
+  constructor(private _snackBar: MatSnackBar, private httpService: HttpService, private router: Router, private route: ActivatedRoute) {
 
     this.HeartFill = "outline";
     this.isHeartLocked = false;
   }
 
   ngOnInit() {
+    this.ad_ID = this.route.snapshot.paramMap.get('id');
+
+    this.getTheAdvertisement();
   }
 
   getTheAdvertisement(){
-    this.httpService.get("http://localhost:8080/announcements/4", this.advertisement).subscribe(
+    this.httpService.get("http://localhost:8080/announcements/" + this.ad_ID, this.advertisement).subscribe(
       ad => {
       this.advertisement = ad;
 
@@ -89,18 +90,6 @@ export class AdInfoCardComponent implements OnInit {
     this._snackBar.open(message, action, {
       duration: 3000
     });
-  }
-
-  initDummy() {
-    /*let date = new Date('2020-05-10 10:23:54');
-    this.adCreationDate = date.toDateString();*/
-    this.address = "*Address*";
-    this.price = 148500;
-    this.square = 112;
-    this.roomCount = 4;
-    this.floor = 5;
-    this.adType = "Selling";
-    this.description = "*Apartment description*";
   }
 
 }
