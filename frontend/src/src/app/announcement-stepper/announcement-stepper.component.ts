@@ -4,12 +4,13 @@ import {Announcement} from "../models/announcement.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpClientService} from "../services/http-client.service";
 import {Router} from "@angular/router";
-import {MatSnackBar} from "@angular/material";
+import {SnackbarService} from "../services/snackbar.service";
 
 @Component({
   selector: 'ncvito-announcement-stepper',
   templateUrl: './announcement-stepper.component.html',
   styleUrls: ['./announcement-stepper.component.less']
+
 })
 export class AnnouncementStepperComponent implements OnInit {
 
@@ -22,15 +23,15 @@ export class AnnouncementStepperComponent implements OnInit {
   fourthFormGroup: FormGroup;
 
 
-  constructor(private _formBuilder: FormBuilder, private httpClientService: HttpClientService , private router: Router, private _snackBar: MatSnackBar) {
+  constructor(private _formBuilder: FormBuilder, private httpClientService: HttpClientService , private router: Router, private snackBarService : SnackbarService) {
   }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required],
-      secondCtrl: [Number(''), [Validators.required, Validators.min(1), , Validators.nullValidator]],
-      thirdCtrl: [Number(''), [Validators.required, Validators.min(1), , Validators.nullValidator]],
-      fourthCtrl: [Number(''), [Validators.required, Validators.min(1), , Validators.nullValidator]],
+      secondCtrl: ['', [Validators.required, Validators.min(1), , Validators.nullValidator]],
+      thirdCtrl: ['', [Validators.required, Validators.min(1), , Validators.nullValidator]],
+      fourthCtrl: ['', [Validators.required, Validators.min(1), , Validators.nullValidator]],
     });
     this.secondFormGroup = this._formBuilder.group({
       firstCtrl: [Boolean(''), Validators.required]
@@ -39,20 +40,16 @@ export class AnnouncementStepperComponent implements OnInit {
       firstCtrl: ['', Validators.required]
     });
     this.fourthFormGroup = this._formBuilder.group({
-      firstCtrl: [Number(''), Validators.required]
+      firstCtrl: ['']
     });
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 3000
-    });
-  }
+
 
   create(): void {
     this.httpClientService.createAnnouncements(this.announcement)
       .subscribe(data => {
-        this.openSnackBar("You have been created successfully", "OK");
+        this.snackBarService.openSnackBar("You have been created successfully", "OK");
         this.router.navigateByUrl("/");
       });
 

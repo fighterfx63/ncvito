@@ -80,7 +80,7 @@
 
   <div *ngIf="announcement.sale==true">
     <mat-step [stepControl]="thirdFormGroup" errorMessage="Announcement price is required."> You want to sell an
-      apartment.Your price?
+      apartment. Your price?
       <form [formGroup]="thirdFormGroup">
         <ng-template matStepLabel>Announcement sell price</ng-template>
         <div>
@@ -98,19 +98,18 @@
   </div>
 
 
-  <mat-step [stepControl]="fourthFormGroup" errorMessage="Description is required.">Additional information about the apartment
+  <mat-step [stepControl]="fourthFormGroup" >Additional information about the apartment
     <form [formGroup]="fourthFormGroup">
       <ng-template matStepLabel>Announcement description</ng-template>
       <div>
         <mat-form-field class="announcement-stepper__input">
-          <input  matInput [(ngModel)]="announcement.description" placeholder="description" formControlName="firstCtrl"
-                  required id="description">
+          <input  matInput [(ngModel)]="announcement.description" placeholder="description" formControlName="firstCtrl">
         </mat-form-field>
       </div>
       <div>
 
-        <button mat-raised-button class="announcement-stepper__button">Back</button>
-        <button mat-raised-button class="announcement-stepper__button">Next</button>
+        <button mat-raised-button class="announcement-stepper__button" matStepperPrevious>Back</button>
+        <button mat-raised-button class="announcement-stepper__button" matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
