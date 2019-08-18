@@ -6,6 +6,7 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
 import {SharedModule} from "./shared/shared.module";
 
 import {AnnouncementStepperComponent} from './announcement-stepper/announcement-stepper.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import {AnnouncementStepperComponent} from './announcement-stepper/announcement-
     AppComponent,
     SignUpComponent,
     AnnouncementStepperComponent,
+    NotFoundComponent,
   ],
   imports: [SharedModule],
   exports: [],
