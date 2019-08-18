@@ -17,30 +17,30 @@ export class AnnouncementStepperComponent implements OnInit {
 
 
   apartment: Apartment = new Apartment('', undefined, undefined, undefined);
-  announcement: Announcement = new Announcement(this.apartment, Boolean(''), '', undefined, new Date());
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
-  fourthFormGroup: FormGroup;
+  announcement: Announcement = new Announcement(this.apartment, false, '', undefined, new Date());
+  apartmentInfoFormGroup: FormGroup;
+  announcementTypeFormGroup: FormGroup;
+  announcementPriceFormGroup: FormGroup;
+  announcementDescriptionFormGroup: FormGroup;
 
 
   constructor(private _formBuilder: FormBuilder, private httpService: HttpService, private router: Router, private snackBarService: SnackbarService) {
   }
 
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
+    this.apartmentInfoFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required],
       secondCtrl: ['', [Validators.required, Validators.min(1), , Validators.nullValidator]],
       thirdCtrl: ['', [Validators.required, Validators.min(1), , Validators.nullValidator]],
       fourthCtrl: ['', [Validators.required, Validators.min(1), , Validators.nullValidator]],
     });
-    this.secondFormGroup = this._formBuilder.group({
+    this.announcementTypeFormGroup = this._formBuilder.group({
       firstCtrl: [Boolean(''), Validators.required]
     });
-    this.thirdFormGroup = this._formBuilder.group({
+    this.announcementPriceFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
-    this.fourthFormGroup = this._formBuilder.group({
+    this.announcementDescriptionFormGroup = this._formBuilder.group({
       firstCtrl: ['']
     });
   }
