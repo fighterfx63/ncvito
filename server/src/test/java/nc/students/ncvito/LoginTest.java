@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @TestPropertySource("/application-test.properties")
-@Ignore
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -83,12 +83,11 @@ public class LoginTest {
     public void accessDenied() throws Exception {
         this.mockMvc.perform(get("/announcements"))
                 .andDo(print())
-                .andExpect(status().isFound())
-                .andExpect(redirectedUrl("http://localhost/login"));
+                .andExpect(status().is4xxClientError());
 
     }
 
-    @Ignore
+
     @Test
     public void badCredentials() throws Exception {
         //HttpHeaders loginHeader=new HttpHeaders()
@@ -97,21 +96,22 @@ public class LoginTest {
                 .param("password", "test")))
 
                 .andDo(print())
-                .andExpect(status().isFound());
+                .andExpect(status().isOk());
                 //.andExpect(redirectedUrl("/login?error"));
     }
 
-    @Ignore
+
     @Test
     public void correctLogin() throws Exception {
-        this.mockMvc.perform(formLogin().user("admin").password("admin"))
+        this.mockMvc.perform(post("/login").param("login","admin").param("password","admin"))
                 .andDo(print())
-                .andExpect(status().isFound());
+                .andExpect(status().isOk());
+
                 //.andExpect(redirectedUrl("/"));
 
     }
 
-    @Ignore
+
     @Test
     public void registration() throws Exception {
 
@@ -130,7 +130,7 @@ public class LoginTest {
 
     }
 
-    @Ignore
+
     @Test
     public void newUserTest() throws Exception {
 
@@ -149,8 +149,7 @@ public class LoginTest {
 
         this.mockMvc.perform(post("/login").param("username", login).param("password", password))
                 .andDo(print())
-                .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/"));
+                .andExpect(status().isOk());
 
         this.mockMvc.perform(get("/announcements").with(user(login)))
                 .andDo(print())

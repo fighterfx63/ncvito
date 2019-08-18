@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @TestPropertySource("/application-test.properties")
 
-@Ignore
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -117,7 +117,7 @@ public class AnnouncementsControllerTest {
                 .andDo(print())
                 .andExpect(authenticated())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$.content[0].author.login", is("admin")));
+                .andExpect(jsonPath("$.content[0].author.login", is("qwe")));
     }
 }
 
