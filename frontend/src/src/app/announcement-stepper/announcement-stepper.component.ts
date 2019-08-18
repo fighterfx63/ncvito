@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Apartment} from "../models/apartment.model";
 import {Announcement} from "../models/announcement.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {HttpClientService} from "../services/http-client.service";
+
 import {Router} from "@angular/router";
 import {SnackbarService} from "../services/snackbar.service";
+import {HttpService} from "../services/http.service";
 
 @Component({
   selector: 'ncvito-announcement-stepper',
@@ -23,7 +24,7 @@ export class AnnouncementStepperComponent implements OnInit {
   fourthFormGroup: FormGroup;
 
 
-  constructor(private _formBuilder: FormBuilder, private httpClientService: HttpClientService , private router: Router, private snackBarService : SnackbarService) {
+  constructor(private _formBuilder: FormBuilder, private httpService: HttpService, private router: Router, private snackBarService: SnackbarService) {
   }
 
   ngOnInit() {
@@ -45,9 +46,9 @@ export class AnnouncementStepperComponent implements OnInit {
   }
 
 
-
   create(): void {
-    this.httpClientService.createAnnouncements(this.announcement)
+    console.log(this.announcement);
+    this.httpService.post('/announcements', this.announcement)
       .subscribe(data => {
         this.snackBarService.openSnackBar("You have been created successfully", "OK");
         this.router.navigateByUrl("/");

@@ -1,30 +1,32 @@
-<mat-vertical-stepper linear #stepper class="announcement-stepper__input" >
+<mat-vertical-stepper linear #stepper class="announcement-stepper">
 
 
-  <mat-step [stepControl]="firstFormGroup" errorMessage="Apartment is required" >  Please provide us the following
+  <mat-step [stepControl]="firstFormGroup" errorMessage="Apartment is required"> Please provide us the following
     information:
-    <form [formGroup]="firstFormGroup" >
+    <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Fill out apartment info</ng-template>
 
-      <div >
+      <div>
         <mat-form-field class="announcement-stepper__input">
-          <input matInput [(ngModel)]="announcement.apartment.address"   placeholder="Address" formControlName="firstCtrl"
+          <input matInput [(ngModel)]="announcement.apartment.address" placeholder="Address" formControlName="firstCtrl"
                  required id="address">
         </mat-form-field>
       </div>
       <div>
         <mat-form-field class="announcement-stepper__input">
-          <input matInput [(ngModel)]="announcement.apartment.floor" type="number"   placeholder="Floor" formControlName="secondCtrl" required>
+          <input matInput [(ngModel)]="announcement.apartment.floor" type="number" placeholder="Floor"
+                 formControlName="secondCtrl" required>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field class="announcement-stepper__input">
-          <input matInput [(ngModel)]="announcement.apartment.roomCount" type="number"  placeholder="Room count" formControlName="thirdCtrl" required >
+          <input matInput [(ngModel)]="announcement.apartment.roomCount" type="number" placeholder="Room count"
+                 formControlName="thirdCtrl" required>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field class="announcement-stepper__input">
-          <input matInput [(ngModel)]="announcement.apartment.square" type="number"   placeholder="Apartment square"
+          <input matInput [(ngModel)]="announcement.apartment.square" type="number" placeholder="Apartment square"
                  formControlName="fourthCtrl" required>
         </mat-form-field>
       </div>
@@ -38,17 +40,17 @@
 
   <mat-step [stepControl]="secondFormGroup" errorMessage="Description is required."> Please, choose a right statment:
 
-    <form [formGroup]="secondFormGroup" >
+    <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Announcement type</ng-template>
       <div>
-        <mat-radio-group aria-label="Select an option" class="radio-group"  [(ngModel)]="announcement.sale" [ngModelOptions]="{standalone: true}" name="fieldName" ngDefaultControl>
-          <div>
-            <mat-radio-button class="radio-button" [value]="true" > I want to sell my apartment </mat-radio-button>
-          </div>
-          <div>
+        <mat-radio-group aria-label="Select an option" class="announcement-stepper__radio-group" [(ngModel)]="announcement.sale"
+                         [ngModelOptions]="{standalone: true}" name="fieldName" ngDefaultControl>
 
-            <mat-radio-button class="radio-button" [value]="false" >I want to lease my apartment</mat-radio-button>
-          </div>
+            <mat-radio-button  class="announcement-stepper__radio-button" [value]="true"> I want to sell my apartment</mat-radio-button>
+
+
+            <mat-radio-button class="announcement-stepper__radio-button" [value]="false">I want to lease my apartment</mat-radio-button>
+
         </mat-radio-group>
       </div>
       <div>
@@ -66,7 +68,8 @@
         <ng-template matStepLabel>Announcement lease price</ng-template>
         <div>
           <mat-form-field class="announcement-stepper__input">
-            <input matInput [(ngModel)]="announcement.price" type="number" placeholder="Price" formControlName="firstCtrl" required >
+            <input matInput [(ngModel)]="announcement.price" type="number" placeholder="Price"
+                   formControlName="firstCtrl" required>
           </mat-form-field>
         </div>
         <div>
@@ -85,7 +88,8 @@
         <ng-template matStepLabel>Announcement sell price</ng-template>
         <div>
           <mat-form-field class="announcement-stepper__input">
-            <input matInput [(ngModel)]="announcement.price" type="number" placeholder="Price" formControlName="firstCtrl"  required>
+            <input matInput [(ngModel)]="announcement.price" type="number" placeholder="Price"
+                   formControlName="firstCtrl" required>
           </mat-form-field>
         </div>
         <div>
@@ -98,12 +102,12 @@
   </div>
 
 
-  <mat-step [stepControl]="fourthFormGroup" >Additional information about the apartment
+  <mat-step [stepControl]="fourthFormGroup">Additional information about the apartment
     <form [formGroup]="fourthFormGroup">
       <ng-template matStepLabel>Announcement description</ng-template>
       <div>
         <mat-form-field class="announcement-stepper__input">
-          <input  matInput [(ngModel)]="announcement.description" placeholder="description" formControlName="firstCtrl">
+          <input matInput [(ngModel)]="announcement.description" placeholder="description" formControlName="firstCtrl">
         </mat-form-field>
       </div>
       <div>
