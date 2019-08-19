@@ -1,19 +1,21 @@
 package nc.students.ncvito;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import nc.students.ncvito.entity.Announcement;
 import nc.students.ncvito.entity.Apartment;
 import nc.students.ncvito.entity.Role;
 import nc.students.ncvito.entity.User;
-import nc.students.ncvito.service.AnnouncementService;
+import nc.students.ncvito.repo.AnnouncementRepository;
+import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -22,12 +24,10 @@ import java.util.Collections;
 import static org.hamcrest.core.Is.is;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@TestPropertySource("/application-test.properties")
-
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -39,7 +39,8 @@ public class AnnouncementsControllerTest {
     MockMvc mockMvc;
 
     @Autowired
-    AnnouncementService announcementService;
+    AnnouncementRepository announcementRepository;
+    ObjectMapper objectMapper = new ObjectMapper();
 
     @Before
     public void createObjects() {
@@ -65,7 +66,7 @@ public class AnnouncementsControllerTest {
         announcement.setSale(true);
         announcement.setPrice(150);
         announcement.setDescription("announcement_1");
-        announcementService.create(announcement);
+        announcementRepository.save(announcement);
     }
 
     @WithMockUser(username = "admin")
@@ -110,13 +111,17 @@ public class AnnouncementsControllerTest {
         announcement1.setPrice(150);
         announcement1.setDescription("test");
 
-        announcementService.create(announcement1);
+        this.mockMvc.perform(post("/announcements")
+                    .content(objectMapper.writeValueAsBytes(announcement1))
+                    .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isCreated());
 
         this.mockMvc.perform(get("/announcements"))
                 .andDo(print())
                 .andExpect(authenticated())
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$.content[0].author.login", is("admin")));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[*].author.login", CoreMatchers.hasItems("admin")));
     }
 }
 
