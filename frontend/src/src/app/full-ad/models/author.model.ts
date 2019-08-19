@@ -1,4 +1,4 @@
-export class AdAuthor {
+export class AuthorModel {
 
   firstName: string;
   lastName: string;

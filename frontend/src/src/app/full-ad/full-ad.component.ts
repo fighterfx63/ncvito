@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MatSnackBar} from "@angular/material";
 import {HttpService} from "../services/http.service";
-import {Advertisement} from "./models/advertisement";
+import {AdvertisementModel} from "./models/advertisement.model";
 import { Router, ActivatedRoute } from '@angular/router';
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'ncvito-full-ad',
@@ -12,7 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class FullAdComponent implements OnInit {
 
   ad_ID: string;
-  advertisement: Advertisement;
+  advertisement: AdvertisementModel;
 
   adCreationDate: string;
   address: string;
@@ -25,14 +26,14 @@ export class FullAdComponent implements OnInit {
   author: string;
   phone: string;
 
-  HeartFill: string;
+  heartFill: string;
   isHeartLocked: boolean;
 
   roomOrRooms: string;
 
   constructor(private _snackBar: MatSnackBar, private httpService: HttpService, private router: Router, private route: ActivatedRoute) {
 
-    this.HeartFill = "outline";
+    this.heartFill = "outline";
     this.isHeartLocked = false;
   }
 
@@ -43,7 +44,7 @@ export class FullAdComponent implements OnInit {
   }
 
   getTheAdvertisement(){
-    this.httpService.get("http://localhost:8080/announcements/" + this.ad_ID, this.advertisement).subscribe(
+    this.httpService.get(environment.url + "/announcements/" + this.ad_ID, this.advertisement).subscribe(
       ad => {
       this.advertisement = ad;
 
@@ -55,11 +56,9 @@ export class FullAdComponent implements OnInit {
       this.floor = this.advertisement.apartment.floor;
       this.adType = this.getAdType(this.advertisement.sale);
       this.description = this.advertisement.description;
-        // this.description = "q".repeat(1795);
       this.author = this.advertisement.author.firstName + " " + this.advertisement.author.lastName;
       this.phone = this.advertisement.author.phone;
 
-      this.openSnackBar("[httpService.get]: success", "OK");
       },
       response => {
         this.router.navigateByUrl("/");
@@ -88,7 +87,7 @@ export class FullAdComponent implements OnInit {
   makePriceParsed(price: number) {
     var result: string = price.toString();
 
-    var count: number = (result.length/3 | 0);
+    var count: number = (result.length / 3 | 0);
     var temp: number = result.length - 3;
 
     for (var i = 0; i < count; i++) {
@@ -100,11 +99,11 @@ export class FullAdComponent implements OnInit {
 
   switchHeartFill(){
     this.isHeartLocked = true;
-    if (this.HeartFill === "outline") {
-      this.HeartFill = "";
+    if (this.heartFill === "outline") {
+      this.heartFill = "";
       this.openSnackBar("This advertisement is your favorite now", "OK");
     } else {
-      this.HeartFill = "outline";
+      this.heartFill = "outline";
       this.openSnackBar("This advertisement is not your favorite one anymore", "OK");
     }
     this.isHeartLocked = false;

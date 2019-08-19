@@ -1,4 +1,4 @@
-export class Apartment {
+export class ApartmentModel {
 
   address: string;
   square : number;

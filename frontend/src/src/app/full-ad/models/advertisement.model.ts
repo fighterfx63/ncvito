@@ -1,23 +1,23 @@
-import {AdAuthor} from "./ad-author";
-import {Apartment} from "./apartment";
+import {AuthorModel} from "./author.model";
+import {ApartmentModel} from "./apartment.model";
 
-export class Advertisement {
+export class AdvertisementModel {
 
   creationDate: Date;
   sale: boolean;
   price: number;
   description: string;
 
-  author: AdAuthor;
-  apartment: Apartment;
+  author: AuthorModel;
+  apartment: ApartmentModel;
 
   constructor(creationDate: Date,
               is_sale: boolean,
               price: number,
               description: string,
 
-              author: AdAuthor,
-              apartment: Apartment) {
+              author: AuthorModel,
+              apartment: ApartmentModel) {
 
     this.creationDate = creationDate;
     this.sale = is_sale;
