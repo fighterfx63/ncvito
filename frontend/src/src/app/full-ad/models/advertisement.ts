@@ -4,7 +4,7 @@ import {Apartment} from "./apartment";
 export class Advertisement {
 
   creationDate: Date;
-  isSale: boolean;
+  sale: boolean;
   price: number;
   description: string;
 
@@ -12,7 +12,7 @@ export class Advertisement {
   apartment: Apartment;
 
   constructor(creationDate: Date,
-              isSale: boolean,
+              is_sale: boolean,
               price: number,
               description: string,
 
@@ -20,7 +20,7 @@ export class Advertisement {
               apartment: Apartment) {
 
     this.creationDate = creationDate;
-    this.isSale = isSale;
+    this.sale = is_sale;
     this.price = price;
     this.description = description;
 

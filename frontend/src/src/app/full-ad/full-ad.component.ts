@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatSnackBar} from "@angular/material";
 import {HttpService} from "../services/http.service";
-import {Advertisement} from "../models/advertisement";
+import {Advertisement} from "./models/advertisement";
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -53,7 +53,7 @@ export class FullAdComponent implements OnInit {
       this.square = this.advertisement.apartment.square;
       this.roomCount = this.advertisement.apartment.roomCount; this.roomOrRooms = this.getRoomOrRooms(this.roomCount);
       this.floor = this.advertisement.apartment.floor;
-      this.adType = this.getAdType(this.advertisement.isSale);
+      this.adType = this.getAdType(this.advertisement.sale);
       this.description = this.advertisement.description;
         // this.description = "q".repeat(1795);
       this.author = this.advertisement.author.firstName + " " + this.advertisement.author.lastName;
