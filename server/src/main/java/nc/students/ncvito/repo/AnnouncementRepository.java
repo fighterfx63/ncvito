@@ -7,4 +7,5 @@ import nc.students.ncvito.entity.Announcement;
 
 public interface AnnouncementRepository extends JpaRepository<Announcement, Long> {
     Page<Announcement> findAll(Pageable pegeable);
+    Announcement findById(long id);
 }

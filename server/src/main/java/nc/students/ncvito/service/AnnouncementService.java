@@ -22,6 +22,9 @@ public class AnnouncementService {
         this.announcementRepository = announcementRepository;
         this.userRepository = userRepository;
     }
+    public Announcement findbyId(long id){
+        return announcementRepository.findById(id);
+    }
 
 
     public Page<Announcement> findAll(Pageable pegeable) {
