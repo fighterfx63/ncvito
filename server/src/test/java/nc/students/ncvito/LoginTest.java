@@ -31,6 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 
 @TestPropertySource("/application.properties")
 
@@ -88,30 +89,20 @@ public class LoginTest {
 
     }
 
-    @Ignore
-    @Test
-    public void badCredentials() throws Exception {
-        //HttpHeaders loginHeader=new HttpHeaders()
-        this.mockMvc.perform((post("/login")
-                .param("username", "Alfred")
-                .param("password", "test")))
-
-                .andDo(print())
-                .andExpect(status().isFound());
-                //.andExpect(redirectedUrl("/login?error"));
-    }
-
-    @Ignore
     @Test
     public void correctLogin() throws Exception {
-        this.mockMvc.perform(formLogin().user("admin").password("admin"))
+        this.mockMvc.perform(get("/login").with(httpBasic("admin", "admin")))
                 .andDo(print())
-                .andExpect(status().isFound());
-                //.andExpect(redirectedUrl("/"));
-
+                .andExpect(status().isOk());
     }
 
-    @Ignore
+    @Test
+    public void unauthorizedUser() throws Exception {
+        this.mockMvc.perform(get("/login").with(httpBasic("admin", "not_admin")))
+                .andDo(print())
+                .andExpect(status().isUnauthorized());
+    }
+
     @Test
     public void registration() throws Exception {
 
@@ -142,22 +133,20 @@ public class LoginTest {
         ObjectMapper objectMapper = new ObjectMapper();
         String userJson = objectMapper.writeValueAsString(user);
         this.mockMvc.perform(post(("/registration")).content(userJson)
-        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(print())
                 .andExpect(status().isOk());
 
 
-        this.mockMvc.perform(post("/login").param("username", login).param("password", password))
+        this.mockMvc.perform(get("/login").with(httpBasic("admin", "admin")))
                 .andDo(print())
-                .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/"));
+                .andExpect(status().isOk());
 
         this.mockMvc.perform(get("/announcements").with(user(login)))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content[0].description",is("announcement_1")))
-                .andExpect(jsonPath("$.totalElements",is(1)));
-
+                .andExpect(jsonPath("$.content[0].description", is("announcement_1")))
+                .andExpect(jsonPath("$.totalElements", is(1)));
 
 
     }
