@@ -3,7 +3,6 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { FullAdComponent } from './full-ad.component';
-import {AdPhotosComponent} from "./ad-photos/ad-photos.component";
 import {SignUpComponent} from "../sign-up/sign-up.component";
 
 import {SharedModule} from "../shared/shared.module";
@@ -14,7 +13,7 @@ describe('AdInfoCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FullAdComponent, AdPhotosComponent, SignUpComponent ],
+      declarations: [ FullAdComponent, SignUpComponent ],
       imports: [
         SharedModule,
         HttpClientTestingModule,

@@ -55,7 +55,7 @@ export class FullAdComponent implements OnInit {
       this.floor = this.advertisement.apartment.floor;
       this.adType = this.getAdType(this.advertisement.isSale);
       this.description = this.advertisement.description;
-        // his.description = "q".repeat(255);
+        // this.description = "q".repeat(1795);
       this.author = this.advertisement.author.firstName + " " + this.advertisement.author.lastName;
       this.phone = this.advertisement.author.phone;
 
