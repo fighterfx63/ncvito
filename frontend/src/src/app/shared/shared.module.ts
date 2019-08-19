@@ -3,24 +3,25 @@ import {CommonModule} from '@angular/common';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
-import {AppRoutingModule} from '../app-routing.module';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {MaterialModule} from '../../material-module/material.module';
-import {HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from "../app-routing.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 import {
-  MatInputModule,
   MatButtonModule,
   MatCardModule,
-  MatSnackBarModule,
   MatFormFieldModule,
-  MatStepperModule,
-  MatMenuModule
-} from '@angular/material';
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatMenuModule,
+  MatPaginatorModule, MatRadioModule,
+  MatSnackBarModule,
+  MatStepperModule
+} from '@angular/material'
 
 const modules = [
   CommonModule,
   ReactiveFormsModule,
-  MaterialModule,
   BrowserAnimationsModule,
   AppRoutingModule,
   HttpClientModule,
@@ -32,7 +33,11 @@ const modules = [
   MatSnackBarModule,
   MatFormFieldModule,
   MatStepperModule,
-  MatMenuModule
+  MatMenuModule,
+  MatIconModule,
+  MatGridListModule,
+  MatPaginatorModule,
+  MatRadioModule,
 ];
 
 @NgModule({
