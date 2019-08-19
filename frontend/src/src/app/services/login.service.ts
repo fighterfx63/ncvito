@@ -34,7 +34,7 @@ export class LoginService {
 
   isLoggedIn(): boolean {
     const user = sessionStorage.getItem('username');
-    return !user;
+    return (user !== null);
   }
 
   logOut(): void {
