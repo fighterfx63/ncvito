@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserModel} from './user.model';
 import {Router} from '@angular/router';
 import {HttpService} from '../services/http.service';
+import {SnackbarService} from '../services/snackbar.service';
 
 @Component({
   selector: 'ncvito-sign-up',
@@ -15,7 +16,7 @@ export class SignUpComponent implements OnInit {
 
   isClicked: boolean;
 
-  constructor(private httpService: HttpService, private router: Router) {
+  constructor(private httpService: HttpService, private router: Router, private snackbarService: SnackbarService) {
 
     this.isClicked = false;
 
@@ -68,7 +69,7 @@ export class SignUpComponent implements OnInit {
     this.httpService.post('/registration', theUser).subscribe(
       () => {
         console.log('You have been signed up successfully');
-        this.httpService.openSnackBar('You have been signed up successfully', 'OK');
+        this.snackbarService.openSnackBar('You have been signed up successfully', 'OK');
         this.router.navigateByUrl('/');
         this.isClicked = false;
       },
@@ -77,7 +78,7 @@ export class SignUpComponent implements OnInit {
         if (response === 'User already exists') {
           this.formGroup.get('loginF').setErrors({'pattern': true});
         } else {
-          this.httpService.openSnackBar('It was unable to sign up. Please, try again later', 'OK');
+          this.snackbarService.openSnackBar('It was unable to sign up. Please, try again later', 'OK');
         }
         this.isClicked = false;
       }

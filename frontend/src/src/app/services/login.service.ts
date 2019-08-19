@@ -32,10 +32,6 @@ export class LoginService {
     );
   }
 
-  public openSnackBar(message: string, action: string) {
-    return this.httpService.openSnackBar(message, action);
-  }
-
   isLoggedIn(): boolean {
     const user = sessionStorage.getItem('username');
     return !user;

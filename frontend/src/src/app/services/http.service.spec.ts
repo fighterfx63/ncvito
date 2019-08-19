@@ -29,8 +29,8 @@ describe('HttpService', () => {
   );
 
   it('should be created', () => {
-    const service: HttpService = TestBed.get(HttpService);
-    expect(service).toBeTruthy();
+    const mService: HttpService = TestBed.get(HttpService);
+    expect(mService).toBeTruthy();
   });
 
   it('should POST the correct data', () => {

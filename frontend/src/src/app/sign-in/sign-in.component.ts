@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {LoginService} from '../services/login.service';
 import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CredentialsModel} from './credentials.model';
+import {SnackbarService} from '../services/snackbar.service';
 
 @Component({
   selector: 'ncvito-sign-in',
@@ -14,7 +14,8 @@ export class SignInComponent {
 
   constructor(
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private snackbarService: SnackbarService
   ) {
   }
 
@@ -45,7 +46,7 @@ export class SignInComponent {
         this.invalidLogin = false;
       },
       error => {
-        this.loginService.openSnackBar('It was unable to sign in. Please, try again later', 'OK');
+        this.snackbarService.openSnackBar('It was unable to sign in. Please, try again later', 'OK');
         this.invalidLogin = true;
         this.isClicked = false;
       }

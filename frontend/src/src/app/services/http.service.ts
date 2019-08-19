@@ -12,11 +12,6 @@ import {MatSnackBar} from '@angular/material';
 })
 export class HttpService {
 
-  public openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 3000
-    });
-  }
 
   constructor(private http: HttpClient, private loginService: LoginService, private snackBar: MatSnackBar) {
   }
