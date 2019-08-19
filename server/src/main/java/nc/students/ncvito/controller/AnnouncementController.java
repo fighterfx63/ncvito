@@ -1,6 +1,5 @@
 package nc.students.ncvito.controller;
 
-
 import nc.students.ncvito.entity.Announcement;
 import nc.students.ncvito.service.AnnouncementService;
 import org.springframework.data.domain.Page;
@@ -9,12 +8,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
-
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/announcements")
-
-
 public class AnnouncementController {
     private final AnnouncementService announcementService;
 
@@ -24,8 +20,7 @@ public class AnnouncementController {
 
     @GetMapping
     public Page<Announcement> getAllAnnouncements(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pegeable) {
-
-        return announcementService.findAll(Pageable.unpaged());
+        return announcementService.findAll(pegeable);
     }
 
     @GetMapping("{id}")
@@ -41,11 +36,8 @@ public class AnnouncementController {
     @PutMapping("{id}")
     public Announcement update(
             @PathVariable("id") Announcement announcementFromDb,
-            @RequestBody Announcement announcement
-    ) {
+            @RequestBody Announcement announcement) {
         return announcementService.update(announcementFromDb, announcement);
-
-
     }
 
     @PostMapping
