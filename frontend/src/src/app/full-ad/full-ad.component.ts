@@ -16,7 +16,7 @@ export class FullAdComponent implements OnInit {
 
   adCreationDate: string;
   address: string;
-  price: number;
+  price: string;
   square: number;
   roomCount: number;
   floor: number;
@@ -49,7 +49,7 @@ export class FullAdComponent implements OnInit {
 
       this.adCreationDate = new Date(this.advertisement.creationDate.toString().replace("T", " ")).toDateString();
       this.address = this.advertisement.apartment.address;
-      this.price = this.advertisement.price;
+      this.price = this.makePriceParsed(this.advertisement.price);
       this.square = this.advertisement.apartment.square;
       this.roomCount = this.advertisement.apartment.roomCount; this.roomOrRooms = this.getRoomOrRooms(this.roomCount);
       this.floor = this.advertisement.apartment.floor;
@@ -59,7 +59,7 @@ export class FullAdComponent implements OnInit {
       this.author = this.advertisement.author.firstName + " " + this.advertisement.author.lastName;
       this.phone = this.advertisement.author.phone;
 
-      this.openSnackBar("Success", "OK");
+      this.openSnackBar("[httpService.get]: success", "OK");
       },
       response => {
         this.router.navigateByUrl("/");
@@ -83,6 +83,19 @@ export class FullAdComponent implements OnInit {
     } else {
       return "rooms";
     }
+  }
+
+  makePriceParsed(price: number) {
+    var result: string = price.toString();
+
+    var count: number = (result.length/3 | 0);
+    var temp: number = result.length - 3;
+
+    for (var i = 0; i < count; i++) {
+      result = result.substring(0, temp) + "," + result.substring(temp, result.length);
+      temp = temp - 3;
+    }
+    return result;
   }
 
   switchHeartFill(){
