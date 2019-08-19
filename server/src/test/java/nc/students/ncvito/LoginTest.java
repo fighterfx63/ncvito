@@ -7,15 +7,18 @@ import nc.students.ncvito.entity.Apartment;
 import nc.students.ncvito.entity.Role;
 import nc.students.ncvito.entity.User;
 import nc.students.ncvito.repo.AnnouncementRepository;
+import nc.students.ncvito.service.AnnouncementService;
 import nc.students.ncvito.service.UserService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.MockBeans;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
@@ -25,12 +28,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Collections;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @TestPropertySource("/application.properties")
 
@@ -49,10 +52,11 @@ public class LoginTest {
     @Autowired
     private MockMvc mockMvc;
 
+
+
     @Before
     public void createObjects() {
         User user = new User();
-
         user.setLogin("admin");
         user.setPassword(passwordEncoder.encode("admin"));
         user.setEmail("email");
@@ -62,14 +66,12 @@ public class LoginTest {
         user.setRole(Collections.singleton(Role.USER));
 
         Apartment apartment = new Apartment();
-
         apartment.setAddress("qwe");
         apartment.setFloor(1);
         apartment.setRoomCount(1);
         apartment.setSquare(1);
 
         Announcement announcement = new Announcement();
-
         announcement.setAuthor(user);
         announcement.setApartment(apartment);
         announcement.setSale(true);
@@ -81,33 +83,28 @@ public class LoginTest {
 
     @Test
     public void accessDenied() throws Exception {
-        this.mockMvc.perform(get("/announcements"))
+        this.mockMvc.perform(get("/login"))
                 .andDo(print())
-                .andExpect(status().is4xxClientError());
+                .andExpect(status().isUnauthorized());
 
     }
 
 
     @Test
     public void badCredentials() throws Exception {
-        //HttpHeaders loginHeader=new HttpHeaders()
-        this.mockMvc.perform((post("/login")
-                .param("username", "Alfred")
-                .param("password", "test")))
 
+        this.mockMvc.perform(post("/login").with(httpBasic("incorrectLogin","incorrectPassword")))
                 .andDo(print())
-                .andExpect(status().isOk());
-                //.andExpect(redirectedUrl("/login?error"));
+                .andExpect(status().isUnauthorized());
+
     }
 
 
     @Test
     public void correctLogin() throws Exception {
-        this.mockMvc.perform(post("/login").param("login","admin").param("password","admin"))
+        this.mockMvc.perform(post("/login").with(httpBasic("admin","admin")))
                 .andDo(print())
                 .andExpect(status().isOk());
-
-                //.andExpect(redirectedUrl("/"));
 
     }
 
@@ -142,12 +139,12 @@ public class LoginTest {
         ObjectMapper objectMapper = new ObjectMapper();
         String userJson = objectMapper.writeValueAsString(user);
         this.mockMvc.perform(post(("/registration")).content(userJson)
-        .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(print())
                 .andExpect(status().isOk());
 
 
-        this.mockMvc.perform(post("/login").param("username", login).param("password", password))
+        this.mockMvc.perform(post("/login").with(httpBasic(login,password)))
                 .andDo(print())
                 .andExpect(status().isOk());
 

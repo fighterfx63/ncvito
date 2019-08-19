@@ -27,8 +27,8 @@ public class AnnouncementService {
     }
 
 
-    public Page<Announcement> findAll(Pageable pegeable) {
-        return announcementRepository.findAll(pegeable);
+    public Page<Announcement> findAll(Pageable pageable) {
+        return announcementRepository.findAll(pageable);
     }
 
 
