@@ -24,7 +24,7 @@ export class LoginService {
     return this.httpClient.get(environment.url + '/login', {headers}).pipe(
       map(
         userData => {
-          sessionStorage.setItem('token', btoa(username + ':' + password));
+          sessionStorage.setItem('token', 'basic ' + btoa(username + ':' + password));
           sessionStorage.setItem('username', username);
           return userData;
         }

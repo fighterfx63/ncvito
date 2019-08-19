@@ -4,7 +4,6 @@ import {catchError} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {LoginService} from './login.service';
-import {MatSnackBar} from '@angular/material';
 
 
 @Injectable({
@@ -14,6 +13,10 @@ export class HttpService {
 
 
   constructor(private http: HttpClient, private loginService: LoginService) {
+  }
+
+  public getHeaders(): HttpHeaders {
+    return new HttpHeaders({Authorization: sessionStorage.getItem('token')});
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -35,9 +38,9 @@ export class HttpService {
   }
 
 
-  post(url: string, object: object): Observable<typeof object> {
+  public post(url: string, object: object): Observable<typeof object> {
     if (this.loginService.isLoggedIn()) {
-      const headers = new HttpHeaders({Authorization: 'Basic' + sessionStorage.getItem('token')});
+      const headers = this.getHeaders();
       return this.http.post<typeof object>(environment.url + url, object, {headers})
         .pipe(
           catchError(this.handleError)
@@ -50,21 +53,15 @@ export class HttpService {
   }
 
   // first 'if' statement is case of using get request for authentication
-  get(url: string, object: object = null, httpHeaders: HttpHeaders = null): Observable<typeof object> {
-    if (httpHeaders) {
-      return this.http.post<typeof object>(environment.url + url, {httpHeaders})
-        .pipe(
-          catchError(this.handleError)
-        );
-    }
+  public get(url: string, object: object = null): Observable<typeof object> {
     if (this.loginService.isLoggedIn()) {
-      const headers = new HttpHeaders({Authorization: 'Basic' + sessionStorage.getItem('token')});
-      return this.http.post<typeof object>(environment.url + url, object, {headers})
+      const headers = this.getHeaders();
+      return this.http.get<typeof object>(environment.url + url, {headers})
         .pipe(
           catchError(this.handleError)
         );
     }
-    return this.http.post<typeof object>(environment.url + url, object)
+    return this.http.get<typeof object>(environment.url + url)
       .pipe(
         catchError(this.handleError)
       );
