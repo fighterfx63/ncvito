@@ -13,7 +13,7 @@ import {MatSnackBar} from '@angular/material';
 export class HttpService {
 
 
-  constructor(private http: HttpClient, private loginService: LoginService, private snackBar: MatSnackBar) {
+  constructor(private http: HttpClient, private loginService: LoginService) {
   }
 
   private handleError(error: HttpErrorResponse) {

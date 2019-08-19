@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
-import {HttpService} from './http.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  constructor(private httpService: HttpService) {
+  constructor(private httpClient: HttpClient) {
   }
 
   redirectUrl = '';
@@ -21,7 +21,7 @@ export class LoginService {
 
   authenticate(username, password) {
     const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(username + ':' + password)});
-    return this.httpService.get(environment.url + '/login', undefined, headers).pipe(
+    return this.httpClient.get(environment.url + '/login', {headers}).pipe(
       map(
         userData => {
           sessionStorage.setItem('token', btoa(username + ':' + password));
