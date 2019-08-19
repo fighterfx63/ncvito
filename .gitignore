@@ -1,9 +1,12 @@
 .idea
-/target/
+*target/
 /nbproject/
 /build/
 /test/
 /out/
 *.iml
 *.jar
-/frontend/src/node_modules
+*node_modules/**
+*node/**
+/frontend/src/node/node.exe
+*package-lock.json
