@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @Controller
 public class RegistrationController {
@@ -27,9 +28,9 @@ public class RegistrationController {
     @PostMapping("/registration")
     public ResponseEntity addUser(@RequestBody User user) {
 
-        User userFromDb = userRepository.findByLogin(user.getLogin());
+        Optional<User> userFromDb = userRepository.findByLogin(user.getLogin());
 
-        if (userFromDb != null) {
+        if (userFromDb.isPresent()) {
             return ResponseEntity.badRequest().body("User already exists");
         }
 
