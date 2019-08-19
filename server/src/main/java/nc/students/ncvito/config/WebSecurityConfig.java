@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .cors().and()
                 .authorizeRequests()
-                .antMatchers( "/*", "/registration","/login", "/ad-overview", "/**").permitAll()
+                .antMatchers( "/registration","/login", "advertisement/*").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic()
                 .and().sessionManagement().disable();
