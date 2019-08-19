@@ -1,5 +1,7 @@
 package nc.students.ncvito.service;
 
+import lombok.extern.slf4j.Slf4j;
+import nc.students.ncvito.entity.User;
 import nc.students.ncvito.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
@@ -18,8 +21,9 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        System.out.println("You are login");
-        return userRepository.findByLogin(login);
+        User user = userRepository.findByLogin(login)
+                .orElseThrow(() -> new UsernameNotFoundException("Username with login" + login + "not found."));
+        log.debug("Founded user: {}", user);
+        return user;
     }
-
 }

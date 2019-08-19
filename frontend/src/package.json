@@ -6,8 +6,6 @@
     "start": "ng serve",
     "build": "ng build",
     "build-prod": "ng build --prod",
-    "copy": "copyfiles -V -E -f ./dist/NC-project/* ../../src/main/resources/static/",
-    "deploy": "npm run build-prod && npm run copy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -38,7 +36,6 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
-    "copyfiles": "^2.1.1",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",

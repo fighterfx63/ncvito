@@ -6,7 +6,7 @@ import nc.students.ncvito.entity.Announcement;
 import nc.students.ncvito.entity.Apartment;
 import nc.students.ncvito.entity.Role;
 import nc.students.ncvito.entity.User;
-import nc.students.ncvito.service.AnnouncementService;
+import nc.students.ncvito.repo.AnnouncementRepository;
 import nc.students.ncvito.service.UserService;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -15,32 +15,24 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.RequestPostProcessor;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.awt.*;
 import java.util.Collections;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.core.StringContains.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@TestPropertySource("/application-test.properties")
+@TestPropertySource("/application.properties")
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -53,7 +45,7 @@ public class LoginTest {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    AnnouncementService announcementService;
+    AnnouncementRepository announcementRepository;
     @Autowired
     private MockMvc mockMvc;
 
@@ -83,7 +75,7 @@ public class LoginTest {
         announcement.setSale(true);
         announcement.setPrice(150);
         announcement.setDescription("announcement_1");
-        announcementService.create(announcement);
+        announcementRepository.save(announcement);
     }
 
     @Ignore
