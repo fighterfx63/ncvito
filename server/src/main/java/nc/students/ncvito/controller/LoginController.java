@@ -9,14 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
     @GetMapping(produces = "application/json")
-    @RequestMapping({ "/login" })
+    @RequestMapping({"/login"})
     public Login validateLogin() {
         return new Login("User successfully authenticated");
     }
 
-    private class Login{
+    private class Login {
         public String status;
-        public Login(String status){this.status=status;}
+
+        public Login(String status) {
+            this.status = status;
+        }
     }
 
 }
