@@ -6,7 +6,7 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
 import {SharedModule} from "./shared/shared.module";
 
 import {AnnouncementStepperComponent} from './announcement-stepper/announcement-stepper.component';
-import {SignInComponent} from "./sign-in/sign-in.component";
+import {SignInModule} from './sign-in/sign-in.module';
 
 
 @NgModule({
@@ -14,9 +14,13 @@ import {SignInComponent} from "./sign-in/sign-in.component";
     AppComponent,
     SignUpComponent,
     AnnouncementStepperComponent,
-    SignInComponent
+
   ],
-  imports: [SharedModule],
+  imports: [
+    SharedModule,
+    SignInModule,
+
+  ],
   exports: [],
   providers: [],
   bootstrap: [AppComponent]

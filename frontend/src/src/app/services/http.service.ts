@@ -3,7 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {LoginService} from './login.service';
+import {StorageService} from './storage.service';
 
 
 @Injectable({
@@ -12,11 +12,11 @@ import {LoginService} from './login.service';
 export class HttpService {
 
 
-  constructor(private http: HttpClient, private loginService: LoginService) {
+  constructor(private http: HttpClient, private storageService: StorageService) {
   }
 
   public getHeaders(): HttpHeaders {
-    return new HttpHeaders({Authorization: sessionStorage.getItem('token')});
+    return new HttpHeaders({Authorization: this.storageService.read('token')});
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -39,7 +39,7 @@ export class HttpService {
 
 
   public post(url: string, object: object): Observable<typeof object> {
-    if (this.loginService.isLoggedIn()) {
+    if (this.storageService.contains('token')) {
       const headers = this.getHeaders();
       return this.http.post<typeof object>(environment.url + url, object, {headers})
         .pipe(
@@ -53,8 +53,15 @@ export class HttpService {
   }
 
   // first 'if' statement is case of using get request for authentication
-  public get(url: string, object: object = null): Observable<typeof object> {
-    if (this.loginService.isLoggedIn()) {
+  public get(url: string, addedHeaders?: HttpHeaders, object: object = null): Observable<typeof object> {
+    if (addedHeaders) {
+      const headers = addedHeaders;
+      return this.http.get<typeof object>(environment.url + url, {headers})
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+    if (this.storageService.contains('token')) {
       const headers = this.getHeaders();
       return this.http.get<typeof object>(environment.url + url, {headers})
         .pipe(
