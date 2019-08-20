@@ -3,8 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {LoginService} from './login.service';
-import {MatSnackBar} from '@angular/material';
+import {StorageService} from './storage.service';
 
 
 @Injectable({
@@ -13,7 +12,11 @@ import {MatSnackBar} from '@angular/material';
 export class HttpService {
 
 
-  constructor(private http: HttpClient, private loginService: LoginService, private snackBar: MatSnackBar) {
+  constructor(private http: HttpClient, private storageService: StorageService) {
+  }
+
+  public getHeaders(): HttpHeaders {
+    return new HttpHeaders({Authorization: this.storageService.read('token')});
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -35,9 +38,9 @@ export class HttpService {
   }
 
 
-  post(url: string, object: object): Observable<typeof object> {
-    if (this.loginService.isLoggedIn()) {
-      const headers = new HttpHeaders({Authorization: 'Basic' + sessionStorage.getItem('token')});
+  public post(url: string, object: object): Observable<typeof object> {
+    if (this.storageService.contains('token')) {
+      const headers = this.getHeaders();
       return this.http.post<typeof object>(environment.url + url, object, {headers})
         .pipe(
           catchError(this.handleError)
@@ -50,21 +53,22 @@ export class HttpService {
   }
 
   // first 'if' statement is case of using get request for authentication
-  get(url: string, object: object = null, httpHeaders: HttpHeaders = null): Observable<typeof object> {
-    if (httpHeaders) {
-      return this.http.post<typeof object>(environment.url + url, {httpHeaders})
+  public get(url: string, addedHeaders?: HttpHeaders, object: object = null): Observable<typeof object> {
+    if (addedHeaders) {
+      const headers = addedHeaders;
+      return this.http.get<typeof object>(environment.url + url, {headers})
         .pipe(
           catchError(this.handleError)
         );
     }
-    if (this.loginService.isLoggedIn()) {
-      const headers = new HttpHeaders({Authorization: 'Basic' + sessionStorage.getItem('token')});
-      return this.http.post<typeof object>(environment.url + url, object, {headers})
+    if (this.storageService.contains('token')) {
+      const headers = this.getHeaders();
+      return this.http.get<typeof object>(environment.url + url, {headers})
         .pipe(
           catchError(this.handleError)
         );
     }
-    return this.http.post<typeof object>(environment.url + url, object)
+    return this.http.get<typeof object>(environment.url + url)
       .pipe(
         catchError(this.handleError)
       );
