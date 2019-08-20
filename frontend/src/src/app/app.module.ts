@@ -4,16 +4,18 @@ import {AppComponent} from './app.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
 
 import {SharedModule} from './shared/shared.module';
-import {SignInComponent} from './sign-in/sign-in.component';
+import {SignInModule} from './sign-in/sign-in.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SignUpComponent,
-    SignInComponent
   ],
-  imports: [SharedModule],
+  imports: [
+    SharedModule,
+    SignInModule
+  ],
   exports: [],
   providers: [],
   bootstrap: [AppComponent]
