@@ -13,7 +13,7 @@ import {
   MatSnackBarModule,
   MatFormFieldModule,
   MatStepperModule,
-  MatMenuModule, MatGridListModule, MatIconModule
+  MatMenuModule, MatIconModule
 } from '@angular/material'
 
 const modules = [
@@ -31,7 +31,6 @@ const modules = [
   MatFormFieldModule,
   MatStepperModule,
   MatMenuModule,
-  MatGridListModule,
   MatIconModule
 ];
 

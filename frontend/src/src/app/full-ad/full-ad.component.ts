@@ -44,7 +44,7 @@ export class FullAdComponent implements OnInit {
   }
 
   getTheAdvertisement(){
-    this.httpService.get(environment.url + "/announcements/" + this.ad_ID, this.advertisement).subscribe(
+    this.httpService.get("/announcements/" + this.ad_ID, this.advertisement).subscribe(
       ad => {
       this.advertisement = ad;
 
@@ -62,7 +62,6 @@ export class FullAdComponent implements OnInit {
       },
       response => {
         this.router.navigateByUrl("/");
-        console.log(response);
         this.openSnackBar("It was unable to load the advertisement. Please, try again later", "OK");
       }
     );

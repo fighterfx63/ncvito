@@ -11,12 +11,12 @@ export class UserModel {
   banReason: string;
   banExpired: Date;
 
-  constructor ( firstName: string,
-                lastName: string,
-                login: string,
-                password: string,
-                email: string,
-                phone: string) {
+  constructor(firstName: string,
+              lastName: string,
+              login: string,
+              password: string,
+              email: string,
+              phone: string) {
 
     this.firstName = firstName;
     this.lastName = lastName;

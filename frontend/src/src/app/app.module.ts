@@ -5,12 +5,15 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
 
 import {SharedModule} from "./shared/shared.module";
 import {FullAdComponent} from "./full-ad/full-ad.component";
+import {SignInComponent} from './sign-in/sign-in.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     SignUpComponent,
-    FullAdComponent
+    FullAdComponent,
+    SignInComponent
   ],
   imports: [SharedModule],
   exports:[],

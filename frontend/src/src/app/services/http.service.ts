@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {catchError} from "rxjs/operators";
-import {Observable, throwError} from "rxjs";
-import {environment} from "../../environments/environment";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {catchError} from 'rxjs/operators';
+import {Observable, throwError} from 'rxjs';
+import {environment} from '../../environments/environment';
+import {LoginService} from './login.service';
 
 
 @Injectable({
@@ -10,7 +11,12 @@ import {environment} from "../../environments/environment";
 })
 export class HttpService {
 
-  constructor(private http: HttpClient) {
+
+  constructor(private http: HttpClient, private loginService: LoginService) {
+  }
+
+  public getHeaders(): HttpHeaders {
+    return new HttpHeaders({Authorization: sessionStorage.getItem('token')});
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -29,21 +35,33 @@ export class HttpService {
     // return an observable with a user-facing error message
     return throwError(
       'Error!\nSomething bad happened; please try again later.');
-  };
+  }
 
 
-  post(url: string, object: Object): Observable<typeof object> {
-
-    const headers= new HttpHeaders({Authorization: 'Basic' + sessionStorage.getItem('token')});
-    return this.http.post<typeof object>(environment.url + url, object, {headers})
+  public post(url: string, object: object): Observable<typeof object> {
+    if (this.loginService.isLoggedIn()) {
+      const headers = this.getHeaders();
+      return this.http.post<typeof object>(environment.url + url, object, {headers})
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+    return this.http.post<typeof object>(environment.url + url, object)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  get(url: string, data: any) {
-
-    return this.http.get<typeof data>(url)
+  // first 'if' statement is case of using get request for authentication
+  public get(url: string, object: any): Observable<typeof object> {
+    if (this.loginService.isLoggedIn()) {
+      const headers = this.getHeaders();
+      return this.http.get<typeof object>(environment.url + url, {headers})
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+    return this.http.get<typeof object>(environment.url + url)
       .pipe(
         catchError(this.handleError)
       );

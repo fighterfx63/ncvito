@@ -3,6 +3,7 @@ import { Routes, RouterModule, Router } from '@angular/router';
 import {APP_BASE_HREF} from "@angular/common";
 import {SignUpComponent} from "./sign-up/sign-up.component";
 import {FullAdComponent} from "./full-ad/full-ad.component";
+import {SignInComponent} from './sign-in/sign-in.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,9 @@ const routes: Routes = [
   },
   {
     path: 'advertisement/:id', component: FullAdComponent
+  },
+  {
+    path: 'sign-in', component: SignInComponent
   }
 ];
 

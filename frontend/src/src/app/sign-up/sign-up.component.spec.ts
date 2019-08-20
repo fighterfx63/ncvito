@@ -5,6 +5,7 @@ import {AppRoutingModule} from "../app-routing.module";
 
 import { SignUpComponent } from './sign-up.component';
 import {FullAdComponent} from "../full-ad/full-ad.component";
+import {SignInComponent} from "../sign-in/sign-in.component";
 
 import {DebugElement} from "@angular/core";
 import {By} from "@angular/platform-browser";
@@ -18,7 +19,7 @@ describe('SignUpComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SignUpComponent, FullAdComponent],
+      declarations: [ SignUpComponent, FullAdComponent, SignInComponent],
       imports: [
         HttpClientTestingModule,
         AppRoutingModule,
