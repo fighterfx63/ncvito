@@ -4,6 +4,7 @@ import {HttpService} from "../services/http.service";
 import {AdvertisementModel} from "./models/advertisement.model";
 import { Router, ActivatedRoute } from '@angular/router';
 import {environment} from "../../environments/environment";
+import {HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'ncvito-full-ad',
@@ -44,7 +45,8 @@ export class FullAdComponent implements OnInit {
   }
 
   getTheAdvertisement(){
-    this.httpService.get("/announcements/" + this.ad_ID, this.advertisement).subscribe(
+    const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(null + ':' + null)});
+    this.httpService.get("/announcements/" + this.ad_ID, headers, this.advertisement).subscribe(
       ad => {
       this.advertisement = ad;
 

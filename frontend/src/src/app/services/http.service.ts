@@ -53,7 +53,7 @@ export class HttpService {
   }
 
   // first 'if' statement is case of using get request for authentication
-  public get(url: string, addedHeaders?: HttpHeaders, object: object = null): Observable<typeof object> {
+  public get(url: string, addedHeaders?: HttpHeaders, object: any = null): Observable<typeof object> {
     if (addedHeaders) {
       const headers = addedHeaders;
       return this.http.get<typeof object>(environment.url + url, {headers})
