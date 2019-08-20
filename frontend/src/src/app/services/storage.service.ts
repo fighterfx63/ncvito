@@ -27,6 +27,6 @@ export class StorageService {
     } else {
       console.log(`item ${key} is found.`);
     }
-    return (item === null);
+    return !!item;
   }
 }
