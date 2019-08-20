@@ -45,8 +45,7 @@ export class FullAdComponent implements OnInit {
   }
 
   getTheAdvertisement(){
-    const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(null + ':' + null)});
-    this.httpService.get("/announcements/" + this.ad_ID, headers, this.advertisement).subscribe(
+    this.httpService.get("/announcements/" + this.ad_ID, null, this.advertisement).subscribe(
       ad => {
       this.advertisement = ad;
 
