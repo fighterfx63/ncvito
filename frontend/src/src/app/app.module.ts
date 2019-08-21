@@ -5,6 +5,7 @@ import {SharedModule} from "./shared/shared.module";
 import {AnnouncementStepperComponent} from './announcement-stepper/announcement-stepper.component';
 import {SignInModule} from './sign-in/sign-in.module';
 import {FullAdComponent} from "./full-ad/full-ad.component";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import {FullAdComponent} from "./full-ad/full-ad.component";
     SignUpComponent,
     FullAdComponent,
     AnnouncementStepperComponent,
+    NotFoundComponent,
   ],
   imports: [
     SharedModule,

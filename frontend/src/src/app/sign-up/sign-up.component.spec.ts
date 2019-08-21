@@ -11,6 +11,7 @@ import {DebugElement} from "@angular/core";
 import {By} from "@angular/platform-browser";
 import {SharedModule} from "../shared/shared.module";
 import {AnnouncementStepperComponent} from "../announcement-stepper/announcement-stepper.component";
+import {NotFoundComponent} from "../not-found/not-found.component";
 
 describe('SignUpComponent', () => {
   let component: SignUpComponent;
@@ -20,7 +21,7 @@ describe('SignUpComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SignUpComponent, FullAdComponent, SignInComponent,AnnouncementStepperComponent],
+      declarations: [ SignUpComponent, FullAdComponent, SignInComponent,AnnouncementStepperComponent,NotFoundComponent],
       imports: [
         HttpClientTestingModule,
         AppRoutingModule,

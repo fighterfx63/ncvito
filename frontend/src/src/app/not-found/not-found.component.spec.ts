@@ -1,21 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AnnouncementStepperComponent } from './announcement-stepper.component';
+import { NotFoundComponent } from './not-found.component';
 import {FullAdComponent} from "../full-ad/full-ad.component";
 import {SignUpComponent} from "../sign-up/sign-up.component";
 import {SignInComponent} from "../sign-in/sign-in.component";
+import {AnnouncementStepperComponent} from "../announcement-stepper/announcement-stepper.component";
 import {SharedModule} from "../shared/shared.module";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
-import {NotFoundComponent} from "../not-found/not-found.component";
 
-describe('AnnouncementStepperComponent', () => {
-  let component: AnnouncementStepperComponent;
-  let fixture: ComponentFixture<AnnouncementStepperComponent>;
+describe('NotFoundComponent', () => {
+  let component: NotFoundComponent;
+  let fixture: ComponentFixture<NotFoundComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AnnouncementStepperComponent,FullAdComponent, SignUpComponent, SignInComponent,NotFoundComponent],
+      declarations: [NotFoundComponent, FullAdComponent, SignUpComponent, SignInComponent,AnnouncementStepperComponent],
       imports: [
         SharedModule,
         HttpClientTestingModule,
@@ -26,7 +26,7 @@ describe('AnnouncementStepperComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AnnouncementStepperComponent);
+    fixture = TestBed.createComponent(NotFoundComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
