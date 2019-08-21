@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NotFoundComponent } from './not-found.component';
+import {NotFoundComponent} from './not-found.component';
 import {FullAdComponent} from "../full-ad/full-ad.component";
 import {SignUpComponent} from "../sign-up/sign-up.component";
 import {SignInComponent} from "../sign-in/sign-in.component";
@@ -15,14 +15,14 @@ describe('NotFoundComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NotFoundComponent, FullAdComponent, SignUpComponent, SignInComponent,AnnouncementStepperComponent],
+      declarations: [NotFoundComponent, FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent],
       imports: [
         SharedModule,
         HttpClientTestingModule,
         RouterTestingModule
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
