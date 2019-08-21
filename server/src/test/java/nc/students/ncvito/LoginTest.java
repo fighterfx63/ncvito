@@ -9,7 +9,6 @@ import nc.students.ncvito.entity.User;
 import nc.students.ncvito.service.AnnouncementService;
 import nc.students.ncvito.service.UserService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +24,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Collections;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @TestPropertySource("/application-test.properties")
 
@@ -81,33 +81,28 @@ public class LoginTest {
 
     @Test
     public void accessDenied() throws Exception {
-        this.mockMvc.perform(get("/announcements"))
+        this.mockMvc.perform(get("/login"))
                 .andDo(print())
-                .andExpect(status().is4xxClientError());
+                .andExpect(status().isUnauthorized());
 
     }
 
 
     @Test
     public void badCredentials() throws Exception {
-        //HttpHeaders loginHeader=new HttpHeaders()
-        this.mockMvc.perform((post("/login")
-                .param("username", "Alfred")
-                .param("password", "test")))
 
+        this.mockMvc.perform(post("/login").with(httpBasic("incorrectLogin","incorrectPassword")))
                 .andDo(print())
-                .andExpect(status().isOk());
-                //.andExpect(redirectedUrl("/login?error"));
+                .andExpect(status().isUnauthorized());
+
     }
 
 
     @Test
     public void correctLogin() throws Exception {
-        this.mockMvc.perform(post("/login").param("login","admin").param("password","admin"))
+        this.mockMvc.perform(post("/login").with(httpBasic("admin","admin")))
                 .andDo(print())
                 .andExpect(status().isOk());
-
-                //.andExpect(redirectedUrl("/"));
 
     }
 
@@ -147,7 +142,7 @@ public class LoginTest {
                 .andExpect(status().isOk());
 
 
-        this.mockMvc.perform(post("/login").param("username", login).param("password", password))
+        this.mockMvc.perform(post("/login").with(httpBasic(login,password)))
                 .andDo(print())
                 .andExpect(status().isOk());
 

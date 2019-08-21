@@ -28,6 +28,7 @@ export class AnnouncementStepperComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.apartmentInfoFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required],
       secondCtrl: ['', [Validators.required, Validators.min(1), , Validators.nullValidator]],
@@ -56,6 +57,17 @@ export class AnnouncementStepperComponent implements OnInit {
 
   };
 
+  edit(event:Announcement){
+    console.log(event);
+    this.httpService.post('/announcements', event)
+      .subscribe(data => {
+        this.snackBarService.openSnackBar("You have been created successfully", "OK");
+        this.router.navigateByUrl("/");
+      });
 
-}
+  };
+  }
+
+
+
 

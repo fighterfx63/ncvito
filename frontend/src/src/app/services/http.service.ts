@@ -41,4 +41,20 @@ export class HttpService {
       );
   }
 
+
+  public getAllAnnouncements(page, size) {
+    return this.http.get(environment.announcementsUrl + '?page=' + page + '&size=' + size);
+  }
+
+
+
+  public getAll() {
+    return this.http.get(environment.announcementsUrl);
+  }
+
+
+  public deleteAnnouncements(announcement) {
+    return this.http.delete(environment.announcementsUrl +'/' + announcement.id);
+  }
+
 }
