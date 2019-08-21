@@ -5,12 +5,14 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
 import {FullAdComponent} from "./full-ad/full-ad.component";
 import {SignInComponent} from './sign-in/sign-in.component';
 import {AnnouncementStepperComponent} from "./announcement-stepper/announcement-stepper.component";
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
   {path: 'advertisement/:id', component: FullAdComponent},
   {path: 'sign-in', component: SignInComponent},
-  {path: 'create', component: AnnouncementStepperComponent}
+  {path: 'create', component: AnnouncementStepperComponent},
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({
