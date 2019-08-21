@@ -1,0 +1,104 @@
+<div class = "container">
+
+  <mat-card class="container__ad-info-card">
+
+    <mat-card-title class="container__ad-info-card__ad-name">
+
+      {{roomCount}} {{roomOrRooms}}, {{square}} m<sup><small>2</small></sup>, floor {{floor}}
+      <button (click)="switchHeartFill()" mat-icon-button class="container__ad-info-card__ad-name__heart-btn" [disabled]=isHeartLocked>
+        <mat-icon>favorite_{{heartFill}}</mat-icon>
+      </button>
+
+    </mat-card-title>
+
+    <br><br>
+    <div class = "container__ad-info-card__ad-property">
+      Advertisement creation date:
+      <div class = "container__ad-info-card__ad-property__value">
+        {{adCreationDate}}
+      </div>
+    </div>
+
+    <br><br>
+    <div class = "container__ad-info-card__ad-property">
+      Address:
+      <div class = "container__ad-info-card__ad-property__value">
+        {{address}}
+      </div>
+    </div>
+
+    <br><br>
+    <div class = "container__ad-info-card__ad-property">
+      Price:
+      <div class = "container__ad-info-card__ad-property__value">
+        ${{price}}
+      </div>
+    </div>
+
+    <br><br>
+    <div class = "container__ad-info-card__ad-property">
+      Entire apartment square:
+      <div class = "container__ad-info-card__ad-property__value">
+        {{square}} m<sup><small>2</small></sup>
+      </div>
+    </div>
+
+    <br><br>
+    <div class = "container__ad-info-card__ad-property">
+      Room count:
+      <div class = "container__ad-info-card__ad-property__value">
+        {{roomCount}}
+      </div>
+    </div>
+
+    <br><br>
+    <div class = "container__ad-info-card__ad-property">
+      Floor:
+      <div class = "container__ad-info-card__ad-property__value">
+        {{floor}}
+      </div>
+    </div>
+
+    <br><br>
+    <div class = "container__ad-info-card__ad-property">
+      Selling/Leasing:
+      <div class = "container__ad-info-card__ad-property__value">
+        {{adType}}
+      </div>
+    </div>
+
+    <br><br>
+    <div class = "container__ad-info-card__ad-property">
+      Description:
+    </div>
+
+    <mat-card class="container__ad-info-card__description-card">
+      {{description}}
+    </mat-card>
+
+    <br>
+    <div class = "container__ad-info-card__author">
+      {{author}}<br>
+      {{phone}}
+    </div>
+
+  </mat-card>
+
+  <div class = "container__ad-photos">
+
+    <div id="container__ad-photos__big-photo">
+      <img alt="bigPhoto" src="https://ar.rdcpix.com/3019165143/d5e3fcb2a45b73804d9d4eec0d3816fbc-f0xd-w1020_h770_q80.jpg" />
+    </div>
+
+    <div id="container__ad-photos__small-photos">
+      <img alt="smallPhoto" src="https://ar.rdcpix.com/3019165143/d5e3fcb2a45b73804d9d4eec0d3816fbc-f0xd-w1020_h770_q80.jpg" />
+      <img alt="smallPhoto" src="https://ar.rdcpix.com/3019165143/d5e3fcb2a45b73804d9d4eec0d3816fbc-f0xd-w1020_h770_q80.jpg" />
+      <img alt="smallPhoto" src="https://ar.rdcpix.com/3019165143/d5e3fcb2a45b73804d9d4eec0d3816fbc-f0xd-w1020_h770_q80.jpg" />
+      <img alt="smallPhoto" src="https://ar.rdcpix.com/3019165143/d5e3fcb2a45b73804d9d4eec0d3816fbc-f0xd-w1020_h770_q80.jpg" />
+    </div>
+
+  </div>
+
+</div>
+
+

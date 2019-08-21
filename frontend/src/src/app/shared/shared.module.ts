@@ -7,17 +7,19 @@ import {AppRoutingModule} from "../app-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {
+  MatInputModule,
   MatButtonModule,
   MatCardModule,
   MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
-  MatInputModule,
   MatMenuModule,
   MatPaginatorModule, MatRadioModule,
   MatSnackBarModule,
-  MatStepperModule
+  MatStepperModule,
+
 } from '@angular/material'
+
 
 const modules = [
   CommonModule,
@@ -33,6 +35,8 @@ const modules = [
   MatSnackBarModule,
   MatFormFieldModule,
   MatStepperModule,
+  MatMenuModule,
+  MatIconModule,
   MatMenuModule,
   MatIconModule,
   MatGridListModule,

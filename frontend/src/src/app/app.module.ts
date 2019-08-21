@@ -7,19 +7,20 @@ import {SharedModule} from "./shared/shared.module";
 
 import {AnnouncementStepperComponent} from './announcement-stepper/announcement-stepper.component';
 import {SignInModule} from './sign-in/sign-in.module';
+import {FullAdComponent} from "./full-ad/full-ad.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SignUpComponent,
+    FullAdComponent,
     AnnouncementStepperComponent,
 
   ],
   imports: [
     SharedModule,
-    SignInModule,
-
+    SignInModule
   ],
   exports: [],
   providers: [],
