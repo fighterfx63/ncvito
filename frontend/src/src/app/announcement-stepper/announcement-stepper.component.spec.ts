@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AnnouncementStepperComponent } from './announcement-stepper.component';
+import {FullAdComponent} from "../full-ad/full-ad.component";
+import {SignUpComponent} from "../sign-up/sign-up.component";
+import {SignInComponent} from "../sign-in/sign-in.component";
+import {SharedModule} from "../shared/shared.module";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('AnnouncementStepperComponent', () => {
   let component: AnnouncementStepperComponent;
@@ -8,7 +14,12 @@ describe('AnnouncementStepperComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AnnouncementStepperComponent ]
+      declarations: [ AnnouncementStepperComponent,FullAdComponent, SignUpComponent, SignInComponent,AnnouncementStepperComponent ],
+      imports: [
+        SharedModule,
+        HttpClientTestingModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));
