@@ -1,0 +1,35 @@
+<mat-card class="announcement-card" *ngIf="announcement.apartment">
+  <mat-card-header class="announcement-card__header">
+
+
+    <mat-card-title class="announcement-card__title">{{announcement.apartment.roomCount}} rooms, {{announcement.apartment.square}}
+      m2, {{announcement.apartment.floor}} floor
+    </mat-card-title>
+
+    <mat-card-subtitle class="announcement-card__subtitle">$ {{announcement.price}}</mat-card-subtitle>
+
+  </mat-card-header>
+
+  <mat-card-content class="announcement-card__content">
+    <div>
+      {{announcement.apartment.address}}
+      </div>
+    <div>
+      {{announcement.creationDate}}
+    </div>
+      <img mat-card-lg-image src="http://recuperatorpro.ru/wp-content/uploads/2018/12/image.png" alt="test">
+  </mat-card-content>
+  <mat-card-actions class="announcement-card_actions">
+    <button mat-icon-button aria-label="Example icon-button with a heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-button (click)="delete()"><i class="material-icons">
+      delete
+    </i></button>
+
+    <button mat-button (click)="edit()">Edit</button>
+
+  </mat-card-actions>
+
+
+</mat-card>
