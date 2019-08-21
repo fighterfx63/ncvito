@@ -1,5 +1,7 @@
 variables:
     SPRING_PROFILES_ACTIVE: gitlab-ci
+before_script:
+  - ci/install-chrome
 stages:
   - build
 maven-build:
