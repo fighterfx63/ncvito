@@ -35,7 +35,7 @@ export class AnnouncementStepperComponent implements OnInit {
       squareCtrl: ['', [Validators.required, Validators.min(1), , Validators.nullValidator]],
     });
     this.announcementTypeFormGroup = this._formBuilder.group({
-      saleCtrl: [Boolean(''), Validators.required]
+      saleCtrl: [false, Validators.required]
     });
     this.announcementPriceFormGroup = this._formBuilder.group({
       priceCtrl: ['', Validators.required]
