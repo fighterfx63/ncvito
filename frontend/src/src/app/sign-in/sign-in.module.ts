@@ -11,6 +11,7 @@ import {SignInComponent} from './sign-in.component';
   providers: [LoginService],
   imports: [
     SharedModule
+
   ],
   exports: [
     SignInComponent

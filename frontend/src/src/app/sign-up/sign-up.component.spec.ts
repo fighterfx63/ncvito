@@ -10,6 +10,7 @@ import {SignInComponent} from "../sign-in/sign-in.component";
 import {DebugElement} from "@angular/core";
 import {By} from "@angular/platform-browser";
 import {SharedModule} from "../shared/shared.module";
+import {AnnouncementStepperComponent} from "../announcement-stepper/announcement-stepper.component";
 
 describe('SignUpComponent', () => {
   let component: SignUpComponent;
@@ -19,7 +20,7 @@ describe('SignUpComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SignUpComponent, FullAdComponent, SignInComponent],
+      declarations: [ SignUpComponent, FullAdComponent, SignInComponent,AnnouncementStepperComponent],
       imports: [
         HttpClientTestingModule,
         AppRoutingModule,

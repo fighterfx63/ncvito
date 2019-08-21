@@ -4,17 +4,13 @@ import {APP_BASE_HREF} from "@angular/common";
 import {SignUpComponent} from "./sign-up/sign-up.component";
 import {FullAdComponent} from "./full-ad/full-ad.component";
 import {SignInComponent} from './sign-in/sign-in.component';
+import {AnnouncementStepperComponent} from "./announcement-stepper/announcement-stepper.component";
 
 const routes: Routes = [
-  {
-    path: 'sign-up', component: SignUpComponent
-  },
-  {
-    path: 'advertisement/:id', component: FullAdComponent
-  },
-  {
-    path: 'sign-in', component: SignInComponent
-  }
+  {path: 'sign-up', component: SignUpComponent},
+  {path: 'advertisement/:id', component: FullAdComponent},
+  {path: 'sign-in', component: SignInComponent},
+  {path: 'create', component: AnnouncementStepperComponent}
 ];
 
 @NgModule({

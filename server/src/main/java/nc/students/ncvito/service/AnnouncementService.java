@@ -2,6 +2,7 @@ package nc.students.ncvito.service;
 
 
 import nc.students.ncvito.entity.Announcement;
+import nc.students.ncvito.entity.Status;
 import nc.students.ncvito.entity.User;
 import nc.students.ncvito.repo.AnnouncementRepository;
 import nc.students.ncvito.repo.UserRepository;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 
 
 @Service
@@ -22,10 +25,13 @@ public class AnnouncementService {
         this.announcementRepository = announcementRepository;
         this.userRepository = userRepository;
     }
+    public Announcement findbyId(long id){
+        return announcementRepository.findById(id);
+    }
 
 
-    public Page<Announcement> findAll(Pageable pegeable) {
-        return announcementRepository.findAll(pegeable);
+    public Page<Announcement> findAll(Pageable pageable) {
+        return announcementRepository.findAll(pageable);
     }
 
     public Announcement findById(long id) {
@@ -46,6 +52,7 @@ public class AnnouncementService {
         User user = userRepository.findByLogin(authentication.getName())
                 .orElseThrow(() -> new IllegalStateException("User with login " + authentication.getName() + " not found."));
         announcement.setAuthor(user);
+        announcement.setStatus(Collections.singleton(Status.NOT_MODERATED));
         return announcementRepository.save(announcement);
     }
 }
