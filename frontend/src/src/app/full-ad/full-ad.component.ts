@@ -83,12 +83,12 @@ export class FullAdComponent implements OnInit {
   }
 
   makePriceParsed(price: number) {
-    var result: string = price.toString();
+    let result: string = price.toString();
 
-    var count: number = (result.length / 3 | 0);
-    var temp: number = result.length - 3;
+    let count: number = (result.length / 3 | 0);
+    let temp: number = result.length - 3;
 
-    for (var i = 0; i < count; i++) {
+    for (let i = 0; i < count; i++) {
       result = result.substring(0, temp) + "," + result.substring(temp, result.length);
       temp = temp - 3;
     }
