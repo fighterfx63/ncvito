@@ -3,8 +3,6 @@ import {MatSnackBar} from "@angular/material";
 import {HttpService} from "../services/http.service";
 import {AdvertisementModel} from "./models/advertisement.model";
 import { Router, ActivatedRoute } from '@angular/router';
-import {environment} from "../../environments/environment";
-import {HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'ncvito-full-ad',

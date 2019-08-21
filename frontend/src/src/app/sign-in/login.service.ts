@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import {environment} from '../../environments/environment';
 import {HttpService} from '../services/http.service';
 import {StorageService} from '../services/storage.service';
-import {SignInModule} from './sign-in.module';
 
 
 @Injectable()
