@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {HttpService} from './http.service';
-import {UserModel} from '../sign-up/user.model';
+import {UserModel} from "../models/user.model";
 
 describe('HttpService', () => {
   let service: HttpService;
@@ -16,7 +16,7 @@ describe('HttpService', () => {
           ],
           providers: [HttpService]
         }
-      );
+      )
     }
   );
 
@@ -24,19 +24,19 @@ describe('HttpService', () => {
       service = TestBed.get(HttpService);
       httpMock = TestBed.get(HttpTestingController);
       theUser = new UserModel('testFname', 'testSname', 'testLogin', 'testPassword', 'testEmail', 'testPhone');
-      url = '/registration';
+      url = "/registration";
     }
   );
 
   it('should be created', () => {
-    const mService: HttpService = TestBed.get(HttpService);
-    expect(mService).toBeTruthy();
+    const service: HttpService = TestBed.get(HttpService);
+    expect(service).toBeTruthy();
   });
 
   it('should POST the correct data', () => {
     service.post(url, theUser).subscribe((data) => {
       expect(data).toEqual(theUser);
-    });
+    })
 
     const req = httpMock.expectOne('http://localhost:8080' + url);
     expect(req.request.method).toBe('POST');

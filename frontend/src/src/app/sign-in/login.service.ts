@@ -26,6 +26,7 @@ export class LoginService {
 
   public authenticate(username, password) {
     const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(username + ':' + password)});
+
     this.storageService.write('token', `basic ${btoa(username + ':' + password)}`);
     console.log(headers);
     return this.httpService.get('/login', headers).pipe(

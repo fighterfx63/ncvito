@@ -4,6 +4,7 @@ import { SignInComponent } from './sign-in.component';
 import {SignUpComponent} from "../sign-up/sign-up.component";
 import {FullAdComponent} from "../full-ad/full-ad.component";
 import {LoginService} from "./login.service";
+import {AnnouncementStepperComponent} from "../announcement-stepper/announcement-stepper.component";
 
 describe('SignInComponent', () => {
   let component: SignInComponent;
@@ -11,7 +12,7 @@ describe('SignInComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SignInComponent, SignUpComponent, FullAdComponent ],
+      declarations: [ SignInComponent, SignUpComponent, FullAdComponent , AnnouncementStepperComponent],
       imports: [SharedModule],
       providers: [LoginService]
     })
