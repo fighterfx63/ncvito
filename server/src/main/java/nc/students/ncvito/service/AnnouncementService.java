@@ -28,6 +28,9 @@ public class AnnouncementService {
         return announcementRepository.findAll(pegeable);
     }
 
+    public Announcement findById(long id) {
+        return announcementRepository.findById(id);
+    }
 
     public void delete(Announcement announcement) {
         announcementRepository.delete(announcement);

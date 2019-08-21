@@ -34,17 +34,25 @@ public class Script {
     }
 
     public static void defineConnectionProperties() throws FileNotFoundException {
-        File properties = new File(System.getProperty("user.dir") + "/src/main/resources/application.properties");
+        String path = System.getProperty("user.dir") + "/server/src/main/resources/application.properties";
+        File properties = new File(path);
+        //System.out.println(path);
         Scanner scan = new Scanner(properties);
         String currentRow;
         while (scan.hasNextLine()) {
+
             currentRow = scan.nextLine();
+            currentRow.substring(0, currentRow.indexOf(""));
+            String value = currentRow.substring(currentRow.indexOf("=") + 1, currentRow.length());
+
             if (currentRow.substring(0, currentRow.indexOf("=")).equals("spring.datasource.url")) {
-                url = currentRow.substring(currentRow.indexOf("=") + 1, currentRow.length());
+                url = value;
             } else if (currentRow.substring(0, currentRow.indexOf("=")).equals("spring.datasource.username")) {
-                user = currentRow.substring(currentRow.indexOf("=") + 1, currentRow.length());
+                user = value;
             } else if (currentRow.substring(0, currentRow.indexOf("=")).equals("spring.datasource.password")) {
-                password = currentRow.substring(currentRow.indexOf("=") + 1, currentRow.length());
+                password = value;
+            } else {
+                break;
             }
         }
         scan.close();
@@ -173,7 +181,7 @@ public class Script {
 
         String query;
         for (int i = 0; i < count; i++) {
-            address = genFname();
+            address = "Address_example_" + rnd.nextInt(1000);
             room_count = rnd.nextInt(5) + 1;
             square = (room_count * (rnd.nextInt(26) + 20)) + "." + rnd.nextInt(100);
             floor = rnd.nextInt(10) + 1;
@@ -208,7 +216,7 @@ public class Script {
         for (int i = 0; i < count; i++) {
             user_id = rnd.nextInt(count) + 1;
             apartment_id = rnd.nextInt(count) + 1;
-            price = (rnd.nextInt(5) + 1) * 1200000 + rnd.nextInt(1000000);
+            price = (rnd.nextInt(5) + 1) * 19324 + rnd.nextInt(20125);
             creation_date = genAdCreationDate();
             is_sale = genBoolean(rnd.nextInt(2));
             description = "Description_" + rnd.nextInt(1000);
@@ -297,7 +305,7 @@ public class Script {
 
     private static String genUserRole() {
         Random rnd = new Random();
-        String[] arr = {"anonymous", "banned", "user", "moderator", "admin"};
+        String[] arr = {"ANONYMOUS", "BANNED", "USER", "MODERATOR", "ADMIN"};
         return arr[rnd.nextInt(arr.length)];
     }
 
@@ -321,7 +329,7 @@ public class Script {
 
     private static String genAnStatus() {
         Random rnd = new Random();
-        String[] arr = {"not_moderated", "published", "blocked"};
+        String[] arr = {"NOT_MODERATED", "PUBLISHED", "BLOCKED"};
         return arr[rnd.nextInt(arr.length)];
     }
 

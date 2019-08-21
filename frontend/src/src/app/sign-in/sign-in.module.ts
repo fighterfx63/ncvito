@@ -8,9 +8,7 @@ import {SignInComponent} from './sign-in.component';
   declarations: [
     SignInComponent
   ],
-  providers: [
-    LoginService
-  ],
+  providers: [LoginService],
   imports: [
     SharedModule
   ],

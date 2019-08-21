@@ -8,7 +8,7 @@ import {SnackbarService} from '../services/snackbar.service';
 @Component({
   selector: 'ncvito-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.less']
+  styleUrls: ['./sign-in.component.less'],
 })
 export class SignInComponent {
 
@@ -49,6 +49,7 @@ export class SignInComponent {
         this.snackbarService.openSnackBar('It was unable to sign in. Please, try again later', 'OK');
         this.invalidLogin = true;
         this.isClicked = false;
+        this.loginService.logOut();
       }
     );
   }

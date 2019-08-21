@@ -42,8 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .cors().and()
                 .authorizeRequests()
-                .mvcMatchers(HttpMethod.GET, "/announcements").permitAll()
-                .antMatchers( "/registration", "/error").permitAll()
+                .mvcMatchers(HttpMethod.GET, "/announcements/*").permitAll()
+                .antMatchers( "/registration", "/error", "/advertisement/*").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic()
                 .and().sessionManagement().disable();

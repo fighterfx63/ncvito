@@ -63,7 +63,7 @@ export class SignUpComponent implements OnInit {
       this.formGroup.get('loginF').value,
       this.formGroup.get('passwordF').value,
       this.formGroup.get('emailF').value,
-      this.formGroup.get('phoneF').value
+      "8" + this.formGroup.get('phoneF').value
     );
 
     this.httpService.post('/registration', theUser).subscribe(

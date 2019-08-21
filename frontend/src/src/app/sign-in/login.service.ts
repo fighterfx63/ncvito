@@ -1,15 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import {environment} from '../../environments/environment';
 import {HttpService} from '../services/http.service';
 import {StorageService} from '../services/storage.service';
-import {SignInModule} from './sign-in.module';
 
 
-@Injectable({
-  providedIn: SignInModule
-})
+@Injectable()
 export class LoginService {
   constructor(private httpService: HttpService, private storageService: StorageService) {
   }
@@ -30,10 +26,11 @@ export class LoginService {
 
   public authenticate(username, password) {
     const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(username + ':' + password)});
-    return this.httpService.get(environment.url + '/login', headers).pipe(
+    this.storageService.write('token', `basic ${btoa(username + ':' + password)}`);
+    console.log(headers);
+    return this.httpService.get('/login', headers).pipe(
       map(
         userData => {
-          this.storageService.write('token', `basic ${btoa(username + ':' + password)}`);
           this.storageService.write('username', username);
           return userData;
         }
