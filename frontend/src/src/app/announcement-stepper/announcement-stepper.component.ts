@@ -29,19 +29,19 @@ export class AnnouncementStepperComponent implements OnInit {
 
   ngOnInit() {
     this.apartmentInfoFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required],
-      secondCtrl: ['', [Validators.required, Validators.min(1), , Validators.nullValidator]],
-      thirdCtrl: ['', [Validators.required, Validators.min(1), , Validators.nullValidator]],
-      fourthCtrl: ['', [Validators.required, Validators.min(1), , Validators.nullValidator]],
+      addressCtrl: ['', Validators.required],
+      floorCtrl: ['', [Validators.required, Validators.min(1), , Validators.nullValidator]],
+      roomCountCtrl: ['', [Validators.required, Validators.min(1), , Validators.nullValidator]],
+      squareCtrl: ['', [Validators.required, Validators.min(1), , Validators.nullValidator]],
     });
     this.announcementTypeFormGroup = this._formBuilder.group({
-      firstCtrl: [Boolean(''), Validators.required]
+      saleCtrl: [Boolean(''), Validators.required]
     });
     this.announcementPriceFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      priceCtrl: ['', Validators.required]
     });
     this.announcementDescriptionFormGroup = this._formBuilder.group({
-      firstCtrl: ['']
+      descriptionCtrl: ['']
     });
   }
 

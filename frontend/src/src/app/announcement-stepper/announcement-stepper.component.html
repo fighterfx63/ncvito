@@ -8,26 +8,26 @@
 
       <div>
         <mat-form-field class="announcement-stepper__input">
-          <input matInput [(ngModel)]="announcement.apartment.address" placeholder="Address" formControlName="firstCtrl"
+          <input matInput [(ngModel)]="announcement.apartment.address" placeholder="Address" formControlName="addressCtrl"
                  required id="address">
         </mat-form-field>
       </div>
       <div>
         <mat-form-field class="announcement-stepper__input">
           <input matInput [(ngModel)]="announcement.apartment.floor" type="number" placeholder="Floor"
-                 formControlName="secondCtrl" required>
+                 formControlName="floorCtrl" required>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field class="announcement-stepper__input">
           <input matInput [(ngModel)]="announcement.apartment.roomCount" type="number" placeholder="Room count"
-                 formControlName="thirdCtrl" required>
+                 formControlName="roomCountCtrl" required>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field class="announcement-stepper__input">
           <input matInput [(ngModel)]="announcement.apartment.square" type="number" placeholder="Apartment square"
-                 formControlName="fourthCtrl" required>
+                 formControlName="squareCtrl" required>
         </mat-form-field>
       </div>
       <div>
@@ -69,7 +69,7 @@
         <div>
           <mat-form-field class="announcement-stepper__input">
             <input matInput [(ngModel)]="announcement.price" type="number" placeholder="Price"
-                   formControlName="firstCtrl" required>
+                   formControlName="priceCtrl" required>
           </mat-form-field>
         </div>
         <div>
@@ -89,7 +89,7 @@
         <div>
           <mat-form-field class="announcement-stepper__input">
             <input matInput [(ngModel)]="announcement.price" type="number" placeholder="Price"
-                   formControlName="firstCtrl" required>
+                   formControlName="priceCtrl" required>
           </mat-form-field>
         </div>
         <div>
@@ -107,7 +107,7 @@
       <ng-template matStepLabel>Announcement description</ng-template>
       <div>
         <mat-form-field class="announcement-stepper__input">
-          <input matInput [(ngModel)]="announcement.description" placeholder="description" formControlName="firstCtrl">
+          <input matInput [(ngModel)]="announcement.description" placeholder="description" formControlName="descriptionCtrl">
         </mat-form-field>
       </div>
       <div>

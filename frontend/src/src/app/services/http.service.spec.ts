@@ -26,7 +26,7 @@ describe('HttpService', () => {
       theUser = new UserModel('testFname', 'testSname', 'testLogin', 'testPassword', 'testEmail', 'testPhone');
       url = "/registration";
     }
-  )
+  );
 
   it('should be created', () => {
     const service: HttpService = TestBed.get(HttpService);
