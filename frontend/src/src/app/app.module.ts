@@ -6,6 +6,8 @@ import {AnnouncementStepperComponent} from './announcement-stepper/announcement-
 import {SignInModule} from './sign-in/sign-in.module';
 import {FullAdComponent} from "./full-ad/full-ad.component";
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AnnouncementComponent } from './announcement/announcement.component';
+import { AnnouncementsListComponent } from './announcements-list/announcements-list.component';
 
 
 @NgModule({
@@ -15,6 +17,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     FullAdComponent,
     AnnouncementStepperComponent,
     NotFoundComponent,
+    AnnouncementComponent,
+    AnnouncementsListComponent,
   ],
   imports: [
     SharedModule,

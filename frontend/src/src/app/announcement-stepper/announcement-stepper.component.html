@@ -9,7 +9,7 @@
       <div>
         <mat-form-field class="announcement-stepper__input">
           <input matInput [(ngModel)]="announcement.apartment.address" placeholder="Address" formControlName="addressCtrl"
-                 required id="address">
+                 required >
         </mat-form-field>
       </div>
       <div>
@@ -122,10 +122,15 @@
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     You are now done.
-    <div>
+    <div *ngIf="editAnnouncement==null">
       <button mat-raised-button class="announcement-stepper__button" matStepperPrevious>Back</button>
       <button mat-raised-button class="announcement-stepper__button" (click)="stepper.reset()">Reset</button>
       <button mat-raised-button class="announcement-stepper__button" (click)="create()">Create</button>
+    </div>
+    <div *ngIf="editAnnouncement!=null">
+      <button mat-raised-button class="announcement-stepper__button" matStepperPrevious>Back</button>
+      <button mat-raised-button class="announcement-stepper__button" (click)="stepper.reset()">Reset</button>
+      <button mat-raised-button class="announcement-stepper__button" (click)="edit()">Edit</button>
     </div>
   </mat-step>
 </mat-vertical-stepper>

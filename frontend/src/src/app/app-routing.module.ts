@@ -6,12 +6,14 @@ import {FullAdComponent} from "./full-ad/full-ad.component";
 import {SignInComponent} from './sign-in/sign-in.component';
 import {AnnouncementStepperComponent} from "./announcement-stepper/announcement-stepper.component";
 import {NotFoundComponent} from "./not-found/not-found.component";
+import {AnnouncementsListComponent} from "./announcements-list/announcements-list.component";
 
 const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
   {path: 'advertisement/:id', component: FullAdComponent},
   {path: 'sign-in', component: SignInComponent},
   {path: 'create', component: AnnouncementStepperComponent},
+  {path: 'announcements', component: AnnouncementsListComponent},
   {path: '**', component: NotFoundComponent}
 ];
 
