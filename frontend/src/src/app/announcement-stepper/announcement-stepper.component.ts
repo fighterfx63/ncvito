@@ -56,7 +56,6 @@ export class AnnouncementStepperComponent implements OnInit {
 
 
   create(): void {
-    console.log(this.announcement);
     this.httpService.post('/announcements', this.announcement)
       .subscribe(data => {
         this.snackBarService.openSnackBar("You have been created successfully", "OK");
@@ -66,12 +65,6 @@ export class AnnouncementStepperComponent implements OnInit {
   };
 
   edit(): void {
-    console.log(this.announcement);
-    console.log(this.editAnnouncement);
-    console.log(this.announcement.id);
-    console.log(this.editAnnouncement.id);
-
-
     this.httpService.updateAnnoucements(this.editAnnouncement.id,this.announcement)
       .subscribe(data => {
         this.snackBarService.openSnackBar("Announcement edit  successfully", "OK");

@@ -6,6 +6,8 @@ import {FullAdComponent} from "../full-ad/full-ad.component";
 import {LoginService} from "./login.service";
 import {AnnouncementStepperComponent} from "../announcement-stepper/announcement-stepper.component";
 import {NotFoundComponent} from "../not-found/not-found.component";
+import {AnnouncementComponent} from "../announcement/announcement.component";
+import {AnnouncementsListComponent} from "../announcements-list/announcements-list.component";
 
 describe('SignInComponent', () => {
   let component: SignInComponent;
@@ -13,7 +15,7 @@ describe('SignInComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SignInComponent, SignUpComponent, FullAdComponent, AnnouncementStepperComponent, NotFoundComponent],
+      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent,NotFoundComponent,AnnouncementComponent,AnnouncementsListComponent],
       imports: [SharedModule],
       providers: [LoginService]
     })

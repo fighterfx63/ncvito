@@ -8,6 +8,8 @@ import {AnnouncementStepperComponent} from "../announcement-stepper/announcement
 import {SharedModule} from "../shared/shared.module";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
+import {AnnouncementComponent} from "../announcement/announcement.component";
+import {AnnouncementsListComponent} from "../announcements-list/announcements-list.component";
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;
@@ -15,7 +17,7 @@ describe('NotFoundComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NotFoundComponent, FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent],
+      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent,NotFoundComponent,AnnouncementComponent,AnnouncementsListComponent],
       imports: [
         SharedModule,
         HttpClientTestingModule,
