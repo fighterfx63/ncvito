@@ -1,11 +1,12 @@
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {SignUpComponent} from "./sign-up/sign-up.component";
-import {SharedModule} from "./shared/shared.module";
+import {SignUpComponent} from './sign-up/sign-up.component';
+import {SharedModule} from './shared/shared.module';
 import {AnnouncementStepperComponent} from './announcement-stepper/announcement-stepper.component';
 import {SignInModule} from './sign-in/sign-in.module';
-import {FullAdComponent} from "./full-ad/full-ad.component";
+import {FullAdComponent} from './full-ad/full-ad.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import {UsefulButtonsModule} from './usefull-buttons/useful-buttons.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
   ],
   imports: [
     SharedModule,
-    SignInModule
+    SignInModule,
+    UsefulButtonsModule
   ],
   exports: [],
   providers: [],

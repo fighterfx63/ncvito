@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule, Router } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule, Router} from '@angular/router';
 import {APP_BASE_HREF} from "@angular/common";
 import {SignUpComponent} from "./sign-up/sign-up.component";
 import {FullAdComponent} from "./full-ad/full-ad.component";
@@ -22,7 +22,8 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 
-  constructor(private router: Router){}
+  constructor(private router: Router) {
+  }
 
   goTo(url) {
     this.router.navigateByUrl(url);

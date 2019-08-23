@@ -1,0 +1,22 @@
+<div class="btn-component">
+  <div class="btn-component__buttons">
+    <i class="material-icons" (click)="backClicked()" *ngIf="arrow">
+      arrow_back
+    </i>
+    <i class="material-icons" (click)="searchClicked()" *ngIf="search">
+      search
+    </i>
+    <i class="material-icons" routerLink="/create" *ngIf="common">
+      add
+    </i>
+    <i class="material-icons" routerLink="/fauvorite" *ngIf="common">
+      favorite
+    </i>
+    <i class="material-icons" (click)="downloadClicked()" *ngIf="download">
+      vertical_align_bottom
+    </i>
+  </div>
+  <div class="btn-component__search" *ngIf="searchShown">
+    <!--<ncvito-ad-search></ncvito-ad-search>-->
+  </div>
+</div>
