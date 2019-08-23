@@ -28,7 +28,7 @@ export class ButtonsComponent {
 
   private changeState(event: string) {
     this.currentUrl = event;
-    if (event === '/announcements') {
+    if (event === '/sign-in') {
       this.search = this.common = true;
       this.arrow = this.download = false;
     } else {
@@ -55,6 +55,7 @@ export class ButtonsComponent {
     this.search = false;
   }
 
+  // TODO: add component for extracting page
   private downloadClicked() {
   }
 
