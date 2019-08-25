@@ -33,13 +33,15 @@ describe('AnnouncementComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AnnouncementComponent);
     component = fixture.componentInstance;
-    component.announcement = {  id: undefined,
-    author: undefined,
-    apartment: undefined,
-    sale: undefined,
-    description: undefined,
-    price: undefined,
-    creationDate: undefined, }
+    component.announcement = {
+      id: undefined,
+      author: undefined,
+      apartment: undefined,
+      sale: undefined,
+      description: undefined,
+      price: undefined,
+      creationDate: undefined,
+    };
 
 
     fixture.detectChanges();
