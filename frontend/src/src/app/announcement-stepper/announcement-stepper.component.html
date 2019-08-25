@@ -122,12 +122,12 @@
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     You are now done.
-    <div *ngIf="editAnnouncement==null">
+    <div *ngIf="!editAnnouncement">
       <button mat-raised-button class="announcement-stepper__button" matStepperPrevious>Back</button>
       <button mat-raised-button class="announcement-stepper__button" (click)="stepper.reset()">Reset</button>
       <button mat-raised-button class="announcement-stepper__button" (click)="create()">Create</button>
     </div>
-    <div *ngIf="editAnnouncement!=null">
+    <div *ngIf="editAnnouncement">
       <button mat-raised-button class="announcement-stepper__button" matStepperPrevious>Back</button>
       <button mat-raised-button class="announcement-stepper__button" (click)="stepper.reset()">Reset</button>
       <button mat-raised-button class="announcement-stepper__button" (click)="edit()">Edit</button>
