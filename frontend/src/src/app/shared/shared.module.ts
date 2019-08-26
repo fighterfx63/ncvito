@@ -17,6 +17,8 @@ import {
   MatPaginatorModule, MatRadioModule,
   MatSnackBarModule,
   MatStepperModule,
+  MatTableModule,
+  MatOptionModule, MatSelectModule,
 
 } from '@angular/material'
 
@@ -42,6 +44,10 @@ const modules = [
   MatGridListModule,
   MatPaginatorModule,
   MatRadioModule,
+  MatTableModule,
+  MatOptionModule,
+  MatSelectModule,
+
 ];
 
 @NgModule({

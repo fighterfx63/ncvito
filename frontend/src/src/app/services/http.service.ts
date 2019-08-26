@@ -77,22 +77,33 @@ export class HttpService {
 
 
   public getAllAnnouncements(page, size) {
-    console.log('test call');
-    return this.http.get(environment.url + '/announcements?page=' + page + '&size=' + size,);
+    return this.http.get(environment.url + '/announcements?page=' + page + '&size=' + size);
   }
 
 
   public getAll() {
-    return this.http.get(environment.url +'/announcements/' );
+    return this.http.get(environment.url + '/announcements/');
   }
 
 
   public deleteAnnouncements(announcement) {
     const headers = this.getHeaders();
-    return this.http.delete(environment.url +'/announcements/'  + announcement.id, {headers});
+    return this.http.delete(environment.url + '/announcements/' + announcement.id, {headers});
   }
 
   public updateAnnoucements(id, announcement) {
-    return this.http.put(environment.url +'/announcements/' + id, announcement);
+    return this.http.put(environment.url + '/announcements/' + id, announcement);
+  }
+
+  public getAllUsers(page, size) {
+    const headers = this.getHeaders();
+    return this.http.get(environment.url + '/users?page=' + page + '&size=' + size,{headers});
+  }
+
+  public updateUser(id, user) {
+    const headers = this.getHeaders();
+    console.log('update user');
+    return this.http.put(environment.url + "/users/" + id, user,{headers});
+
   }
 }

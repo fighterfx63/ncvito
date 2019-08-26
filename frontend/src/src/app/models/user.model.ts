@@ -8,6 +8,7 @@ export class UserModel {
   password: string;
   email: string;
   phone: string;
+  role:string;
   banReason: string;
   banExpired: Date;
 
