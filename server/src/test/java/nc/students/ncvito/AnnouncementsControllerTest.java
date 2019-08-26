@@ -6,6 +6,7 @@ import nc.students.ncvito.entity.Apartment;
 import nc.students.ncvito.entity.Role;
 import nc.students.ncvito.entity.User;
 import nc.students.ncvito.repo.AnnouncementRepository;
+import nc.students.ncvito.repo.UserRepository;
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -29,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@TestPropertySource("/application.properties")
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -37,6 +40,9 @@ public class AnnouncementsControllerTest {
 
     @Autowired
     MockMvc mockMvc;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     AnnouncementRepository announcementRepository;
@@ -53,6 +59,7 @@ public class AnnouncementsControllerTest {
         user.setLastName("Petrov");
         user.setPhone("123");
         user.setRole(Collections.singleton(Role.USER));
+        userRepository.save(user);
 
         Apartment apartment = new Apartment();
         apartment.setAddress("qwe");
@@ -71,6 +78,7 @@ public class AnnouncementsControllerTest {
 
     @WithMockUser(username = "admin")
     @Test
+
     public void findAll() throws Exception {
         this.mockMvc.perform(get("/announcements"))
                 .andDo(print())
@@ -82,11 +90,11 @@ public class AnnouncementsControllerTest {
     @WithMockUser(username = "admin")
     @Test
     public void getByID() throws Exception {
-        this.mockMvc.perform(get("/announcements/1"))
+        this.mockMvc.perform(get("/announcements"))
                 .andDo(print())
                 .andExpect(authenticated())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$.description", is("announcement_1")));
+                .andExpect(jsonPath("$.content[0].description", is("announcement_1")));
     }
 
     @WithMockUser(username = "admin")
@@ -97,6 +105,8 @@ public class AnnouncementsControllerTest {
         user1.setLogin("qwe");
         user1.setPassword("qwe");
         user1.setRole(Collections.singleton(Role.USER));
+        userRepository.save(user1);
+
 
         Apartment apartment1 = new Apartment();
         apartment1.setAddress("qwe");
@@ -112,8 +122,8 @@ public class AnnouncementsControllerTest {
         announcement1.setDescription("test");
 
         this.mockMvc.perform(post("/announcements")
-                    .content(objectMapper.writeValueAsBytes(announcement1))
-                    .contentType(MediaType.APPLICATION_JSON))
+                .content(objectMapper.writeValueAsBytes(announcement1))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isCreated());
 

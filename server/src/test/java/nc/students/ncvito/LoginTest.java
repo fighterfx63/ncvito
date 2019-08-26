@@ -7,6 +7,7 @@ import nc.students.ncvito.entity.Apartment;
 import nc.students.ncvito.entity.Role;
 import nc.students.ncvito.entity.User;
 import nc.students.ncvito.repo.AnnouncementRepository;
+import nc.students.ncvito.repo.UserRepository;
 import nc.students.ncvito.service.AnnouncementService;
 import nc.students.ncvito.service.UserService;
 import org.junit.Before;
@@ -50,8 +51,9 @@ public class LoginTest {
     @Autowired
     AnnouncementRepository announcementRepository;
     @Autowired
+    UserRepository userRepository;
+    @Autowired
     private MockMvc mockMvc;
-
 
 
     @Before
@@ -64,6 +66,7 @@ public class LoginTest {
         user.setLastName("Petrov");
         user.setPhone("123");
         user.setRole(Collections.singleton(Role.USER));
+        userRepository.save(user);
 
         Apartment apartment = new Apartment();
         apartment.setAddress("qwe");
@@ -93,7 +96,7 @@ public class LoginTest {
     @Test
     public void badCredentials() throws Exception {
 
-        this.mockMvc.perform(post("/login").with(httpBasic("incorrectLogin","incorrectPassword")))
+        this.mockMvc.perform(post("/login").with(httpBasic("incorrectLogin", "incorrectPassword")))
                 .andDo(print())
                 .andExpect(status().isUnauthorized());
 
@@ -102,7 +105,7 @@ public class LoginTest {
 
     @Test
     public void correctLogin() throws Exception {
-        this.mockMvc.perform(post("/login").with(httpBasic("admin","admin")))
+        this.mockMvc.perform(post("/login").with(httpBasic("admin", "admin")))
                 .andDo(print())
                 .andExpect(status().isOk());
 
@@ -144,16 +147,15 @@ public class LoginTest {
                 .andExpect(status().isOk());
 
 
-        this.mockMvc.perform(post("/login").with(httpBasic(login,password)))
+        this.mockMvc.perform(post("/login").with(httpBasic(login, password)))
                 .andDo(print())
                 .andExpect(status().isOk());
 
         this.mockMvc.perform(get("/announcements").with(user(login)))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content[0].description",is("announcement_1")))
-                .andExpect(jsonPath("$.totalElements",is(1)));
-
+                .andExpect(jsonPath("$.content[0].description", is("announcement_1")))
+                .andExpect(jsonPath("$.totalElements", is(1)));
 
 
     }
