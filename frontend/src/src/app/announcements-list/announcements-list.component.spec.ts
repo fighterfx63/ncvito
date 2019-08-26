@@ -10,6 +10,7 @@ import {AnnouncementComponent} from "../announcement/announcement.component";
 import {SharedModule} from "../shared/shared.module";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
+import {UserListComponent} from "../user-list/user-list.component";
 
 describe('AnnouncementsListComponent', () => {
   let component: AnnouncementsListComponent;
@@ -17,7 +18,7 @@ describe('AnnouncementsListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent,NotFoundComponent,AnnouncementComponent,AnnouncementsListComponent],
+      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent,NotFoundComponent,AnnouncementComponent,AnnouncementsListComponent,UserListComponent],
       imports: [
         SharedModule,
         HttpClientTestingModule,

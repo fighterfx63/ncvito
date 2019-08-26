@@ -10,6 +10,7 @@ import {SharedModule} from "../shared/shared.module";
 import {NotFoundComponent} from "../not-found/not-found.component";
 import {AnnouncementComponent} from "../announcement/announcement.component";
 import {AnnouncementsListComponent} from "../announcements-list/announcements-list.component";
+import {UserListComponent} from "../user-list/user-list.component";
 
 describe('FullAddComponent', () => {
   let component: FullAdComponent;
@@ -17,7 +18,7 @@ describe('FullAddComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NotFoundComponent, FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent,NotFoundComponent,AnnouncementComponent,AnnouncementsListComponent],
+      declarations: [NotFoundComponent, FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent,NotFoundComponent,AnnouncementComponent,AnnouncementsListComponent,UserListComponent],
       imports: [
         SharedModule,
         HttpClientTestingModule,

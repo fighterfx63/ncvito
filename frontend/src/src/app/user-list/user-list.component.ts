@@ -5,6 +5,7 @@ import {Announcement} from "../models/announcement.model";
 import {PageEvent} from "@angular/material";
 import {SnackbarService} from "../services/snackbar.service";
 import {Router} from "@angular/router";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ncvito-user-list',
@@ -14,9 +15,6 @@ import {Router} from "@angular/router";
 export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['login', 'role'];
   userList: UserModel[];
-
-  test:string;
-  isBanned:boolean;
 
   pageDefault: number = 0;
   sizeDefault: number = 10;
@@ -35,7 +33,7 @@ export class UserListComponent implements OnInit {
     return event;
   }
 
-  constructor(private httpService: HttpService, private router: Router, private snackBarService: SnackbarService) {
+  constructor(private httpService: HttpService, private router: Router, private snackBarService: SnackbarService,private location: Location) {
   }
 
   ngOnInit() {
@@ -59,15 +57,9 @@ export class UserListComponent implements OnInit {
 
   changeRole(user,value) {
     user.role=[value];
-    if(user.role=="BANNED"){
-      this.isBanned=true;
-    }
-
-    console.log('BANNED');
-
     this.httpService.updateUser(user.id, user).subscribe(data => {
       this.snackBarService.openSnackBar("User role has been changed", "OK");
-    this.router.navigateByUrl("/users");
+
     });
 
   }
