@@ -24,7 +24,7 @@
     <img mat-card-lg-image class="announcement-card__image" src="http://recuperatorpro.ru/wp-content/uploads/2018/12/image.png" alt="test">
   </mat-card-content>
   <mat-card-actions class="announcement-card__actions">
-    <button mat-icon-button aria-label="Example icon-button with a heart icon">
+    <button mat-icon-button aria-label="Example icon-button with a heart icon" class="announcement-card__favorites" (click)="addFavorites()">
       <mat-icon>favorite</mat-icon>
     </button>
     <button mat-button (click)="delete()"><i class="material-icons">

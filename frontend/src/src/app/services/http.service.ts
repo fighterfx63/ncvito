@@ -106,4 +106,6 @@ export class HttpService {
     return this.http.put(environment.url + "/users/" + id, user,{headers});
 
   }
+
+
 }

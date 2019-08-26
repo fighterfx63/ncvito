@@ -23,6 +23,8 @@ export class AnnouncementComponent implements OnInit {
   private deleteEmitter = new EventEmitter<Announcement>();
   @Output()
   private editEmitter = new EventEmitter<Announcement>();
+  @Output()
+  private favoritesEmitter = new EventEmitter<Announcement>();
 
   ngOnInit() {
 
@@ -38,6 +40,10 @@ export class AnnouncementComponent implements OnInit {
 
   edit(): void {
     this.editEmitter.emit(this.announcement);
+  }
+
+  addFavorites():void{
+    this.favoritesEmitter.emit(this.announcement);
   }
 
 
