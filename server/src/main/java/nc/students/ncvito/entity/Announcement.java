@@ -31,7 +31,7 @@ public class Announcement {
     @Column(nullable = false)
     private Long price;
 
-    @Column(nullable = false)
+
     private LocalDateTime creationDate;
 
 
