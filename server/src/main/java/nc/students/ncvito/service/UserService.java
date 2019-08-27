@@ -3,7 +3,6 @@ package nc.students.ncvito.service;
 import lombok.extern.slf4j.Slf4j;
 import nc.students.ncvito.entity.User;
 import nc.students.ncvito.repo.UserRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,8 +37,7 @@ public class UserService implements UserDetailsService {
 
     }
 
-    public User update(User userFromDb, User user) {
-        BeanUtils.copyProperties(user, userFromDb, "id");
-        return userRepository.save(userFromDb);
+    public User update(User user) {
+        return userRepository.save(user);
     }
 }

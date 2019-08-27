@@ -78,7 +78,7 @@ public class LoginTest {
         announcement.setAuthor(user);
         announcement.setApartment(apartment);
         announcement.setSale(true);
-        announcement.setPrice(150);
+        announcement.setPrice(150l);
         announcement.setDescription("announcement_1");
         announcementRepository.save(announcement);
     }

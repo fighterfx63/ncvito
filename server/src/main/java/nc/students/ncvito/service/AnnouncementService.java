@@ -39,9 +39,8 @@ public class AnnouncementService {
     }
 
 
-    public Announcement update(Announcement announcementFromDb, Announcement announcement) {
-        BeanUtils.copyProperties(announcement, announcementFromDb, "id");
-        return announcementRepository.save(announcementFromDb);
+    public Announcement update(Announcement announcement) {
+        return announcementRepository.save(announcement);
     }
 
     public Announcement create(Announcement announcement, Authentication authentication) {

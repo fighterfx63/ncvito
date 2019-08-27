@@ -92,7 +92,8 @@ export class HttpService {
   }
 
   public updateAnnoucements(id, announcement) {
-    return this.http.put(environment.url + '/announcements/' + id, announcement);
+    const headers = this.getHeaders();
+    return this.http.put(environment.url + '/announcements', announcement,{headers});
   }
 
   public getAllUsers(page, size) {
@@ -103,7 +104,7 @@ export class HttpService {
   public updateUser(id, user) {
     const headers = this.getHeaders();
     console.log('update user');
-    return this.http.put(environment.url + "/users/" + id, user,{headers});
+    return this.http.put(environment.url + "/users" , user,{headers});
 
   }
 }

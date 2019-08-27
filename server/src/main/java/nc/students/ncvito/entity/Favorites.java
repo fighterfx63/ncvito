@@ -18,11 +18,11 @@ public class Favorites {
 
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "announcement_id")
+    @JoinColumn(name = "announcement_id", nullable = false)
     private Announcement announcement;
 }
