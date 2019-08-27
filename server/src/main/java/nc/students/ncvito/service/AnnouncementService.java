@@ -21,7 +21,7 @@ import java.util.Collections;
 public class AnnouncementService {
     private final AnnouncementRepository announcementRepository;
     private final UserRepository userRepository;
-    private  final FavoritesRepository favoritesRepository;
+    private final FavoritesRepository favoritesRepository;
 
 
     public AnnouncementService(AnnouncementRepository announcementRepository, UserRepository userRepository, FavoritesRepository favoritesRepository) {
@@ -43,9 +43,8 @@ public class AnnouncementService {
     }
 
 
-    public Announcement update(Announcement announcementFromDb, Announcement announcement) {
-        BeanUtils.copyProperties(announcement, announcementFromDb, "id");
-        return announcementRepository.save(announcementFromDb);
+    public Announcement update(Announcement announcement) {
+        return announcementRepository.save(announcement);
     }
 
     public Announcement create(Announcement announcement, Authentication authentication) {
@@ -56,17 +55,13 @@ public class AnnouncementService {
         return announcementRepository.save(announcement);
     }
 
-    public void addToFavorites(Announcement announcement ,Authentication authentication){
+    public void addToFavorites(Announcement announcement, Authentication authentication) {
         User user = userRepository.findByLogin(authentication.getName())
                 .orElseThrow(() -> new IllegalStateException("User with login " + authentication.getName() + " not found."));
         Favorites favorites = new Favorites();
         favorites.setAnnouncement(announcement);
         favorites.setUser(user);
         favoritesRepository.save(favorites);
-
-
-
-
 
 
     }

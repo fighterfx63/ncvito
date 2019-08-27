@@ -24,16 +24,15 @@ public class UserController {
     public Page<User> getAllUsers(@PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
         return userService.findAll(pageable);
     }
+
     @GetMapping("{id}")
-    public User getUser(@PathVariable("id") long id){
+    public User getUser(@PathVariable("id") long id) {
         return userService.findById(id);
     }
 
-    @PutMapping("{id}")
-    public User update(
-            @PathVariable("id") User userFromDb,
-            @RequestBody User user) {
-        return userService.update(userFromDb, user);
+    @PutMapping
+    public User update(@RequestBody User user) {
+        return userService.update(user);
     }
 
 

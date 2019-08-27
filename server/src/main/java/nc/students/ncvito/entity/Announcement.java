@@ -17,18 +17,25 @@ public class Announcement {
     private long id;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id",nullable = false)
     private User author;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "apartment_id")
+    @JoinColumn(name = "apartment_id",nullable = false)
     private Apartment apartment;
 
     private boolean isSale;
+
     private String description;
-    private long price;
+
+    @Column(nullable = false)
+    private Long price;
+
+    @Column(nullable = false)
     private LocalDateTime creationDate;
 
+
+    @Column(nullable = false)
     @ElementCollection(targetClass = Status.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "announcement_status", joinColumns = @JoinColumn(name = "announcement_id"))
     @Enumerated(EnumType.STRING)

@@ -78,7 +78,6 @@ export class AnnouncementsListComponent implements OnInit {
     this.httpService.post('/announcements/' + event.id,event)
       .subscribe(data=>{
         this.snackBarService.openSnackBar("announcement has been added to favorites", "OK");
-        this.router.navigateByUrl("/");
       });
 
   };

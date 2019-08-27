@@ -35,11 +35,9 @@ public class AnnouncementController {
         announcementService.delete(announcement);
     }
 
-    @PutMapping("{id}")
-    public Announcement update(
-            @PathVariable("id") Announcement announcementFromDb,
-            @RequestBody Announcement announcement) {
-        return announcementService.update(announcementFromDb, announcement);
+    @PutMapping
+    public Announcement update(@RequestBody Announcement announcement) {
+        return announcementService.update(announcement);
     }
 
     @PostMapping
@@ -49,8 +47,8 @@ public class AnnouncementController {
     }
 
     @PostMapping("{id}")
-    public void addToFavorites(@PathVariable("id") Announcement announcement,Authentication authentication){
-       announcementService.addToFavorites(announcement,authentication);
+    public void addToFavorites(@PathVariable("id") Announcement announcement, Authentication authentication) {
+        announcementService.addToFavorites(announcement, authentication);
 
     }
 }
