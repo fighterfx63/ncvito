@@ -8,6 +8,8 @@ import {SharedModule} from "../shared/shared.module";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {NotFoundComponent} from "../not-found/not-found.component";
+import {AnnouncementComponent} from "../announcement/announcement.component";
+import {AnnouncementsListComponent} from "../announcements-list/announcements-list.component";
 
 describe('AnnouncementStepperComponent', () => {
   let component: AnnouncementStepperComponent;
@@ -15,7 +17,7 @@ describe('AnnouncementStepperComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AnnouncementStepperComponent, FullAdComponent, SignUpComponent, SignInComponent, NotFoundComponent],
+      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent, NotFoundComponent, AnnouncementComponent, AnnouncementsListComponent],
       imports: [
         SharedModule,
         HttpClientTestingModule,
@@ -24,6 +26,7 @@ describe('AnnouncementStepperComponent', () => {
     })
       .compileComponents();
   }));
+
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AnnouncementStepperComponent);

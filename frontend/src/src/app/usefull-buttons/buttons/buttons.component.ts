@@ -28,11 +28,11 @@ export class ButtonsComponent {
 
   private changeState(event: string) {
     this.currentUrl = event;
-    if (event === '/sign-in') {
+    if (event === '/announcements') {
       this.search = this.common = true;
       this.arrow = this.download = false;
     } else {
-      if (event.search('/sign-up') !== -1) {
+      if (event.search('/advertisement') !== -1) {
         this.download = this.common = this.arrow = true;
         this.search = false;
       } else {

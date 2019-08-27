@@ -1,16 +1,29 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import {NavComponent} from "./nav/nav.component";
+import {MatMenuModule} from "@angular/material";
+import {LoginService} from "./sign-in/login.service";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ButtonsComponent} from "./usefull-buttons/buttons/buttons.component";
+
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientTestingModule,
+        MatMenuModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        NavComponent,
+        ButtonsComponent
       ],
+      providers: [
+        LoginService
+      ]
     }).compileComponents();
   }));
 

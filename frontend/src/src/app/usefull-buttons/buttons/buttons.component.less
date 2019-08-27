@@ -1,14 +1,15 @@
-@top-component: 0;
+@top-component: 84px;
 @btn-width: 24px;
 .btn-component {
   &__buttons {
-    position: fixed;
+    position: sticky;
     top: @top-component;
     left: 0;
     margin: 0;
     min-width: 20px;
     max-width: @btn-width;
     width: 100%;
+    z-index: 1;
   }
   &__search{
     position: fixed;

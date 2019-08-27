@@ -52,6 +52,7 @@ export class HttpService {
       );
   }
 
+
   // first 'if' statement is case of using get request for authentication
   public get(url: string, addedHeaders?: HttpHeaders, object: any = null): Observable<typeof object> {
     if (addedHeaders) {
@@ -72,5 +73,26 @@ export class HttpService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+
+  public getAllAnnouncements(page, size) {
+    console.log('test call');
+    return this.http.get(environment.url + '/announcements?page=' + page + '&size=' + size,);
+  }
+
+
+  public getAll() {
+    return this.http.get(environment.url +'/announcements/' );
+  }
+
+
+  public deleteAnnouncements(announcement) {
+    const headers = this.getHeaders();
+    return this.http.delete(environment.url +'/announcements/'  + announcement.id, {headers});
+  }
+
+  public updateAnnoucements(id, announcement) {
+    return this.http.put(environment.url +'/announcements/' + id, announcement);
   }
 }

@@ -1,0 +1,40 @@
+.nav-header {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0px 0px;
+  background-color: #ffffff;
+
+  &__title {
+    font-size: 30px;
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    color: midnightblue;
+  }
+
+  &__menu {
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 0;
+    flex-direction: row;
+    list-style: none;
+    color: #000324;
+
+    &-links {
+      display: inline-block;
+      padding: 0px 0px;
+      transition: all 0.3s ease 0s;
+      color: #000324;
+    }
+
+    &-links-authorized {
+      color: darkviolet;
+    }
+  }
+}
+
+
