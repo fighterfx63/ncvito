@@ -12,9 +12,9 @@ import java.util.Random;
 
 public class Script {
 
-    private static String url = "jdbc:postgresql://localhost/ncvito";
-    private static String user = "postgres";
-    private static String password = "qwe1wasd3";
+    private static String url;
+    private static String user;
+    private static String password;
 
 
     public static void main(String[] args) throws FileNotFoundException {
