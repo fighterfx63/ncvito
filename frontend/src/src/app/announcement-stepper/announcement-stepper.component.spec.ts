@@ -17,7 +17,7 @@ describe('AnnouncementStepperComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent,NotFoundComponent,AnnouncementComponent,AnnouncementsListComponent],
+      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent, NotFoundComponent, AnnouncementComponent, AnnouncementsListComponent],
       imports: [
         SharedModule,
         HttpClientTestingModule,
