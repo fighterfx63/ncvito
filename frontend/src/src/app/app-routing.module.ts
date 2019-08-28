@@ -10,10 +10,11 @@ import {AnnouncementsListComponent} from "./announcements-list/announcements-lis
 
 const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
-  {path: 'advertisement/:id', component: FullAdComponent},
+  {path: 'announcement/:id', component: FullAdComponent},
   {path: 'sign-in', component: SignInComponent},
   {path: 'create', component: AnnouncementStepperComponent},
   {path: 'announcements', component: AnnouncementsListComponent},
+  {path: '', component: AnnouncementsListComponent},
   {path: '**', component: NotFoundComponent}
 ];
 
