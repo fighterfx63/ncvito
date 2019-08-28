@@ -22,11 +22,6 @@ export class StorageService {
 
   public contains(key: string): boolean {
     const item = sessionStorage.getItem(key);
-    /*if (!item) {
-      console.log(`item ${key} is not found.`);
-    } else {
-      console.log(`item ${key} is found.`);
-    }*/
     return !!item;
   }
 }
