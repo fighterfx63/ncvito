@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 
 
 @Service
@@ -25,10 +26,6 @@ public class AnnouncementService {
         this.announcementRepository = announcementRepository;
         this.userRepository = userRepository;
     }
-    public Announcement findbyId(long id){
-        return announcementRepository.findById(id);
-    }
-
 
     public Page<Announcement> findAll(Pageable pageable) {
         return announcementRepository.findAll(pageable);
@@ -38,14 +35,19 @@ public class AnnouncementService {
         return announcementRepository.findById(id);
     }
 
+    public Page<Announcement> findAllByAuthor(Pageable pageable, Authentication authentication) {
+        User user = userRepository.findByLogin(authentication.getName())
+                .orElseThrow(() -> new IllegalStateException("User with login " + authentication.getName() + " not found."));
+        return announcementRepository.findAllByAuthor(user, pageable);
+    }
+
     public void delete(Announcement announcement) {
         announcementRepository.delete(announcement);
     }
 
 
-    public Announcement update(Announcement announcementFromDb, Announcement announcement) {
-        BeanUtils.copyProperties(announcement, announcementFromDb, "id");
-        return announcementRepository.save(announcementFromDb);
+    public Announcement update(Announcement announcement) {
+        return announcementRepository.save(announcement);
     }
 
     public Announcement create(Announcement announcement, Authentication authentication) {

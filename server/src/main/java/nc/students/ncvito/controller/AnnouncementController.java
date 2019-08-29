@@ -21,8 +21,13 @@ public class AnnouncementController {
     }
 
     @GetMapping
-    public Page<Announcement> getAllAnnouncements(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pegeable) {
-        return announcementService.findAll(pegeable);
+    public Page<Announcement> getAllAnnouncements(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
+        return announcementService.findAll(pageable);
+    }
+
+    @GetMapping("/user")
+    public Page<Announcement> getAllAnnouncementsByAuthor(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, Authentication authentication){
+        return announcementService.findAllByAuthor(pageable, authentication);
     }
 
     @GetMapping("{id}")
@@ -35,11 +40,9 @@ public class AnnouncementController {
         announcementService.delete(announcement);
     }
 
-    @PutMapping("{id}")
-    public Announcement update(
-            @PathVariable("id") Announcement announcementFromDb,
-            @RequestBody Announcement announcement) {
-        return announcementService.update(announcementFromDb, announcement);
+    @PutMapping
+    public Announcement update(@RequestBody Announcement announcement) {
+        return announcementService.update(announcement);
     }
 
     @PostMapping

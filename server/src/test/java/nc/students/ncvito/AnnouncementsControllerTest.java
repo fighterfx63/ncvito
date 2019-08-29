@@ -71,7 +71,7 @@ public class AnnouncementsControllerTest {
         announcement.setAuthor(user);
         announcement.setApartment(apartment);
         announcement.setSale(true);
-        announcement.setPrice(150);
+        announcement.setPrice(150l);
         announcement.setDescription("announcement_1");
         announcementRepository.save(announcement);
     }
@@ -105,6 +105,10 @@ public class AnnouncementsControllerTest {
         user1.setLogin("qwe");
         user1.setPassword("qwe");
         user1.setRole(Collections.singleton(Role.USER));
+        user1.setFirstName("qwe");
+        user1.setLastName("qwe");
+        user1.setEmail("qwe");
+        user1.setPhone("123");
         userRepository.save(user1);
 
 
@@ -118,7 +122,7 @@ public class AnnouncementsControllerTest {
         announcement1.setAuthor(user1);
         announcement1.setApartment(apartment1);
         announcement1.setSale(true);
-        announcement1.setPrice(150);
+        announcement1.setPrice(150l);
         announcement1.setDescription("test");
 
         this.mockMvc.perform(post("/announcements")

@@ -26,6 +26,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -65,6 +66,7 @@ public class LoginTest {
         user.setFirstName("Petya");
         user.setLastName("Petrov");
         user.setPhone("123");
+        user.setEmail("qwe");
         user.setRole(Collections.singleton(Role.USER));
         userRepository.save(user);
 
@@ -78,8 +80,9 @@ public class LoginTest {
         announcement.setAuthor(user);
         announcement.setApartment(apartment);
         announcement.setSale(true);
-        announcement.setPrice(150);
+        announcement.setPrice(150l);
         announcement.setDescription("announcement_1");
+        announcement.setCreationDate(LocalDateTime.now());
         announcementRepository.save(announcement);
     }
 
@@ -120,6 +123,14 @@ public class LoginTest {
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
+        user.setEmail("email");
+        user.setFirstName("Petya");
+        user.setLastName("Petrov");
+        user.setPhone("123");
+        user.setEmail("qwe");
+        user.setRole(Collections.singleton(Role.USER));
+
+
         ObjectMapper objectMapper = new ObjectMapper();
         String userJson = objectMapper.writeValueAsString(user);
         this.mockMvc.perform(post(("/registration")).content(userJson)
@@ -139,6 +150,13 @@ public class LoginTest {
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
+        user.setEmail("email");
+        user.setFirstName("Petya");
+        user.setLastName("Petrov");
+        user.setPhone("123");
+        user.setEmail("qwe");
+        user.setRole(Collections.singleton(Role.USER));
+
         ObjectMapper objectMapper = new ObjectMapper();
         String userJson = objectMapper.writeValueAsString(user);
         this.mockMvc.perform(post(("/registration")).content(userJson)
