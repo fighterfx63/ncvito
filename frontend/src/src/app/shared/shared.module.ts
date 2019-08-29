@@ -46,7 +46,7 @@ const modules = [
   MatRadioModule,
   MatTableModule,
   MatOptionModule,
-  MatSelectModule,
+  MatSelectModule
 
 ];
 
