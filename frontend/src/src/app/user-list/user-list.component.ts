@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../services/http.service";
 import {UserModel} from "../models/user.model";
 import {Announcement} from "../models/announcement.model";
 import {PageEvent} from "@angular/material";
 import {SnackbarService} from "../services/snackbar.service";
 import {Router} from "@angular/router";
-import { Location } from '@angular/common';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'ncvito-user-list',
@@ -33,7 +33,7 @@ export class UserListComponent implements OnInit {
     return event;
   }
 
-  constructor(private httpService: HttpService, private router: Router, private snackBarService: SnackbarService,private location: Location) {
+  constructor(private httpService: HttpService, private router: Router, private snackBarService: SnackbarService, private location: Location) {
   }
 
   ngOnInit() {
@@ -55,8 +55,8 @@ export class UserListComponent implements OnInit {
     })
   }
 
-  changeRole(user,value) {
-    user.role=[value];
+  changeRole(user, value) {
+    user.role = [value];
     this.httpService.updateUser(user.id, user).subscribe(data => {
       this.snackBarService.openSnackBar("User role has been changed", "OK");
 

@@ -93,18 +93,18 @@ export class HttpService {
 
   public updateAnnoucements(id, announcement) {
     const headers = this.getHeaders();
-    return this.http.put(environment.url + '/announcements', announcement,{headers});
+    return this.http.put(environment.url + '/announcements', announcement, {headers});
   }
 
   public getAllUsers(page, size) {
     const headers = this.getHeaders();
-    return this.http.get(environment.url + '/users?page=' + page + '&size=' + size,{headers});
+    return this.http.get(environment.url + '/users?page=' + page + '&size=' + size, {headers});
   }
 
   public updateUser(id, user) {
     const headers = this.getHeaders();
     console.log('update user');
-    return this.http.put(environment.url + "/users" , user,{headers});
+    return this.http.put(environment.url + "/users", user, {headers});
 
   }
 }
