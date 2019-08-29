@@ -5,6 +5,7 @@ import {NavComponent} from "./nav/nav.component";
 import {MatMenuModule} from "@angular/material";
 import {LoginService} from "./sign-in/login.service";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ButtonsComponent} from "./usefull-buttons/buttons/buttons.component";
 
 
 describe('AppComponent', () => {
@@ -17,7 +18,8 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
-        NavComponent
+        NavComponent,
+        ButtonsComponent
       ],
       providers: [
         LoginService

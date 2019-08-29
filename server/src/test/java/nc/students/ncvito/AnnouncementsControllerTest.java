@@ -105,6 +105,10 @@ public class AnnouncementsControllerTest {
         user1.setLogin("qwe");
         user1.setPassword("qwe");
         user1.setRole(Collections.singleton(Role.USER));
+        user1.setFirstName("qwe");
+        user1.setLastName("qwe");
+        user1.setEmail("qwe");
+        user1.setPhone("123");
         userRepository.save(user1);
 
 

@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule, Router } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule, Router} from '@angular/router';
 import {APP_BASE_HREF} from "@angular/common";
 import {SignUpComponent} from "./sign-up/sign-up.component";
 import {FullAdComponent} from "./full-ad/full-ad.component";
@@ -11,11 +11,11 @@ import {UserListComponent} from "./user-list/user-list.component";
 
 const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
-  {path: 'advertisement/:id', component: FullAdComponent},
+  {path: 'announcement/:id', component: FullAdComponent},
   {path: 'sign-in', component: SignInComponent},
   {path: 'create', component: AnnouncementStepperComponent},
   {path: 'announcements', component: AnnouncementsListComponent},
-  {path: 'users', component: UserListComponent},
+  {path: '', component: AnnouncementsListComponent},
   {path: '**', component: NotFoundComponent}
 ];
 
@@ -26,7 +26,8 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 
-  constructor(private router: Router){}
+  constructor(private router: Router) {
+  }
 
   goTo(url) {
     this.router.navigateByUrl(url);
