@@ -45,6 +45,12 @@ public class AnnouncementController {
     public Announcement create(@RequestBody Announcement announcement, Authentication authentication) {
         return announcementService.create(announcement, authentication);
     }
+
+    @PostMapping("/favorites/{id}")
+    public void addToFavorites(@PathVariable("id") Announcement announcement, Authentication authentication) {
+        announcementService.addToFavorites(announcement, authentication);
+
+    }
 }
 
 

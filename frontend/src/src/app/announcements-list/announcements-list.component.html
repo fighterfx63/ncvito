@@ -6,8 +6,8 @@
     <mat-grid-tile *ngFor="let announcement of announcements">
       <ncvito-announcement *ngIf="announcement" [announcement]="announcement"
                            (deleteEmitter)="delete($event)"
-
-                           (editEmitter)="edit($event)">
+                           (editEmitter)="edit($event)"
+                           (favoritesEmitter)="addFavorites($event)">
 
       </ncvito-announcement>
     </mat-grid-tile>
