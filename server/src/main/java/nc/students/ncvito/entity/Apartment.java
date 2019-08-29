@@ -14,9 +14,15 @@ public class Apartment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(nullable = false)
     private String address;
+    @Column(nullable = false)
     private double square;
+
+    @Column(nullable = false)
     private int roomCount;
+
+    @Column(nullable = false)
     private int floor;
 
     public Apartment() {

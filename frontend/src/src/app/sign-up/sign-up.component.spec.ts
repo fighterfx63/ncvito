@@ -15,6 +15,8 @@ import {AnnouncementStepperComponent} from "../announcement-stepper/announcement
 import {NotFoundComponent} from "../not-found/not-found.component";
 import {AnnouncementComponent} from "../announcement/announcement.component";
 import {AnnouncementsListComponent} from "../announcements-list/announcements-list.component";
+import {UserListComponent} from "../user-list/user-list.component";
+import {NavComponent} from "../nav/nav.component";
 
 
 describe('SignUpComponent', () => {
@@ -26,7 +28,7 @@ describe('SignUpComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
 
-      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent,NotFoundComponent,AnnouncementComponent,AnnouncementsListComponent],
+      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent, NotFoundComponent, AnnouncementComponent, AnnouncementsListComponent, UserListComponent, NavComponent],
 
       imports: [
         HttpClientTestingModule,

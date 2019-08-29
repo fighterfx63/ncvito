@@ -25,10 +25,6 @@ public class AnnouncementService {
         this.announcementRepository = announcementRepository;
         this.userRepository = userRepository;
     }
-    public Announcement findbyId(long id){
-        return announcementRepository.findById(id);
-    }
-
 
     public Page<Announcement> findAll(Pageable pageable) {
         return announcementRepository.findAll(pageable);
@@ -43,9 +39,8 @@ public class AnnouncementService {
     }
 
 
-    public Announcement update(Announcement announcementFromDb, Announcement announcement) {
-        BeanUtils.copyProperties(announcement, announcementFromDb, "id");
-        return announcementRepository.save(announcementFromDb);
+    public Announcement update(Announcement announcement) {
+        return announcementRepository.save(announcement);
     }
 
     public Announcement create(Announcement announcement, Authentication authentication) {

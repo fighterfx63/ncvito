@@ -41,8 +41,6 @@ export class AnnouncementsListComponent implements OnInit {
   }
 
   getData(event: PageEvent) {
-
-
     this.httpService.getAllAnnouncements(event.pageIndex, event.pageSize)
       .subscribe(response => {
         this.announcements = response['content'];
@@ -53,7 +51,8 @@ export class AnnouncementsListComponent implements OnInit {
 
   getNumberOfElements() {
     this.httpService.getAll().subscribe(response => {
-      this.numberOfElements = response['numberOfElements'];
+      this.numberOfElements = response['totalElements'];
+      console.log(this.numberOfElements);
     });
   }
 

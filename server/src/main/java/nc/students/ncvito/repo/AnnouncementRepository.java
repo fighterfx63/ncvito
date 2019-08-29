@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import nc.students.ncvito.entity.Announcement;
 
 public interface AnnouncementRepository extends JpaRepository<Announcement, Long> {
-    Page<Announcement> findAll(Pageable pegeable);
+    Page<Announcement> findAll(Pageable pageable);
     Announcement findById(long id);
 }
