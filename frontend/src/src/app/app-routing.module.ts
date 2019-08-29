@@ -11,11 +11,11 @@ import {UserListComponent} from "./user-list/user-list.component";
 
 const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
-  {path: 'advertisement/:id', component: FullAdComponent},
+  {path: 'announcement/:id', component: FullAdComponent},
   {path: 'sign-in', component: SignInComponent},
   {path: 'create', component: AnnouncementStepperComponent},
   {path: 'announcements', component: AnnouncementsListComponent},
-  {path: 'users', component: UserListComponent},
+  {path: '', component: AnnouncementsListComponent},
   {path: '**', component: NotFoundComponent}
 ];
 
