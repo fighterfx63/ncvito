@@ -18,7 +18,7 @@ import {
   MatSnackBarModule,
   MatStepperModule,
   MatTableModule,
-  MatOptionModule, MatSelectModule,
+  MatOptionModule, MatSelectModule
 
 } from '@angular/material'
 
