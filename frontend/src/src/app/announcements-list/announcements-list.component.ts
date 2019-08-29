@@ -73,16 +73,15 @@ export class AnnouncementsListComponent implements OnInit {
 
 
   }
-  addFavorites(event:Announcement){
+
+  addFavorites(event: Announcement) {
     console.log(event);
-    this.httpService.post('/announcements/favorites/' + event.id,event)
-      .subscribe(data=>{
+    this.httpService.post('/announcements/favorites/' + event.id, event)
+      .subscribe(data => {
         this.snackBarService.openSnackBar("announcement has been added to favorites", "OK");
       });
 
   };
-
-
 
 
 }

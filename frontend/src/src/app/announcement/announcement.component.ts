@@ -8,7 +8,7 @@ import {Announcement} from "../models/announcement.model";
 })
 export class AnnouncementComponent implements OnInit {
   announcements: Announcement[];
-   creationDate: string;
+  creationDate: string;
 
 
   constructor() {
@@ -29,7 +29,8 @@ export class AnnouncementComponent implements OnInit {
   ngOnInit() {
 
   }
-  getCreationDate(){
+
+  getCreationDate() {
     return this.creationDate = new Date(this.announcement.creationDate.toString().replace("T", " ")).toDateString();
   }
 
@@ -42,7 +43,7 @@ export class AnnouncementComponent implements OnInit {
     this.editEmitter.emit(this.announcement);
   }
 
-  addFavorites():void{
+  addFavorites(): void {
     this.favoritesEmitter.emit(this.announcement);
   }
 
