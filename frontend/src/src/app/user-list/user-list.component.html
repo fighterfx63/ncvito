@@ -12,11 +12,11 @@
       <td mat-cell *matCellDef="let user">
         <mat-form-field>
           <mat-label>{{user.role}}</mat-label>
-          <mat-select >
+          <mat-select>
             <mat-option value="BANNED" (onSelectionChange)="changeRole(user,'BANNED')">BANNED</mat-option>
-            <mat-option value="USER"  (onSelectionChange)="changeRole(user,'USER')">USER</mat-option>
+            <mat-option value="USER" (onSelectionChange)="changeRole(user,'USER')">USER</mat-option>
             <mat-option value="MODERATOR" (onSelectionChange)="changeRole(user,'MODERATOR')">MODERATOR</mat-option>
-            <mat-option value="ADMIN"  (onSelectionChange)="changeRole(user,'ADMIN')">ADMIN</mat-option>
+            <mat-option value="ADMIN" (onSelectionChange)="changeRole(user,'ADMIN')">ADMIN</mat-option>
           </mat-select>
         </mat-form-field>
       </td>
