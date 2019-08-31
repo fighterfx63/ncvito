@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class AnnouncementController {
     private final AnnouncementService announcementService;
 
+
     public AnnouncementController(AnnouncementService announcementService) {
         this.announcementService = announcementService;
     }
@@ -25,14 +26,19 @@ public class AnnouncementController {
         return announcementService.findAll(pageable);
     }
 
-    @GetMapping("/user")
-    public Page<Announcement> getAllAnnouncementsByAuthor(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, Authentication authentication){
+    @GetMapping("created")
+    public Page<Announcement> getAllAnnouncementsByAuthor(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, Authentication authentication) {
         return announcementService.findAllByAuthor(pageable, authentication);
     }
 
     @GetMapping("{id}")
     public Announcement getAnnouncement(@PathVariable("id") long id) {
         return announcementService.findById(id);
+    }
+
+    @GetMapping("favorites")
+    public Page<Announcement> getFavoritesByUser(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, Authentication authentication) {
+        return announcementService.getFavoriteAds(pageable, authentication);
     }
 
     @DeleteMapping("{id}")
@@ -49,6 +55,11 @@ public class AnnouncementController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public Announcement create(@RequestBody Announcement announcement, Authentication authentication) {
         return announcementService.create(announcement, authentication);
+    }
+
+    @PostMapping("/favorites/{id}")
+    public void addToFavorites(@PathVariable("id") Announcement announcement, Authentication authentication) {
+        announcementService.addToFavorites(announcement, authentication);
     }
 }
 
