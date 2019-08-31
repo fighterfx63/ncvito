@@ -8,12 +8,14 @@ import {AnnouncementStepperComponent} from "./announcement-stepper/announcement-
 import {NotFoundComponent} from "./not-found/not-found.component";
 import {AnnouncementsListComponent} from "./announcements-list/announcements-list.component";
 import {UserListComponent} from "./user-list/user-list.component";
+import {FavoritesComponent} from "./profile/favorites/favorites.component";
 
 const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
   {path: 'announcement/:id', component: FullAdComponent},
   {path: 'sign-in', component: SignInComponent},
   {path: 'create', component: AnnouncementStepperComponent},
+  {path: 'profile', component: FavoritesComponent},
   {path: 'announcements', component: AnnouncementsListComponent},
   {path: '', component: AnnouncementsListComponent},
   {path: '**', component: NotFoundComponent}

@@ -107,4 +107,14 @@ export class HttpService {
     return this.http.put(environment.url + "/users", user, {headers});
 
   }
+
+  public getFavorites(page, size) {
+    const headers = this.getHeaders();
+    return this.http.get(`${environment.url}/announcements/favorites?page=${page}&size=${size}`, {headers});
+  }
+
+  public getPageble(url, page, size) {
+    const headers = this.getHeaders();
+    return this.http.get(`${environment.url}${url}?page=${page}&size=${size}`, {headers});
+  }
 }

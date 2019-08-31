@@ -1,17 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {Announcement} from "../models/announcement.model";
+import {Announcement} from "../../models/announcement.model";
 import {PageEvent} from "@angular/material";
-import {HttpService} from "../services/http.service";
-import {SnackbarService} from "../services/snackbar.service";
+import {HttpService} from "../../services/http.service";
 import {NavigationExtras, Router} from "@angular/router";
+import {SnackbarService} from "../../services/snackbar.service";
 
 @Component({
-  selector: 'ncvito-announcements-list',
-  templateUrl: './announcements-list.component.html',
-  styleUrls: ['./announcements-list.component.less']
+  selector: 'ncvito-favorites',
+  templateUrl: './favorites.component.html',
+  styleUrls: ['./favorites.component.less']
 })
-export class AnnouncementsListComponent implements OnInit {
-
+export class FavoritesComponent implements OnInit {
 
   pageDefault: number = 0;
   sizeDefault: number = 10;
@@ -41,20 +40,19 @@ export class AnnouncementsListComponent implements OnInit {
   }
 
   getData(event: PageEvent) {
-    this.httpService.getAllAnnouncements(event.pageIndex, event.pageSize)
+    this.httpService.getFavorites(event.pageIndex, event.pageSize)
       .subscribe(response => {
         this.announcements = response['content'];
-        this.getNumberOfElements();
       });
   }
-
+/*
 
   getNumberOfElements() {
     this.httpService.getAll().subscribe(response => {
       this.numberOfElements = response['totalElements'];
       console.log(this.numberOfElements);
     });
-  }
+  }*/
 
   delete(event: Announcement) {
     this.httpService.deleteAnnouncements(event)
@@ -82,6 +80,5 @@ export class AnnouncementsListComponent implements OnInit {
       });
 
   };
-
 
 }

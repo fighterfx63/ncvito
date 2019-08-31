@@ -11,6 +11,8 @@ import {UsefulButtonsModule} from './usefull-buttons/useful-buttons.module';
 import {AnnouncementComponent} from './announcement/announcement.component';
 import {AnnouncementsListComponent} from './announcements-list/announcements-list.component';
 import {UserListComponent} from './user-list/user-list.component';
+import {ProfileModule} from "./profile/profile.module";
+import {FavoritesComponent} from "./profile/favorites/favorites.component";
 
 @NgModule({
   declarations: [
@@ -22,12 +24,14 @@ import {UserListComponent} from './user-list/user-list.component';
     NotFoundComponent,
     AnnouncementComponent,
     AnnouncementsListComponent,
-    UserListComponent
+    UserListComponent,
+    FavoritesComponent
   ],
   imports: [
     SharedModule,
     SignInModule,
-    UsefulButtonsModule
+    UsefulButtonsModule,
+    ProfileModule
   ],
   exports: [],
   providers: [],
