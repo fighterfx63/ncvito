@@ -4,6 +4,7 @@ import {catchError} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {StorageService} from './storage.service';
+import {Announcement} from "../models/announcement.model";
 
 
 @Injectable({
@@ -85,6 +86,13 @@ export class HttpService {
     return this.http.get(environment.url + '/announcements/');
   }
 
+  public getAllCreated() {
+    return this.http.get(environment.url + '/announcements/created/');
+  }
+  public getAllFavorites() {
+    return this.http.get(environment.url + '/announcements/favorites/');
+  }
+
 
   public deleteAnnouncements(announcement) {
     const headers = this.getHeaders();
@@ -101,11 +109,15 @@ export class HttpService {
     return this.http.get(environment.url + '/users?page=' + page + '&size=' + size, {headers});
   }
 
+  public getCurrentUserAnnouncements(page,size){
+    const headers = this.getHeaders();
+    return this.http.get(`${environment.url}/announcements/created?page=${page}&size=${size}`,{headers});
+  }
+
   public updateUser(id, user) {
     const headers = this.getHeaders();
     console.log('update user');
     return this.http.put(environment.url + "/users", user, {headers});
-
   }
 
   public getFavorites(page, size) {

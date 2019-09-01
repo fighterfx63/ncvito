@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {Announcement} from "../../models/announcement.model";
 import {PageEvent} from "@angular/material";
 import {HttpService} from "../../services/http.service";
@@ -6,11 +6,11 @@ import {NavigationExtras, Router} from "@angular/router";
 import {SnackbarService} from "../../services/snackbar.service";
 
 @Component({
-  selector: 'ncvito-favorites',
-  templateUrl: './favorites.component.html',
-  styleUrls: ['./favorites.component.less']
+  selector: 'ncvito-my-announcements',
+  templateUrl: './my-announcements.component.html',
+  styleUrls: ['./my-announcements.component.less']
 })
-export class FavoritesComponent implements OnInit {
+export class MyAnnouncementsComponent implements OnInit {
 
   pageDefault: number = 0;
   sizeDefault: number = 10;
@@ -34,26 +34,24 @@ export class FavoritesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getData(this.setPage(this.event));
-
-
+    this.getMyAnnouncements(this.setPage(this.event));
   }
 
-  getData(event: PageEvent) {
-    this.httpService.getFavorites(event.pageIndex, event.pageSize)
-      .subscribe(response => {
-        this.announcements = response['content'];
-        this.getNumberOfElements();
-        });
+
+  getMyAnnouncements(event: PageEvent) {
+    this.httpService.getCurrentUserAnnouncements(event.pageIndex, event.pageSize)
+      .subscribe(annResponse => {
+        this.announcements = annResponse['content'];
+        this.getNumberOfElements()
+      });
   }
 
-  getNumberOfElements() {
-    this.httpService.getAllFavorites().subscribe(response => {
-      this.numberOfElements = response['total'];
-      console.log(this.numberOfElements);
-    });
-  }
-
+    getNumberOfElements() {
+      this.httpService.getAllCreated().subscribe(response => {
+        this.numberOfElements = response['totalElements'];
+        console.log(this.numberOfElements);
+      });
+    }
   delete(event: Announcement) {
     this.httpService.deleteAnnouncements(event)
       .subscribe(data => {

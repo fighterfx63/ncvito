@@ -1,24 +1,22 @@
-<div class="grid-list">
+<div class="container__announcements-card__grid-list">
 
 
-  <mat-grid-list cols="2" rowHeight="4:1">
+      <mat-grid-list cols="2" rowHeight="3:1">
 
-    <mat-grid-tile *ngFor="let announcement of announcements">
-      <ncvito-announcement *ngIf="announcement" [announcement]="announcement"
-                           (deleteEmitter)="delete($event)"
-                           (editEmitter)="edit($event)"
-                           (favoritesEmitter)="addFavorites($event)">
+        <mat-grid-tile *ngFor="let announcement of announcements">
+          <ncvito-announcement *ngIf="announcement" [announcement]="announcement"
+                               (deleteEmitter)="delete($event)"
+                               (editEmitter)="edit($event)"
+                               (favoritesEmitter)="addFavorites($event)">
 
-      </ncvito-announcement>
-    </mat-grid-tile>
+          </ncvito-announcement>
+        </mat-grid-tile>
 
-  </mat-grid-list>
-  <mat-paginator [length]="numberOfElements "
-                 [pageSize]="sizeDefault"
-                 [pageIndex]="pageDefault"
-                 [pageSizeOptions]="[5, 10, 15]"
-                 (page)="getData($event)">
-  </mat-paginator>
-
-
+      </mat-grid-list>
+      <mat-paginator [length]="numberOfElements "
+                     [pageSize]="sizeDefault"
+                     [pageIndex]="pageDefault"
+                     [pageSizeOptions]="[5, 10, 15]"
+                     (page)="getData($event)">
+      </mat-paginator>
 </div>

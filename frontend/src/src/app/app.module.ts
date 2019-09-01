@@ -11,8 +11,10 @@ import {UsefulButtonsModule} from './usefull-buttons/useful-buttons.module';
 import {AnnouncementComponent} from './announcement/announcement.component';
 import {AnnouncementsListComponent} from './announcements-list/announcements-list.component';
 import {UserListComponent} from './user-list/user-list.component';
-import {ProfileModule} from "./profile/profile.module";
 import {FavoritesComponent} from "./profile/favorites/favorites.component";
+import {MatListModule} from "@angular/material";
+import {MyAnnouncementsComponent} from "./profile/my-announcements/my-announcements.component";
+import {ProfileComponent} from "./profile/profile.component";
 
 @NgModule({
   declarations: [
@@ -25,13 +27,16 @@ import {FavoritesComponent} from "./profile/favorites/favorites.component";
     AnnouncementComponent,
     AnnouncementsListComponent,
     UserListComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    UserListComponent,
+    MyAnnouncementsComponent,
+    ProfileComponent
   ],
   imports: [
     SharedModule,
     SignInModule,
     UsefulButtonsModule,
-    ProfileModule
+    MatListModule
   ],
   exports: [],
   providers: [],
