@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Announcement} from "../models/announcement.model";
+import {StorageService} from "../services/storage.service";
+import {LoginService} from "../sign-in/login.service";
+import {HttpService} from "../services/http.service";
 
 @Component({
   selector: 'ncvito-announcement',
@@ -9,9 +12,10 @@ import {Announcement} from "../models/announcement.model";
 export class AnnouncementComponent implements OnInit {
   announcements: Announcement[];
   creationDate: string;
-
-
-  constructor() {
+  isFavorites: boolean;
+  favorites: Announcement[];
+isEditable:boolean;
+  constructor(private loginService:LoginService, private httpService:HttpService) {
 
   }
 
@@ -27,6 +31,18 @@ export class AnnouncementComponent implements OnInit {
   private favoritesEmitter = new EventEmitter<Announcement>();
 
   ngOnInit() {
+  this.getFavorites();
+this.isEditable= this.loginService.getLogin()==this.announcement.author.login;
+
+console.log(this.favorites);
+console.log(this.announcement);
+
+    if (this.favorites.includes(this.announcement)){
+      this.isFavorites=true;
+      console.log(this.favorites)
+    }
+
+
 
   }
 
@@ -44,8 +60,20 @@ export class AnnouncementComponent implements OnInit {
   }
 
   addFavorites(): void {
+
     this.favoritesEmitter.emit(this.announcement);
   }
+  deleteFavorites():void{
+    this.favoritesEmitter.emit(this.announcement);
+  }
+  getFavorites() {
+    console.log('get favorites');
+    this.httpService.getAllFavorites()
+      .subscribe(response => {
+        this.favorites = response[''];
+          ;
 
+      });
+  }
 
 }

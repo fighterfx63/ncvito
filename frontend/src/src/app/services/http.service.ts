@@ -107,4 +107,11 @@ export class HttpService {
     return this.http.put(environment.url + "/users", user, {headers});
 
   }
+  public getAllFavorites(){
+    const headers = this.getHeaders();
+    console.log('get favorites');
+    return this.http.get(environment.url + "/announcements/favorites" ,{headers});
+  }
+
+
 }

@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SnackbarService} from "../services/snackbar.service";
 import {HttpService} from "../services/http.service";
 
+
 @Component({
   selector: 'ncvito-announcement-stepper',
   templateUrl: './announcement-stepper.component.html',
@@ -65,6 +66,7 @@ export class AnnouncementStepperComponent implements OnInit {
   };
 
   edit(): void {
+
     this.httpService.updateAnnoucements(this.editAnnouncement.id,this.announcement)
       .subscribe(data => {
         this.snackBarService.openSnackBar("Announcement edit  successfully", "OK");

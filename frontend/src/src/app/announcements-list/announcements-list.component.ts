@@ -4,6 +4,7 @@ import {PageEvent} from "@angular/material";
 import {HttpService} from "../services/http.service";
 import {SnackbarService} from "../services/snackbar.service";
 import {NavigationExtras, Router} from "@angular/router";
+import {LoginService} from "../sign-in/login.service";
 
 @Component({
   selector: 'ncvito-announcements-list',
@@ -15,7 +16,7 @@ export class AnnouncementsListComponent implements OnInit {
 
   pageDefault: number = 0;
   sizeDefault: number = 10;
-
+  isEditable: boolean;
   announcements: Announcement[];
 
   numberOfElements: number;
@@ -30,7 +31,7 @@ export class AnnouncementsListComponent implements OnInit {
     return event;
   }
 
-  constructor(private httpService: HttpService, private router: Router, private snackBarService: SnackbarService) {
+  constructor(private httpService: HttpService, private router: Router, private snackBarService: SnackbarService, private loginService: LoginService) {
 
   }
 
@@ -57,19 +58,28 @@ export class AnnouncementsListComponent implements OnInit {
   }
 
   delete(event: Announcement) {
-    this.httpService.deleteAnnouncements(event)
-      .subscribe(data => {
-        this.announcements = this.announcements.filter(u => u !== event);
+    if (this.loginService.getLogin() == event.author.login) {
+      this.isEditable = true;
+      this.httpService.deleteAnnouncements(event)
+        .subscribe(data => {
+          this.announcements = this.announcements.filter(u => u !== event);
 
-      });
-
+        });
+    } else {
+      this.snackBarService.openSnackBar("ERROR", "OK");
+    }
   }
 
 
   edit(event: Announcement) {
-    console.log(event);
-    let naviagtionsExtras: NavigationExtras = {state: {event: event}};
-    this.router.navigateByUrl('/create', naviagtionsExtras);
+
+    if (this.loginService.getLogin() == event.author.login) {
+      this.isEditable = true;
+      let naviagtionsExtras: NavigationExtras = {state: {event: event}};
+      this.router.navigateByUrl('/create', naviagtionsExtras);
+    } else {
+      this.snackBarService.openSnackBar("ERROR", "OK");
+    }
 
 
   }
@@ -84,4 +94,9 @@ export class AnnouncementsListComponent implements OnInit {
   };
 
 
-}
+
+
+  }
+
+
+
