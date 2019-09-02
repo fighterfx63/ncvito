@@ -1,17 +1,5 @@
-import {Component, NgModule, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FavoritesComponent} from './favorites/favorites.component';
-import {AnnouncementComponent} from "../announcement/announcement.component";
-import {SharedModule} from "../shared/shared.module";
-import {AppModule} from "../app.module";
+import {Component, OnInit} from '@angular/core';
 
-
-/*@NgModule({
-  declarations: [],
-  imports: [
-    SharedModule
-  ]
-})*/
 @Component({
   selector: 'ncvito-profile',
   templateUrl: './profile.component.html',

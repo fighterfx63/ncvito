@@ -87,12 +87,13 @@ export class HttpService {
   }
 
   public getAllCreated() {
-    return this.http.get(environment.url + '/announcements/created/');
+    const headers = this.getHeaders();
+    return this.http.get(environment.url + '/announcements/created/',{headers});
   }
   public getAllFavorites() {
-    return this.http.get(environment.url + '/announcements/favorites/');
+    const headers = this.getHeaders();
+    return this.http.get(environment.url + '/announcements/favorites/', {headers});
   }
-
 
   public deleteAnnouncements(announcement) {
     const headers = this.getHeaders();

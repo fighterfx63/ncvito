@@ -49,7 +49,7 @@ export class FavoritesComponent implements OnInit {
 
   getNumberOfElements() {
     this.httpService.getAllFavorites().subscribe(response => {
-      this.numberOfElements = response['total'];
+      this.numberOfElements = response['totalElements'];
       console.log(this.numberOfElements);
     });
   }
@@ -66,8 +66,8 @@ export class FavoritesComponent implements OnInit {
 
   edit(event: Announcement) {
     console.log(event);
-    let naviagtionsExtras: NavigationExtras = {state: {event: event}};
-    this.router.navigateByUrl('/create', naviagtionsExtras);
+    let navigationsExtras: NavigationExtras = {state: {event: event}};
+    this.router.navigateByUrl('/create', navigationsExtras);
 
 
   }
