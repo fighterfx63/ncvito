@@ -1,11 +1,9 @@
 package nc.students.ncvito;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nc.students.ncvito.entity.Announcement;
-import nc.students.ncvito.entity.Apartment;
-import nc.students.ncvito.entity.Role;
-import nc.students.ncvito.entity.User;
+import nc.students.ncvito.entity.*;
 import nc.students.ncvito.repo.AnnouncementRepository;
+import nc.students.ncvito.repo.FavoritesRepository;
 import nc.students.ncvito.repo.UserRepository;
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
@@ -45,6 +43,9 @@ public class AnnouncementsControllerTest {
     UserRepository userRepository;
 
     @Autowired
+    FavoritesRepository favoritesRepository;
+
+    @Autowired
     AnnouncementRepository announcementRepository;
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -74,6 +75,11 @@ public class AnnouncementsControllerTest {
         announcement.setPrice(150l);
         announcement.setDescription("announcement_1");
         announcementRepository.save(announcement);
+
+        Favorites favorites = new Favorites();
+        favorites.setAnnouncement(announcement);
+        favorites.setUser(user);
+        favoritesRepository.save(favorites);
     }
 
     @WithMockUser(username = "admin")
@@ -91,6 +97,16 @@ public class AnnouncementsControllerTest {
     @Test
     public void getByID() throws Exception {
         this.mockMvc.perform(get("/announcements"))
+                .andDo(print())
+                .andExpect(authenticated())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$.content[0].description", is("announcement_1")));
+    }
+
+    @WithMockUser(username = "admin")
+    @Test
+    public void getFavorites() throws Exception{
+        this.mockMvc.perform(get("/announcements/favorites?page=0&size=5"))
                 .andDo(print())
                 .andExpect(authenticated())
                 .andExpect(status().is2xxSuccessful())
