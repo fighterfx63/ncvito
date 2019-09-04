@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface AnnouncementRepository extends JpaRepository<Announcement, Long> {
     Page<Announcement> findAll(Pageable pageable);
+
     Announcement findById(long id);
 
- }
+}

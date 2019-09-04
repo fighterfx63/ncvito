@@ -5,7 +5,8 @@
       <p>
         <mat-form-field class="login-component__field">
           <label>
-            <input type="text" matInput placeholder="Username" formControlName="username" class="login-component__input ">
+            <input type="text" matInput placeholder="Username" formControlName="username"
+                   class="login-component__input ">
           </label>
           <mat-error *ngIf="form.get('username').invalid">{{getUsernameErrorMessage()}}</mat-error>
         </mat-form-field>
@@ -13,7 +14,8 @@
       <p>
         <mat-form-field class="login-component__field">
           <label>
-            <input type="password" matInput placeholder="Password" formControlName="password" class="login-component__input">
+            <input type="password" matInput placeholder="Password" formControlName="password"
+                   class="login-component__input">
           </label>
           <mat-error *ngIf="form.get('password').invalid">{{getPasswordErrorMessage()}}</mat-error>
         </mat-form-field>

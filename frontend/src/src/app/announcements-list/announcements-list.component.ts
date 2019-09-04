@@ -92,7 +92,7 @@ export class AnnouncementsListComponent implements OnInit {
         this.getFavorites();
         this.snackBarService.openSnackBar("announcement has been added to favorites", "OK");
       });
-/*    location.reload();*/
+    /*    location.reload();*/
   };
 
   getFavorites() {
@@ -102,8 +102,8 @@ export class AnnouncementsListComponent implements OnInit {
         this.favorites = <any>response;
 
         for (let announcement of this.announcements) {
-          console.log(this.favorites.some(favorite=> favorite.id==announcement.id))
-          if ((this.favorites.some(favorite=> favorite.id==announcement.id))==true) {
+          console.log(this.favorites.some(favorite => favorite.id == announcement.id))
+          if ((this.favorites.some(favorite => favorite.id == announcement.id)) == true) {
             console.log('here');
             this.favoriteMap.set(announcement.id, true);
 
@@ -120,15 +120,15 @@ export class AnnouncementsListComponent implements OnInit {
       });
   }
 
-deleteFavorites(event:Announcement){
+  deleteFavorites(event: Announcement) {
     console.log(event);
-    this.httpService.deleteFavorites(event)      .subscribe(data => {
+    this.httpService.deleteFavorites(event).subscribe(data => {
       this.getFavorites();
       this.snackBarService.openSnackBar("announcement has been delete to favorites", "OK");
 
     });
 
-};
+  };
 
 }
 

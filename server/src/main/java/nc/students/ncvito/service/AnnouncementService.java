@@ -37,12 +37,12 @@ public class AnnouncementService {
         return announcementRepository.findById(id);
     }
 
-    public void delete(Announcement announcement,Authentication authentication) {
+    public void delete(Announcement announcement, Authentication authentication) {
 
         User user = userRepository.findByLogin(authentication.getName())
                 .orElseThrow(() -> new IllegalStateException("User with login " + authentication.getName() + " not found."));
 
-        if (user.getId()==announcement.getAuthor().getId()||user.getRole().contains(Role.ADMIN)||user.getRole().contains(Role.MODERATOR)) {
+        if (user.getId() == announcement.getAuthor().getId() || user.getRole().contains(Role.ADMIN) || user.getRole().contains(Role.MODERATOR)) {
             List<Favorites> favoritesList = favoritesRepository.findByAnnouncement(announcement);
             for (Favorites favorite : favoritesList) {
                 favoritesRepository.delete(favorite);
@@ -54,14 +54,13 @@ public class AnnouncementService {
     }
 
 
-    public Announcement update(Announcement announcement,Authentication authentication) {
+    public Announcement update(Announcement announcement, Authentication authentication) {
         User user = userRepository.findByLogin(authentication.getName())
                 .orElseThrow(() -> new IllegalStateException("User with login " + authentication.getName() + " not found."));
 
-        if (user.getId()==announcement.getAuthor().getId()||user.getRole().contains(Role.ADMIN)||user.getRole().contains(Role.MODERATOR)) {
+        if (user.getId() == announcement.getAuthor().getId() || user.getRole().contains(Role.ADMIN) || user.getRole().contains(Role.MODERATOR)) {
             return announcementRepository.save(announcement);
-        }
-        else return null;
+        } else return null;
     }
 
     public Announcement create(Announcement announcement, Authentication authentication) {
@@ -87,11 +86,11 @@ public class AnnouncementService {
         User user = userRepository.findByLogin(authentication.getName())
                 .orElseThrow(() -> new IllegalStateException("User with login " + authentication.getName() + " not found."));
         Favorites favorites = favoritesRepository.findByAnnouncementAndUser(announcement, user);
-            favoritesRepository.delete(favorites);
+        favoritesRepository.delete(favorites);
 
     }
 
-  public   List<Announcement> getAllFavoritesByUser(Authentication authentication) {
+    public List<Announcement> getAllFavoritesByUser(Authentication authentication) {
         User user = userRepository.findByLogin(authentication.getName())
                 .orElseThrow(() -> new IllegalStateException("User with login " + authentication.getName() + " not found."));
         List<Announcement> announcementList = new ArrayList<>();

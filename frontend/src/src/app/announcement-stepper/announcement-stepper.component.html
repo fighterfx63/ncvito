@@ -8,8 +8,9 @@
 
       <div>
         <mat-form-field class="announcement-stepper__input">
-          <input matInput [(ngModel)]="announcement.apartment.address" placeholder="Address" formControlName="addressCtrl"
-                 required >
+          <input matInput [(ngModel)]="announcement.apartment.address" placeholder="Address"
+                 formControlName="addressCtrl"
+                 required>
         </mat-form-field>
       </div>
       <div>
@@ -38,18 +39,22 @@
   </mat-step>
 
 
-  <mat-step [stepControl]="announcementTypeFormGroup" errorMessage="Description is required."> Please, choose a right statment:
+  <mat-step [stepControl]="announcementTypeFormGroup" errorMessage="Description is required."> Please, choose a right
+    statment:
 
     <form [formGroup]="announcementTypeFormGroup">
       <ng-template matStepLabel>Announcement type</ng-template>
       <div>
-        <mat-radio-group aria-label="Select an option" class="announcement-stepper__radio-group" [(ngModel)]="announcement.sale"
+        <mat-radio-group aria-label="Select an option" class="announcement-stepper__radio-group"
+                         [(ngModel)]="announcement.sale"
                          [ngModelOptions]="{standalone: true}" name="fieldName" ngDefaultControl>
 
-            <mat-radio-button  class="announcement-stepper__radio-button" [value]="true"> I want to sell my apartment</mat-radio-button>
+          <mat-radio-button class="announcement-stepper__radio-button" [value]="true"> I want to sell my apartment
+          </mat-radio-button>
 
 
-            <mat-radio-button class="announcement-stepper__radio-button" [value]="false">I want to lease my apartment</mat-radio-button>
+          <mat-radio-button class="announcement-stepper__radio-button" [value]="false">I want to lease my apartment
+          </mat-radio-button>
 
         </mat-radio-group>
       </div>
@@ -62,7 +67,8 @@
 
 
   <div *ngIf="!announcement.sale">
-    <mat-step [stepControl]="announcementPriceFormGroup" errorMessage="Announcement price is required."> You want to lease an
+    <mat-step [stepControl]="announcementPriceFormGroup" errorMessage="Announcement price is required."> You want to
+      lease an
       apartment.Your price?
       <form [formGroup]="announcementPriceFormGroup">
         <ng-template matStepLabel>Announcement lease price</ng-template>
@@ -82,7 +88,8 @@
   </div>
 
   <div *ngIf="announcement.sale">
-    <mat-step [stepControl]="announcementPriceFormGroup" errorMessage="Announcement price is required."> You want to sell an
+    <mat-step [stepControl]="announcementPriceFormGroup" errorMessage="Announcement price is required."> You want to
+      sell an
       apartment. Your price?
       <form [formGroup]="announcementPriceFormGroup">
         <ng-template matStepLabel>Announcement sell price</ng-template>
@@ -107,7 +114,8 @@
       <ng-template matStepLabel>Announcement description</ng-template>
       <div>
         <mat-form-field class="announcement-stepper__input">
-          <input matInput [(ngModel)]="announcement.description" placeholder="description" formControlName="descriptionCtrl">
+          <input matInput [(ngModel)]="announcement.description" placeholder="description"
+                 formControlName="descriptionCtrl">
         </mat-form-field>
       </div>
       <div>

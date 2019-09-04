@@ -20,6 +20,7 @@ public class UserService implements UserDetailsService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     public Page<User> findAll(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
@@ -32,7 +33,7 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public User  findById(long id ){
+    public User findById(long id) {
         return userRepository.findById(id);
 
     }

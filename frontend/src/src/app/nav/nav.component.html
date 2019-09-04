@@ -1,27 +1,27 @@
 <div class="nav-header">
 
-    <a mat-button>
-      <h3 class="nav-header__title" routerLink="/">{{appTitle}}</h3>
-    </a>
+  <a mat-button>
+    <h3 class="nav-header__title" routerLink="/">{{appTitle}}</h3>
+  </a>
 
-    <ul class="nav-header__menu">
+  <ul class="nav-header__menu">
 
-      <li class="nav-header__menu-links">
-        <a mat-button routerLink="/announcements">Announcements</a>
-      </li>
+    <li class="nav-header__menu-links">
+      <a mat-button routerLink="/announcements">Announcements</a>
+    </li>
 
-      <li class="nav-header__menu-links">
-        <a *ngIf="!loginService.isLoggedIn()" mat-button routerLink="/sign-in">Sign in</a>
-      </li>
+    <li class="nav-header__menu-links">
+      <a *ngIf="!loginService.isLoggedIn()" mat-button routerLink="/sign-in">Sign in</a>
+    </li>
 
-      <li class="nav-header__menu-links" *ngIf="loginService.isLoggedIn()">
-        <mat-menu #menu="matMenu">
-          <a mat-menu-item routerLink="/profile">Profile</a>
-          <button (click)="loginService.logOut()" mat-menu-item routerLink="/announcements">Sign Out</button>
-        </mat-menu>
-        <button class="nav-header__menu-links-authorized" mat-button [matMenuTriggerFor]="menu">{{username()}}</button>
-      </li>
+    <li class="nav-header__menu-links" *ngIf="loginService.isLoggedIn()">
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item routerLink="/profile">Profile</a>
+        <button (click)="loginService.logOut()" mat-menu-item routerLink="/announcements">Sign Out</button>
+      </mat-menu>
+      <button class="nav-header__menu-links-authorized" mat-button [matMenuTriggerFor]="menu">{{username()}}</button>
+    </li>
 
-    </ul>
+  </ul>
 
 </div>

@@ -29,7 +29,7 @@ describe('UserListComponent', () => {
     spyHttpService.getAllUsers.and.returnValue(of([]));
     TestBed.configureTestingModule({
       providers: [{provide: HttpService, useValue: spyHttpService}],
-      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent, NotFoundComponent, AnnouncementComponent, AnnouncementsListComponent, UserListComponent,NavComponent],
+      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent, NotFoundComponent, AnnouncementComponent, AnnouncementsListComponent, UserListComponent, NavComponent],
 
       imports: [
         HttpClientTestingModule,

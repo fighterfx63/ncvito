@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Announcement} from "../models/announcement.model";
-import {StorageService} from "../services/storage.service";
 import {LoginService} from "../sign-in/login.service";
 import {HttpService} from "../services/http.service";
 
@@ -12,8 +11,6 @@ import {HttpService} from "../services/http.service";
 export class AnnouncementComponent implements OnInit {
   announcements: Announcement[];
   creationDate: string;
-  isFavorites: boolean;
-  favorites: Announcement[];
   isEditable: boolean;
 
   constructor(private loginService: LoginService, private httpService: HttpService) {
@@ -23,7 +20,7 @@ export class AnnouncementComponent implements OnInit {
   @Input()
   announcement: Announcement;
   @Input()
-  isFavorite:boolean;
+  isFavorite: boolean;
 
 
   @Output()
@@ -33,11 +30,11 @@ export class AnnouncementComponent implements OnInit {
   @Output()
   private AddFavoritesEmitter = new EventEmitter<Announcement>();
   @Output()
-  private DeleteFavoritesEmitter=  new EventEmitter<Announcement>();
+  private DeleteFavoritesEmitter = new EventEmitter<Announcement>();
 
   ngOnInit() {
-    console.log(this.isFavorite , this.announcement.id);
-    this.isEditable = this.loginService.getLogin() == this.announcement.author.login  ;
+    console.log(this.isFavorite, this.announcement.id);
+    this.isEditable = this.loginService.getLogin() == this.announcement.author.login;
 
   }
 
@@ -62,7 +59,6 @@ export class AnnouncementComponent implements OnInit {
   deleteFavorites(): void {
     this.DeleteFavoritesEmitter.emit(this.announcement);
   }
-
 
 
 }

@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Favorites", uniqueConstraints = {
-        @UniqueConstraint(name = "UK_FAVORITES_ANNOUNCEMENT_USER", columnNames = {"user_id","announcement_id"})
+        @UniqueConstraint(name = "UK_FAVORITES_ANNOUNCEMENT_USER", columnNames = {"user_id", "announcement_id"})
 
 })
 @Getter

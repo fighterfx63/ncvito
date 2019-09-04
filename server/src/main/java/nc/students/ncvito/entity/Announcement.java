@@ -17,11 +17,11 @@ public class Announcement {
     private long id;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id",nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User author;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "apartment_id",nullable = false)
+    @JoinColumn(name = "apartment_id", nullable = false)
     private Apartment apartment;
 
     private boolean isSale;
