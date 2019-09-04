@@ -82,13 +82,7 @@ public class AnnouncementService {
     public Page<Announcement> getFavoriteAds(Pageable pageable, Authentication authentication){
         User user = userRepository.findByLogin(authentication.getName())
                 .orElseThrow(() -> new IllegalStateException("User with login " + authentication.getName() + " not found."));
-        List<Announcement> announcementList=new ArrayList<>();
-        List<Favorites> favoritesList= favoritesRepository.findAllByUser(user);
-        for (Favorites favorites: favoritesList) {
-            announcementList.add(favorites.getAnnouncement());
-        }
-        Page<Announcement> page = new PageImpl<>(announcementList, pageable, announcementList.size());
-        return page;
+        return favoritesRepository.findAllByUser(user, pageable);
     }
 }
 
