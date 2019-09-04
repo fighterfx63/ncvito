@@ -14,13 +14,16 @@ export class AnnouncementComponent implements OnInit {
   creationDate: string;
   isFavorites: boolean;
   favorites: Announcement[];
-isEditable:boolean;
-  constructor(private loginService:LoginService, private httpService:HttpService) {
+  isEditable: boolean;
+
+  constructor(private loginService: LoginService, private httpService: HttpService) {
 
   }
 
   @Input()
   announcement: Announcement;
+  @Input()
+  isFavorite:boolean;
 
 
   @Output()
@@ -28,21 +31,13 @@ isEditable:boolean;
   @Output()
   private editEmitter = new EventEmitter<Announcement>();
   @Output()
-  private favoritesEmitter = new EventEmitter<Announcement>();
+  private AddFavoritesEmitter = new EventEmitter<Announcement>();
+  @Output()
+  private DeleteFavoritesEmitter=  new EventEmitter<Announcement>();
 
   ngOnInit() {
-  this.getFavorites();
-this.isEditable= this.loginService.getLogin()==this.announcement.author.login;
-
-console.log(this.favorites);
-console.log(this.announcement);
-
-    if (this.favorites.includes(this.announcement)){
-      this.isFavorites=true;
-      console.log(this.favorites)
-    }
-
-
+    console.log(this.isFavorite , this.announcement.id);
+    this.isEditable = this.loginService.getLogin() == this.announcement.author.login  ;
 
   }
 
@@ -61,19 +56,13 @@ console.log(this.announcement);
 
   addFavorites(): void {
 
-    this.favoritesEmitter.emit(this.announcement);
+    this.AddFavoritesEmitter.emit(this.announcement);
   }
-  deleteFavorites():void{
-    this.favoritesEmitter.emit(this.announcement);
-  }
-  getFavorites() {
-    console.log('get favorites');
-    this.httpService.getAllFavorites()
-      .subscribe(response => {
-        this.favorites = response[''];
-          ;
 
-      });
+  deleteFavorites(): void {
+    this.DeleteFavoritesEmitter.emit(this.announcement);
   }
+
+
 
 }

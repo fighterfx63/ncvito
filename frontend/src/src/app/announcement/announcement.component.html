@@ -30,14 +30,14 @@
 
 
   <mat-card-actions class="announcement-card__actions">
-    <div *ngIf="isFavorites">
-      <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" class="announcement-card__favorites"
+    <div *ngIf="isFavorite" class="announcement-card__favorites">
+      <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon"
               (click)="deleteFavorites()">
         <mat-icon>favorite</mat-icon>
       </button>
     </div>
-    <div *ngIf="!isFavorites">
-      <button mat-icon-button aria-label="Example icon-button with a heart icon" class="announcement-card__favorites"
+    <div *ngIf="!isFavorite" class="announcement-card__favorites">
+      <button mat-icon-button aria-label="Example icon-button with a heart icon"
               (click)="addFavorites()">
         <mat-icon>favorite</mat-icon>
       </button>

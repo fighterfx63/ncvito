@@ -15,6 +15,7 @@ const routes: Routes = [
   {path: 'sign-in', component: SignInComponent},
   {path: 'create', component: AnnouncementStepperComponent},
   {path: 'announcements', component: AnnouncementsListComponent},
+  {path: 'users', component: UserListComponent},
   {path: '', component: AnnouncementsListComponent},
   {path: '**', component: NotFoundComponent}
 ];

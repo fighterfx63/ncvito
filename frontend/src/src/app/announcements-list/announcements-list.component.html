@@ -5,9 +5,12 @@
 
     <mat-grid-tile *ngFor="let announcement of announcements">
       <ncvito-announcement *ngIf="announcement" [announcement]="announcement"
+                            [isFavorite]="favoriteMap.get(announcement.id)"
                            (deleteEmitter)="delete($event)"
                            (editEmitter)="edit($event)"
-                           (favoritesEmitter)="addFavorites($event)">
+                           (AddFavoritesEmitter)="addFavorites($event)"
+                            (DeleteFavoritesEmitter)="deleteFavorites($event)">
+
 
       </ncvito-announcement>
     </mat-grid-tile>

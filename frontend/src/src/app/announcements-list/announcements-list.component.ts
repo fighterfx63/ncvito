@@ -18,7 +18,8 @@ export class AnnouncementsListComponent implements OnInit {
   sizeDefault: number = 10;
   isEditable: boolean;
   announcements: Announcement[];
-
+  favorites: Announcement[];
+  favoriteMap: Map<bigint, boolean> = new Map();
   numberOfElements: number;
 
   event: PageEvent = new PageEvent();
@@ -37,7 +38,7 @@ export class AnnouncementsListComponent implements OnInit {
 
   ngOnInit() {
     this.getData(this.setPage(this.event));
-
+    this.getFavorites();
 
   }
 
@@ -88,15 +89,48 @@ export class AnnouncementsListComponent implements OnInit {
     console.log(event);
     this.httpService.post('/announcements/favorites/' + event.id, event)
       .subscribe(data => {
+        this.getFavorites();
         this.snackBarService.openSnackBar("announcement has been added to favorites", "OK");
       });
-
+/*    location.reload();*/
   };
 
+  getFavorites() {
+    console.log('get favorites');
+    this.httpService.getAllFavorites()
+      .subscribe(response => {
+        this.favorites = <any>response;
+
+        for (let announcement of this.announcements) {
+          console.log(this.favorites.some(favorite=> favorite.id==announcement.id))
+          if ((this.favorites.some(favorite=> favorite.id==announcement.id))==true) {
+            console.log('here');
+            this.favoriteMap.set(announcement.id, true);
+
+          } else {
+            this.favoriteMap.set(announcement.id, false);
+          }
 
 
+        }
 
+        console.log(this.favoriteMap)
+
+
+      });
   }
+
+deleteFavorites(event:Announcement){
+    console.log(event);
+    this.httpService.deleteFavorites(event)      .subscribe(data => {
+      this.getFavorites();
+      this.snackBarService.openSnackBar("announcement has been delete to favorites", "OK");
+
+    });
+
+};
+
+}
 
 
 

@@ -113,5 +113,11 @@ export class HttpService {
     return this.http.get(environment.url + "/announcements/favorites" ,{headers});
   }
 
+  public  deleteFavorites(favorites ){
+    const headers = this.getHeaders();
+    console.log('delete favorites');
+    return this.http.delete(environment.url +"/announcements/favorites/" +favorites.id , {headers});
+  }
+
 
 }
