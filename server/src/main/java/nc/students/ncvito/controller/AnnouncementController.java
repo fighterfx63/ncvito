@@ -31,13 +31,13 @@ public class AnnouncementController {
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable("id") Announcement announcement) {
-        announcementService.delete(announcement);
+    public void delete(@PathVariable("id") Announcement announcement, Authentication authentication) {
+        announcementService.delete(announcement, authentication);
     }
 
     @PutMapping
-    public Announcement update(@RequestBody Announcement announcement) {
-        return announcementService.update(announcement);
+    public Announcement update(@RequestBody Announcement announcement, Authentication authentication) {
+        return announcementService.update(announcement, authentication);
     }
 
     @PostMapping
@@ -46,11 +46,7 @@ public class AnnouncementController {
         return announcementService.create(announcement, authentication);
     }
 
-    @PostMapping("/favorites/{id}")
-    public void addToFavorites(@PathVariable("id") Announcement announcement, Authentication authentication) {
-        announcementService.addToFavorites(announcement, authentication);
 
-    }
 }
 
 

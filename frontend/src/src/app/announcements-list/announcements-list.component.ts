@@ -4,6 +4,7 @@ import {PageEvent} from "@angular/material";
 import {HttpService} from "../services/http.service";
 import {SnackbarService} from "../services/snackbar.service";
 import {NavigationExtras, Router} from "@angular/router";
+import {LoginService} from "../sign-in/login.service";
 
 @Component({
   selector: 'ncvito-announcements-list',
@@ -15,9 +16,10 @@ export class AnnouncementsListComponent implements OnInit {
 
   pageDefault: number = 0;
   sizeDefault: number = 10;
-
+  isEditable: boolean;
   announcements: Announcement[];
-
+  favorites: Announcement[];
+  favoriteMap: Map<bigint, boolean> = new Map();
   numberOfElements: number;
 
   event: PageEvent = new PageEvent();
@@ -30,13 +32,13 @@ export class AnnouncementsListComponent implements OnInit {
     return event;
   }
 
-  constructor(private httpService: HttpService, private router: Router, private snackBarService: SnackbarService) {
+  constructor(private httpService: HttpService, private router: Router, private snackBarService: SnackbarService, private loginService: LoginService) {
 
   }
 
   ngOnInit() {
     this.getData(this.setPage(this.event));
-
+    this.getFavorites();
 
   }
 
@@ -57,19 +59,28 @@ export class AnnouncementsListComponent implements OnInit {
   }
 
   delete(event: Announcement) {
-    this.httpService.deleteAnnouncements(event)
-      .subscribe(data => {
-        this.announcements = this.announcements.filter(u => u !== event);
+    if (this.loginService.getLogin() == event.author.login) {
+      this.isEditable = true;
+      this.httpService.deleteAnnouncements(event)
+        .subscribe(data => {
+          this.announcements = this.announcements.filter(u => u !== event);
 
-      });
-
+        });
+    } else {
+      this.snackBarService.openSnackBar("ERROR", "OK");
+    }
   }
 
 
   edit(event: Announcement) {
-    console.log(event);
-    let naviagtionsExtras: NavigationExtras = {state: {event: event}};
-    this.router.navigateByUrl('/create', naviagtionsExtras);
+
+    if (this.loginService.getLogin() == event.author.login) {
+      this.isEditable = true;
+      let naviagtionsExtras: NavigationExtras = {state: {event: event}};
+      this.router.navigateByUrl('/create', naviagtionsExtras);
+    } else {
+      this.snackBarService.openSnackBar("ERROR", "OK");
+    }
 
 
   }
@@ -78,10 +89,48 @@ export class AnnouncementsListComponent implements OnInit {
     console.log(event);
     this.httpService.post('/announcements/favorites/' + event.id, event)
       .subscribe(data => {
+        this.getFavorites();
         this.snackBarService.openSnackBar("announcement has been added to favorites", "OK");
       });
+    /*    location.reload();*/
+  };
+
+  getFavorites() {
+    console.log('get favorites');
+    this.httpService.getAllFavorites()
+      .subscribe(response => {
+        this.favorites = <any>response;
+
+        for (let announcement of this.announcements) {
+          console.log(this.favorites.some(favorite => favorite.id == announcement.id))
+          if ((this.favorites.some(favorite => favorite.id == announcement.id)) == true) {
+            console.log('here');
+            this.favoriteMap.set(announcement.id, true);
+
+          } else {
+            this.favoriteMap.set(announcement.id, false);
+          }
+
+
+        }
+
+        console.log(this.favoriteMap)
+
+
+      });
+  }
+
+  deleteFavorites(event: Announcement) {
+    console.log(event);
+    this.httpService.deleteFavorites(event).subscribe(data => {
+      this.getFavorites();
+      this.snackBarService.openSnackBar("announcement has been delete to favorites", "OK");
+
+    });
 
   };
 
-
 }
+
+
+

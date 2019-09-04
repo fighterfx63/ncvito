@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatSnackBar} from "@angular/material";
 import {HttpService} from "../services/http.service";
 import {AdvertisementModel} from "./models/advertisement.model";
-import { Router, ActivatedRoute } from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'ncvito-full-ad',
@@ -42,21 +42,22 @@ export class FullAdComponent implements OnInit {
     this.getTheAdvertisement();
   }
 
-  getTheAdvertisement(){
+  getTheAdvertisement() {
     this.httpService.get("/announcements/" + this.ad_ID, null, this.advertisement).subscribe(
       ad => {
-      this.advertisement = ad;
+        this.advertisement = ad;
 
-      this.adCreationDate = new Date(this.advertisement.creationDate.toString().replace("T", " ")).toDateString();
-      this.address = this.advertisement.apartment.address;
-      this.price = this.makePriceParsed(this.advertisement.price);
-      this.square = this.advertisement.apartment.square;
-      this.roomCount = this.advertisement.apartment.roomCount; this.roomOrRooms = this.getRoomOrRooms(this.roomCount);
-      this.floor = this.advertisement.apartment.floor;
-      this.adType = this.getAdType(this.advertisement.sale);
-      this.description = this.advertisement.description;
-      this.author = this.advertisement.author.firstName + " " + this.advertisement.author.lastName;
-      this.phone = this.advertisement.author.phone;
+        this.adCreationDate = new Date(this.advertisement.creationDate.toString().replace("T", " ")).toDateString();
+        this.address = this.advertisement.apartment.address;
+        this.price = this.makePriceParsed(this.advertisement.price);
+        this.square = this.advertisement.apartment.square;
+        this.roomCount = this.advertisement.apartment.roomCount;
+        this.roomOrRooms = this.getRoomOrRooms(this.roomCount);
+        this.floor = this.advertisement.apartment.floor;
+        this.adType = this.getAdType(this.advertisement.sale);
+        this.description = this.advertisement.description;
+        this.author = this.advertisement.author.firstName + " " + this.advertisement.author.lastName;
+        this.phone = this.advertisement.author.phone;
 
       },
       response => {
@@ -95,7 +96,7 @@ export class FullAdComponent implements OnInit {
     return result;
   }
 
-  switchHeartFill(){
+  switchHeartFill() {
     this.isHeartLocked = true;
     if (this.heartFill === "outline") {
       this.heartFill = "";

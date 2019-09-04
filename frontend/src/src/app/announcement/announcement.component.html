@@ -2,7 +2,10 @@
   <mat-card-header class="announcement-card__header">
 
 
-    <mat-card-title class="announcement-card__title">{{announcement.apartment.roomCount}} rooms, {{announcement.apartment.square}} m<sup><small>2</small></sup>, floor {{announcement.apartment.floor}}
+    <mat-card-title class="announcement-card__title">{{announcement.apartment.roomCount}}
+      rooms, {{announcement.apartment.square}} m<sup>
+        <small>2</small>
+      </sup>, floor {{announcement.apartment.floor}}
 
 
     </mat-card-title>
@@ -21,18 +24,32 @@
     <div class="announcement-card__content__string">
       {{getCreationDate()}}
     </div>
-    <img mat-card-lg-image class="announcement-card__image" src="http://recuperatorpro.ru/wp-content/uploads/2018/12/image.png" alt="test">
+    <img mat-card-lg-image class="announcement-card__image"
+         src="http://recuperatorpro.ru/wp-content/uploads/2018/12/image.png" alt="test">
   </mat-card-content>
+
+
   <mat-card-actions class="announcement-card__actions">
-    <button mat-icon-button aria-label="Example icon-button with a heart icon" class="announcement-card__favorites" (click)="addFavorites()">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-button (click)="delete()"><i class="material-icons">
-      delete
-    </i></button>
+    <div *ngIf="isFavorite" class="announcement-card__favorites">
+      <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon"
+              (click)="deleteFavorites()">
+        <mat-icon>favorite</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="!isFavorite" class="announcement-card__favorites">
+      <button mat-icon-button aria-label="Example icon-button with a heart icon"
+              (click)="addFavorites()">
+        <mat-icon>favorite</mat-icon>
+      </button>
+    </div>
 
-    <button mat-button class="announcement-card__edit"  (click)="edit()">Edit</button>
+    <div *ngIf="isEditable">
+      <button mat-button (click)="delete()"><i class="material-icons">
+        delete
+      </i></button>
 
+      <button mat-button class="announcement-card__edit" (click)="edit()">Edit</button>
+    </div>
   </mat-card-actions>
 
 

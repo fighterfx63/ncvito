@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Announcement} from "../models/announcement.model";
+import {LoginService} from "../sign-in/login.service";
+import {HttpService} from "../services/http.service";
 
 @Component({
   selector: 'ncvito-announcement',
@@ -9,14 +11,16 @@ import {Announcement} from "../models/announcement.model";
 export class AnnouncementComponent implements OnInit {
   announcements: Announcement[];
   creationDate: string;
+  isEditable: boolean;
 
-
-  constructor() {
+  constructor(private loginService: LoginService, private httpService: HttpService) {
 
   }
 
   @Input()
   announcement: Announcement;
+  @Input()
+  isFavorite: boolean;
 
 
   @Output()
@@ -24,9 +28,13 @@ export class AnnouncementComponent implements OnInit {
   @Output()
   private editEmitter = new EventEmitter<Announcement>();
   @Output()
-  private favoritesEmitter = new EventEmitter<Announcement>();
+  private AddFavoritesEmitter = new EventEmitter<Announcement>();
+  @Output()
+  private DeleteFavoritesEmitter = new EventEmitter<Announcement>();
 
   ngOnInit() {
+    console.log(this.isFavorite, this.announcement.id);
+    this.isEditable = this.loginService.getLogin() == this.announcement.author.login;
 
   }
 
@@ -44,7 +52,12 @@ export class AnnouncementComponent implements OnInit {
   }
 
   addFavorites(): void {
-    this.favoritesEmitter.emit(this.announcement);
+
+    this.AddFavoritesEmitter.emit(this.announcement);
+  }
+
+  deleteFavorites(): void {
+    this.DeleteFavoritesEmitter.emit(this.announcement);
   }
 
 

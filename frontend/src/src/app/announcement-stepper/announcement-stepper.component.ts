@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SnackbarService} from "../services/snackbar.service";
 import {HttpService} from "../services/http.service";
 
+
 @Component({
   selector: 'ncvito-announcement-stepper',
   templateUrl: './announcement-stepper.component.html',
@@ -15,7 +16,7 @@ import {HttpService} from "../services/http.service";
 
 })
 export class AnnouncementStepperComponent implements OnInit {
-  editAnnouncement : Announcement;
+  editAnnouncement: Announcement;
   apartment: Apartment = new Apartment('', undefined, undefined, undefined);
   announcement: Announcement = new Announcement(this.apartment, false, '', undefined, new Date());
   apartmentInfoFormGroup: FormGroup;
@@ -28,7 +29,7 @@ export class AnnouncementStepperComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.editAnnouncement = this.router.getCurrentNavigation().extras.state.event;
-        this.announcement=this.editAnnouncement;
+        this.announcement = this.editAnnouncement;
       }
     });
   }
@@ -65,7 +66,8 @@ export class AnnouncementStepperComponent implements OnInit {
   };
 
   edit(): void {
-    this.httpService.updateAnnoucements(this.editAnnouncement.id,this.announcement)
+
+    this.httpService.updateAnnoucements(this.editAnnouncement.id, this.announcement)
       .subscribe(data => {
         this.snackBarService.openSnackBar("Announcement edit  successfully", "OK");
         this.router.navigateByUrl("/");

@@ -5,31 +5,31 @@
     <p class="sign-up-form__text-header">Creating a new account</p>
 
     <mat-form-field class="sign-up-form__input">
-      <input type="text" matInput placeholder="First name" formControlName = "fNameF" required>
+      <input type="text" matInput placeholder="First name" formControlName="fNameF" required>
     </mat-form-field>
 
     <mat-form-field class="sign-up-form__input">
-      <input type="text" matInput placeholder="Last name" formControlName = "lNameF" required>
+      <input type="text" matInput placeholder="Last name" formControlName="lNameF" required>
     </mat-form-field>
 
     <mat-form-field class="sign-up-form__input">
-      <input type="text" matInput placeholder="Login (username)" formControlName = "loginF" required>
+      <input type="text" matInput placeholder="Login (username)" formControlName="loginF" required>
       <mat-error>{{getLoginErrorMessage()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="sign-up-form__input">
-      <input type="password" matInput placeholder="Password" formControlName = "passwordF" minlength="6" required>
+      <input type="password" matInput placeholder="Password" formControlName="passwordF" minlength="6" required>
       <mat-error>Password must be six characters or longer</mat-error>
     </mat-form-field>
 
     <mat-form-field class="sign-up-form__input">
-      <input type="text" matInput placeholder="Email" formControlName = "emailF" required>
+      <input type="text" matInput placeholder="Email" formControlName="emailF" required>
       <mat-error *ngIf="formGroup.get('emailF').invalid">{{getEmailErrorMessage()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="sign-up-form__input">
       <span matPrefix>+7 &nbsp;</span>
-      <input type="text" matInput placeholder="Phone" formControlName = "phoneF" required>
+      <input type="text" matInput placeholder="Phone" formControlName="phoneF" required>
       <mat-error *ngIf="formGroup.get('phoneF').invalid">{{getPhoneErrorMessage()}}</mat-error>
     </mat-form-field>
 

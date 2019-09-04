@@ -47,4 +47,9 @@ export class LoginService {
     this.storageService.delete('username');
     this.storageService.delete('token');
   }
+
+  public getLogin(): string {
+    return sessionStorage.getItem("username");
+  }
 }
+
