@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .authorizeRequests()
                 .mvcMatchers(HttpMethod.GET, "/announcements").permitAll()
-                .antMatchers("/registration", "/error", "/advertisement/*", "/index.html", "/", "/*.js").permitAll()
+                .antMatchers("/registration", "/error", "/announcements/findBy/*", "/announcements/findByGetLength/*", "/index.html", "/", "/*.js").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic()
                 .and().sessionManagement().disable();

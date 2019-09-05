@@ -5,6 +5,7 @@ import {HttpService} from "../services/http.service";
 import {SnackbarService} from "../services/snackbar.service";
 import {NavigationExtras, Router} from "@angular/router";
 import {LoginService} from "../sign-in/login.service";
+import {SearchService} from "../services/search.service";
 
 @Component({
   selector: 'ncvito-announcements-list',
@@ -16,14 +17,20 @@ export class AnnouncementsListComponent implements OnInit {
 
   pageDefault: number = 0;
   sizeDefault: number = 10;
+
+  pageIndex: number;
+  pageSize: number;
+
   isEditable: boolean;
+
   announcements: Announcement[];
   favorites: Announcement[];
+
   favoriteMap: Map<bigint, boolean> = new Map();
+
   numberOfElements: number;
 
   event: PageEvent = new PageEvent();
-
 
   setPage(event: PageEvent): PageEvent {
     event.pageSize = this.sizeDefault;
@@ -32,29 +39,47 @@ export class AnnouncementsListComponent implements OnInit {
     return event;
   }
 
-  constructor(private httpService: HttpService, private router: Router, private snackBarService: SnackbarService, private loginService: LoginService) {
-
+  constructor(
+    private httpService: HttpService,
+    private router: Router,
+    private snackBarService: SnackbarService,
+    private searchService: SearchService,
+    private loginService: LoginService) {
   }
 
   ngOnInit() {
+    this.searchService.subSearch().subscribe(
+      () => this.getData()
+    );
+
     this.getData(this.setPage(this.event));
     this.getFavorites();
-
   }
 
-  getData(event: PageEvent) {
-    this.httpService.getAllAnnouncements(event.pageIndex, event.pageSize)
-      .subscribe(response => {
+  getData(event?: PageEvent) {
+    if (event) {
+      this.pageIndex = event.pageIndex;
+      this.pageSize = event.pageSize;
+    }
+
+    let url = "/announcements/findBy/" + this.searchService.getUrl() + "@page_" + this.pageIndex + "_" + this.pageSize;
+    this.httpService.get(url).subscribe(
+      response => {
         this.announcements = response['content'];
+        this.snackBarService.openSnackBar(this.announcements.length + " results have been found", "OK");
         this.getNumberOfElements();
-      });
+      },
+      error => {
+        this.snackBarService.openSnackBar("Error! It was unable to apply filter. Please, try again", "OK");
+      }
+    )
   }
 
 
   getNumberOfElements() {
-    this.httpService.getAll().subscribe(response => {
-      this.numberOfElements = response['totalElements'];
-      console.log(this.numberOfElements);
+    let url = "/announcements/findByGetLength/" + this.searchService.getUrl();
+    this.httpService.get(url).subscribe(response => {
+      this.numberOfElements = response;
     });
   }
 
@@ -92,7 +117,6 @@ export class AnnouncementsListComponent implements OnInit {
         this.getFavorites();
         this.snackBarService.openSnackBar("announcement has been added to favorites", "OK");
       });
-    /*    location.reload();*/
   };
 
   getFavorites() {
@@ -120,6 +144,7 @@ export class AnnouncementsListComponent implements OnInit {
       });
   }
 
+
   deleteFavorites(event: Announcement) {
     console.log(event);
     this.httpService.deleteFavorites(event).subscribe(data => {
@@ -131,6 +156,3 @@ export class AnnouncementsListComponent implements OnInit {
   };
 
 }
-
-
-

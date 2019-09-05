@@ -1,0 +1,180 @@
+<div class="mat-dialog">
+
+  <form [formGroup]="formGroup">
+
+    <mat-accordion #accordion="matAccordion" [multi]="true">
+      <mat-expansion-panel (closed)="setAddressLabel()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Address:
+          </mat-panel-title>
+          <mat-panel-description class="mat-dialog__description">
+            {{data.address}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field class="mat-dialog__input-text">
+          <input matInput placeholder="Address" formControlName="address">
+        </mat-form-field>
+      </mat-expansion-panel>
+
+      <br>
+      <mat-expansion-panel (closed)="setPriceLabel()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Price, $:
+          </mat-panel-title>
+          <mat-panel-description class="mat-dialog__description">
+            {{data.priceLabel}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="mat-dialog__input-number">
+          <input matInput placeholder="From" formControlName="priceFrom" type="number" min="0" max="999999999999">
+        </mat-form-field>
+
+        <mat-form-field class="mat-dialog__input-number">
+          <input matInput placeholder="To" formControlName="priceTo" type="number" min="0" max="999999999999">
+        </mat-form-field>
+
+      </mat-expansion-panel>
+
+      <br>
+      <mat-expansion-panel (closed)="setSquareLabel()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Square, m<sup>
+            <small>2</small>
+          </sup>:
+          </mat-panel-title>
+          <mat-panel-description class="mat-dialog__description">
+            {{data.squareLabel}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="mat-dialog__input-number">
+          <input matInput placeholder="From" formControlName="squareFrom" type="number" min="0" max="1000">
+        </mat-form-field>
+
+        <mat-form-field class="mat-dialog__input-number">
+          <input matInput placeholder="To" formControlName="squareTo" type="number" min="0" max="1000">
+        </mat-form-field>
+
+      </mat-expansion-panel>
+
+      <br>
+      <mat-expansion-panel (closed)="setRoomCount()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Room count:
+          </mat-panel-title>
+          <mat-panel-description class="mat-dialog__description">
+            {{data.roomCountLabel}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <section class="mat-dialog__checkboxes">
+          <mat-checkbox [checked]="data.choseRoomCountArray[0]"
+                        (change)="changeRoomBoxesStatement(0)">Any
+          </mat-checkbox>
+          <mat-checkbox *ngFor="let room of roomList; let i = index"
+                        [checked]="data.choseRoomCountArray[i + 1]"
+                        (change)="changeRoomBoxesStatement(i + 1)"
+                        [disabled]="data.anyRoomCount">
+            {{room}}
+          </mat-checkbox>
+        </section>
+
+      </mat-expansion-panel>
+
+      <br>
+      <mat-expansion-panel (closed)="setFloorCount()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Floor:
+          </mat-panel-title>
+          <mat-panel-description class="mat-dialog__description">
+            {{data.floorCountLabel}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <section class="mat-dialog__checkboxes">
+          <mat-checkbox [checked]="data.choseFloorCountArray[0]"
+                        (change)="changeFloorBoxesStatement(0)">Any
+          </mat-checkbox>
+          <mat-checkbox *ngFor="let floor of floorList; let i = index"
+                        [checked]="data.choseFloorCountArray[i + 1]"
+                        (change)="changeFloorBoxesStatement(i + 1)"
+                        [disabled]="data.anyFloorCount">
+            {{floor}}
+          </mat-checkbox>
+        </section>
+
+      </mat-expansion-panel>
+
+      <br>
+      <mat-expansion-panel (closed)="setSortBy()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Sort by
+          </mat-panel-title>
+          <mat-panel-description class="mat-dialog__description">
+            {{data.sortByLabel}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <section class="mat-dialog__radio-buttons">
+          <mat-radio-button [checked]="data.choseSortBy[0]" (click)="changePriceSortOrder(data.choseSortBy[1])">
+            Price {{priceSortOrderLabel}}
+          </mat-radio-button>
+
+          <br>
+          <mat-radio-button [checked]="data.choseSortBy[2]" (click)="changeSquareSortOrder(data.choseSortBy[3])">
+            Square {{squareSortOrderLabel}}
+          </mat-radio-button>
+
+          <br>
+          <mat-radio-button [checked]="data.choseSortBy[4]" (click)="changeRoomSortOrder(data.choseSortBy[5])">
+            Room count {{roomSortOrderLabel}}
+          </mat-radio-button>
+
+          <br>
+          <mat-radio-button [checked]="data.choseSortBy[6]" (click)="changeFloorSortOrder(data.choseSortBy[7])">
+            Floor {{floorSortOrderLabel}}
+          </mat-radio-button>
+
+          <br>
+          <mat-radio-button [checked]="data.choseSortBy[8]" (click)="changeCreationDateSortOrder(data.choseSortBy[9])">
+            Creation date {{creationDateSortOrderLabel}}
+          </mat-radio-button>
+
+          <br>
+        </section>
+
+      </mat-expansion-panel>
+
+      <br>
+      <div class="mat-dialog__buttons">
+
+        <button mat-button
+                [disabled]="isClearClicked"
+                (click)="accordion.closeAll()"
+                (click)="clearValues()">
+          Clear
+        </button>
+
+        <button mat-raised-button
+                [disabled]="isSubmitClicked"
+                (click)="accordion.closeAll()"
+                (click)="submit()">
+          Apply
+        </button>
+
+      </div>
+      <br>
+
+    </mat-accordion>
+
+  </form>
+
+</div>
+

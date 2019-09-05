@@ -83,15 +83,17 @@ export class FullAdComponent implements OnInit {
     }
   }
 
-  makePriceParsed(price: number) {
-    let result: string = price.toString();
+  makePriceParsed(price: number) { // subsidiary method
+    let result = price.toString();
 
     let count: number = (result.length / 3 | 0);
-    let temp: number = result.length - 3;
+    let temp = result.length - 3;
 
     for (let i = 0; i < count; i++) {
-      result = result.substring(0, temp) + "," + result.substring(temp, result.length);
-      temp = temp - 3;
+      if (temp !== 0) {
+        result = result.substring(0, temp) + "," + result.substring(temp, result.length);
+        temp = temp - 3;
+      }
     }
     return result;
   }
