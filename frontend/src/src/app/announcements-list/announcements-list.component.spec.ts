@@ -12,6 +12,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {UserListComponent} from "../user-list/user-list.component";
 import {NavComponent} from "../nav/nav.component";
+import {AdSearchComponent} from "../usefull-buttons/ad-search/ad-search.component";
 
 describe('AnnouncementsListComponent', () => {
   let component: AnnouncementsListComponent;
@@ -19,7 +20,7 @@ describe('AnnouncementsListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent, NotFoundComponent, AnnouncementComponent, AnnouncementsListComponent, UserListComponent, NavComponent],
+      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent, NotFoundComponent, AnnouncementComponent, AnnouncementsListComponent, UserListComponent, NavComponent, AdSearchComponent],
       imports: [
         SharedModule,
         HttpClientTestingModule,

@@ -22,7 +22,7 @@ import {UserListComponent} from './user-list/user-list.component';
     NotFoundComponent,
     AnnouncementComponent,
     AnnouncementsListComponent,
-    UserListComponent
+    UserListComponent,
 
   ],
   imports: [

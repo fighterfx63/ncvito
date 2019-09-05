@@ -4,8 +4,6 @@ import nc.students.ncvito.entity.Announcement;
 import nc.students.ncvito.service.AnnouncementService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +19,11 @@ public class AnnouncementController {
     }
 
     @GetMapping
-    public Page<Announcement> getAllAnnouncements(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
+    public Page<Announcement> getAllAnnouncements(Pageable pageable) {
         return announcementService.findAll(pageable);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public Announcement getAnnouncement(@PathVariable("id") long id) {
         return announcementService.findById(id);
     }
@@ -46,7 +44,17 @@ public class AnnouncementController {
         return announcementService.create(announcement, authentication);
     }
 
+    @GetMapping("/findBy/{filter}")
+    public Page<Announcement> getFilteredAds(@PathVariable("filter") String filter) {
+        return announcementService.findByFilter(filter);
+    }
 
+    @GetMapping("/findByGetLength/{filter}")
+    public long getFilteredAdsLength(@PathVariable("filter") String filter) {
+        return announcementService.getListOfAnnouncements(
+                announcementService.makeSearchCriteriaList(filter)
+        ).size();
+    }
 }
 
 

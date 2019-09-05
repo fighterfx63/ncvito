@@ -13,6 +13,7 @@ import {NotFoundComponent} from "../not-found/not-found.component";
 import {AnnouncementComponent} from "../announcement/announcement.component";
 import {AnnouncementsListComponent} from "../announcements-list/announcements-list.component";
 import {UserListComponent} from "../user-list/user-list.component";
+import {AdSearchComponent} from "../usefull-buttons/ad-search/ad-search.component";
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -20,7 +21,7 @@ describe('NavComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent, NotFoundComponent, AnnouncementComponent, AnnouncementsListComponent, UserListComponent, NavComponent],
+      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent, NotFoundComponent, AnnouncementComponent, AnnouncementsListComponent, UserListComponent, NavComponent, AdSearchComponent],
 
       imports: [
         SharedModule,

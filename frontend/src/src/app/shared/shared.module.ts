@@ -14,12 +14,15 @@ import {
   MatGridListModule,
   MatIconModule,
   MatMenuModule,
-  MatPaginatorModule, MatRadioModule,
+  MatPaginatorModule,
+  MatRadioModule,
   MatSnackBarModule,
   MatStepperModule,
   MatTableModule,
-  MatOptionModule, MatSelectModule
-
+  MatOptionModule,
+  MatExpansionModule,
+  MatCheckboxModule,
+  MatSelectModule, MatDialogModule
 } from '@angular/material'
 
 
@@ -39,15 +42,15 @@ const modules = [
   MatStepperModule,
   MatMenuModule,
   MatIconModule,
-  MatMenuModule,
-  MatIconModule,
   MatGridListModule,
   MatPaginatorModule,
   MatRadioModule,
   MatTableModule,
   MatOptionModule,
-  MatSelectModule
-
+  MatExpansionModule,
+  MatCheckboxModule,
+  MatSelectModule,
+  MatDialogModule
 ];
 
 @NgModule({

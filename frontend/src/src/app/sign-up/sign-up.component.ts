@@ -18,9 +18,9 @@ export class SignUpComponent implements OnInit {
 
   constructor(private httpService: HttpService, private router: Router, private snackBarService: SnackbarService) {
 
-    this.isClicked = false;
+  this.isClicked = false;
 
-    this.formGroup = new FormGroup({
+  this.formGroup = new FormGroup( {
         fNameF: new FormControl(''),
         lNameF: new FormControl(''),
         loginF: new FormControl(''),
@@ -28,6 +28,7 @@ export class SignUpComponent implements OnInit {
         emailF: new FormControl('', [Validators.email]),
         phoneF: new FormControl('', [Validators.pattern('[6-9]\\d{9}')]),
       }
+
     );
   }
 
@@ -46,7 +47,7 @@ export class SignUpComponent implements OnInit {
 
   getLoginErrorMessage() {
     return this.formGroup.get('loginF').hasError('pattern') ? 'This username has been already used' :
-      '';
+        '';
   }
 
   submit() {
@@ -58,9 +59,9 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
-    var theUser = new UserModel(this.formGroup.get('fNameF').value,
+    let theUser = new UserModel( this.formGroup.get('fNameF').value,
       this.formGroup.get('lNameF').value,
-      this.formGroup.get('loginF').value,
+      this.formGroup.get('loginF').value.toString().replace(/\s/g,''),
       this.formGroup.get('passwordF').value,
       this.formGroup.get('emailF').value,
       "8" + this.formGroup.get('phoneF').value
@@ -70,7 +71,7 @@ export class SignUpComponent implements OnInit {
       () => {
         console.log("You have been signed up successfully");
         this.snackBarService.openSnackBar("You have been signed up successfully", "OK");
-        this.router.navigateByUrl("/");
+        this.router.navigateByUrl("/sign-in");
         this.isClicked = false;
       },
       response => {
