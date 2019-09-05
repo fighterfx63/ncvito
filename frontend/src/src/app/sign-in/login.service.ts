@@ -11,6 +11,7 @@ export class LoginService {
   }
 
   private redirectUrl = '';
+  isAdmin: boolean = false;
 
   public getRedirectUrl(): string {
     try {
@@ -33,6 +34,7 @@ export class LoginService {
       map(
         userData => {
           this.storageService.write('username', username);
+          this.storageService.write('role', userData['role'])
           return userData;
         }
       )
@@ -46,10 +48,19 @@ export class LoginService {
   public logOut(): void {
     this.storageService.delete('username');
     this.storageService.delete('token');
+    this.storageService.delete('role');
+    this.isAdmin = false;
   }
 
   public getLogin(): string {
     return sessionStorage.getItem("username");
+  }
+
+  isCurrentUserAdmin(){
+    if (this.storageService.read('role') == 'ADMIN'){
+      this.isAdmin = true;
+      console.log('user is admin');
+    }
   }
 }
 

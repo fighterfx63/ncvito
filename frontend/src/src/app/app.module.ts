@@ -11,6 +11,9 @@ import {UsefulButtonsModule} from './usefull-buttons/useful-buttons.module';
 import {AnnouncementComponent} from './announcement/announcement.component';
 import {AnnouncementsListComponent} from './announcements-list/announcements-list.component';
 import {UserListComponent} from './user-list/user-list.component';
+import {MatListModule} from "@angular/material";
+import {AnnouncementModule} from "./announcement/announcement.module";
+import {ProfileModule} from "./profile/profile.module";
 
 @NgModule({
   declarations: [
@@ -20,15 +23,15 @@ import {UserListComponent} from './user-list/user-list.component';
     FullAdComponent,
     AnnouncementStepperComponent,
     NotFoundComponent,
-    AnnouncementComponent,
     AnnouncementsListComponent,
-    UserListComponent,
-
   ],
   imports: [
     SharedModule,
     SignInModule,
-    UsefulButtonsModule
+    UsefulButtonsModule,
+    MatListModule,
+    ProfileModule,
+    AnnouncementModule
   ],
   exports: [],
   providers: [],

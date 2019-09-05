@@ -4,6 +4,8 @@ import nc.students.ncvito.entity.Announcement;
 import nc.students.ncvito.service.AnnouncementService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +57,17 @@ public class AnnouncementController {
                 announcementService.makeSearchCriteriaList(filter)
         ).size();
     }
+
+    @GetMapping("created")
+    public Page<Announcement> getAllAnnouncementsByAuthor(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, Authentication authentication) {
+        return announcementService.findAllByAuthor(pageable, authentication);
+    }
+
+    @GetMapping("my_favorites")
+    public Page<Announcement> getFavoritesByUser(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, Authentication authentication) {
+        return announcementService.getFavoriteAds(pageable, authentication);
+    }
+
 }
 
 
