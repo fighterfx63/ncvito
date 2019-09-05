@@ -38,6 +38,7 @@ export class FullAdComponent implements OnInit {
 
   ngOnInit() {
     this.ad_ID = this.route.snapshot.paramMap.get('id');
+    this.checkIfTheAdIsFavorite();
 
     this.getTheAdvertisement();
   }
@@ -101,11 +102,27 @@ export class FullAdComponent implements OnInit {
   switchHeartFill() {
     this.isHeartLocked = true;
     if (this.heartFill === "outline") {
-      this.heartFill = "";
-      this.openSnackBar("This advertisement is your favorite now", "OK");
+
+      this.httpService.post('/announcements/favorites/' + this.ad_ID, this.advertisement)
+        .subscribe(data => {
+            this.heartFill = "";
+            this.openSnackBar("This advertisement is your favorite now", "OK");
+          },
+          error1 => {
+            this.openSnackBar("Error! It was unable to add the announcement to your Favorites", "OK");
+          });
+
     } else {
-      this.heartFill = "outline";
-      this.openSnackBar("This advertisement is not your favorite one anymore", "OK");
+
+      this.httpService.deleteFavorites(this.advertisement).subscribe(
+        data => {
+          this.heartFill = "outline";
+          this.openSnackBar("This advertisement is not your favorite one anymore", "OK");
+        },
+        error1 => {
+          this.openSnackBar("Error! It was unable to remove the announcement from your Favorites", "OK");
+        });
+
     }
     this.isHeartLocked = false;
   }
@@ -114,6 +131,17 @@ export class FullAdComponent implements OnInit {
     this._snackBar.open(message, action, {
       duration: 3000
     });
+  }
+
+  checkIfTheAdIsFavorite() {
+    this.httpService.get("/announcements/favorites/checkIfTheAdIsFavorite/" + this.ad_ID, null, this.advertisement).subscribe(
+      () => {
+        this.heartFill = "";
+      },
+      error1 => {
+        this.heartFill = "outline";
+      }
+    )
   }
 
 }

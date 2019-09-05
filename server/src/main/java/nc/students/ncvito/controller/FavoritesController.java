@@ -34,5 +34,10 @@ public class FavoritesController {
         announcementService.deleteFavorites(announcement, authentication);
     }
 
+    @GetMapping("/checkIfTheAdIsFavorite/{ad}")
+    public Announcement checkIfTheAdIsFavorite(@PathVariable("ad") Announcement announcement, Authentication authentication) {
+        return announcementService.checkIfTheAdIsFavorite(announcement, authentication);
+    }
+
 }
 
