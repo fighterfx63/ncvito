@@ -9,11 +9,11 @@
       <mat-icon>search</mat-icon>
     </button>
 
-    <button routerLink="/create" mat-icon-button class="material-icons" *ngIf="common">
+    <button routerLink="/create" mat-icon-button class="material-icons" *ngIf="common && loginService.isLoggedIn()">
       <mat-icon>add</mat-icon>
     </button>
 
-    <button routerLink="/favorites" mat-icon-button class="material-icons" *ngIf="common">
+    <button routerLink="/profile" mat-icon-button class="material-icons" *ngIf="common && loginService.isLoggedIn()">
       <mat-icon>favorite</mat-icon>
     </button>
 

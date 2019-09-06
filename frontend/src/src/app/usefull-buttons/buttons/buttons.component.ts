@@ -5,6 +5,7 @@ import {AdSearchComponent} from "../ad-search/ad-search.component";
 import {MatDialog} from "@angular/material";
 import {DialogDataModel} from "../ad-search/models/dialog-data-model";
 import {SearchService} from "../../services/search.service";
+import {LoginService} from "../../sign-in/login.service";
 
 @Component({
   selector: 'ncvito-buttons',
@@ -16,7 +17,8 @@ export class ButtonsComponent {
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private searchService: SearchService) {
+    private searchService: SearchService,
+    private loginService: LoginService) {
 
     router.events.pipe(
       filter((event: any) => event instanceof NavigationEnd)

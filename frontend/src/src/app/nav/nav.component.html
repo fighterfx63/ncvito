@@ -1,4 +1,4 @@
-<div class="nav-header">
+<div class="nav-header" (mouseover)="loginService.isCurrentUserAdmin()">
 
   <a mat-button>
     <h3 class="nav-header__title" routerLink="/">{{appTitle}}</h3>
@@ -16,7 +16,7 @@
 
     <li class="nav-header__menu-links" *ngIf="loginService.isLoggedIn()">
       <mat-menu #menu="matMenu">
-        <a mat-menu-item routerLink="/profile">Profile</a>
+        <a mat-menu-item routerLink="/profile" (click)="loginService.isCurrentUserAdmin()">Profile</a>
         <button (click)="loginService.logOut()" mat-menu-item routerLink="/announcements">Sign Out</button>
       </mat-menu>
       <button class="nav-header__menu-links-authorized" mat-button [matMenuTriggerFor]="menu">{{username()}}</button>

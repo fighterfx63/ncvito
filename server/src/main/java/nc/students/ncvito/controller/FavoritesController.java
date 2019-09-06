@@ -2,6 +2,10 @@ package nc.students.ncvito.controller;
 
 import nc.students.ncvito.entity.Announcement;
 import nc.students.ncvito.service.AnnouncementService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +15,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/announcements/favorites")
 public class FavoritesController {
-
 
     private final AnnouncementService announcementService;
 

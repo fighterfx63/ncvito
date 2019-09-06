@@ -85,6 +85,25 @@ export class HttpService {
     return this.http.get(environment.url + '/announcements/');
   }
 
+  public getAllCreated() {
+    const headers = this.getHeaders();
+    return this.http.get(environment.url + '/announcements/created/',{headers});
+  }
+
+  public getCurrentUserAnnouncements(page,size){
+    const headers = this.getHeaders();
+    return this.http.get(`${environment.url}/announcements/created?page=${page}&size=${size}`,{headers});
+  }
+
+  public getFavorites(page, size) {
+    const headers = this.getHeaders();
+    return this.http.get(`${environment.url}/announcements/my_favorites?page=${page}&size=${size}`, {headers});
+  }
+
+  public getAllMyFavorites() {
+    const headers = this.getHeaders();
+    return this.http.get(environment.url + '/announcements/my_favorites/', {headers});
+  }
 
   public deleteAnnouncements(announcement) {
     const headers = this.getHeaders();

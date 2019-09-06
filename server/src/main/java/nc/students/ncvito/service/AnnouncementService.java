@@ -246,11 +246,22 @@ public class AnnouncementService {
         return result;
     }
 
-    public Announcement checkIfTheAdIsFavorite(Announcement announcement, Authentication authentication) {
+    public Page<Announcement> findAllByAuthor(Pageable pageable, Authentication authentication) {
         User user = userRepository.findByLogin(authentication.getName())
                 .orElseThrow(() -> new IllegalStateException("User with login " + authentication.getName() + " not found."));
-        Favorites fav = favoritesRepository.findByAnnouncementAndUser(announcement, user);
-        return fav.getAnnouncement();
+        return announcementRepository.findAllByAuthor(user, pageable);
+    }
+
+    public Page<Announcement> getFavoriteAds(Pageable pageable, Authentication authentication){
+        User user = userRepository.findByLogin(authentication.getName())
+                .orElseThrow(() -> new IllegalStateException("User with login " + authentication.getName() + " not found."));
+        List<Announcement> announcementList=new ArrayList<>();
+        List<Favorites> favoritesList= favoritesRepository.findAllByUser(user);
+        for (Favorites favorites: favoritesList) {
+            announcementList.add(favorites.getAnnouncement());
+        }
+        Page<Announcement> page = new PageImpl<>(announcementList, pageable, announcementList.size());
+        return page;
     }
 
 }

@@ -7,6 +7,7 @@ import {SignInComponent} from './sign-in/sign-in.component';
 import {AnnouncementStepperComponent} from "./announcement-stepper/announcement-stepper.component";
 import {NotFoundComponent} from "./not-found/not-found.component";
 import {AnnouncementsListComponent} from "./announcements-list/announcements-list.component";
+import {ProfileComponent} from "./profile/profile.component";
 
 const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'sign-in', component: SignInComponent},
   {path: 'create', component: AnnouncementStepperComponent},
   {path: 'announcements', component: AnnouncementsListComponent},
+  {path: 'profile', component: ProfileComponent},
   {path: '', component: AnnouncementsListComponent},
   {path: '**', component: NotFoundComponent}
 ];

@@ -1,0 +1,21 @@
+<div class = "container" (mouseover)="loginService.isCurrentUserAdmin()">
+
+  <mat-card class = "container__profile-card">
+    <mat-card-title class="container__profile-card-title">Profile</mat-card-title>
+    <mat-list class="container__profile-card__menu">
+      <a mat-button class = container__profile-card__menu-links (click)="showFavorites()">Favorites</a>
+      <a mat-button class = container__profile-card__menu-links (click)="showApp()">My announcements</a>
+      <a mat-button *ngIf="loginService.isAdmin" class = container__profile-card__menu-links (click)="showUserList()">User list</a>
+    </mat-list>
+  </mat-card>
+  <mat-card class = "container__announcements-card" *ngIf="showFav">
+    <mat-card-title class="container__announcements-card-title">Favorites</mat-card-title>
+    <ncvito-favorites></ncvito-favorites>
+  </mat-card>
+  <mat-card class = "container__announcements-card" *ngIf="show">
+    <mat-card-title class="container__announcements-card-title">My announcements</mat-card-title>
+    <ncvito-my-announcements></ncvito-my-announcements>
+  </mat-card>
+  <ncvito-user-list class="container__user-list" *ngIf="showAdmPan"></ncvito-user-list>
+
+</div>
