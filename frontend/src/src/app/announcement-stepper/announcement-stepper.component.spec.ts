@@ -14,6 +14,7 @@ import {UserListComponent} from "../user-list/user-list.component";
 import {HttpService} from "../services/http.service";
 import {of} from "rxjs";
 import {NavComponent} from "../nav/nav.component";
+import {AdSearchComponent} from "../usefull-buttons/ad-search/ad-search.component";
 
 describe('AnnouncementStepperComponent', () => {
   let component: AnnouncementStepperComponent;
@@ -21,7 +22,7 @@ describe('AnnouncementStepperComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent, NotFoundComponent, AnnouncementComponent, AnnouncementsListComponent, UserListComponent, NavComponent],
+      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent, NotFoundComponent, AnnouncementComponent, AnnouncementsListComponent, UserListComponent, NavComponent, AdSearchComponent],
       imports: [
         SharedModule,
         HttpClientTestingModule,
@@ -30,7 +31,6 @@ describe('AnnouncementStepperComponent', () => {
     })
       .compileComponents();
   }));
-
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AnnouncementStepperComponent);

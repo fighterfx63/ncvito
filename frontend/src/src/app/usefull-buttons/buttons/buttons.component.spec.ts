@@ -12,6 +12,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {UsefulButtonsModule} from "../useful-buttons.module";
+import {AdSearchComponent} from "../ad-search/ad-search.component";
 
 describe('ButtonsComponent', () => {
   let component: ButtonsComponent;
@@ -27,7 +28,8 @@ describe('ButtonsComponent', () => {
         NotFoundComponent,
         AnnouncementComponent,
         AnnouncementsListComponent,
-        ButtonsComponent
+        ButtonsComponent,
+        AdSearchComponent
       ],
       imports: [
         SharedModule,

@@ -21,11 +21,11 @@ public class AnnouncementController {
     }
 
     @GetMapping
-    public Page<Announcement> getAllAnnouncements(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
+    public Page<Announcement> getAllAnnouncements(Pageable pageable) {
         return announcementService.findAll(pageable);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public Announcement getAnnouncement(@PathVariable("id") long id) {
         return announcementService.findById(id);
     }
@@ -46,6 +46,27 @@ public class AnnouncementController {
         return announcementService.create(announcement, authentication);
     }
 
+    @GetMapping("/findBy/{filter}")
+    public Page<Announcement> getFilteredAds(@PathVariable("filter") String filter) {
+        return announcementService.findByFilter(filter);
+    }
+
+    @GetMapping("/findByGetLength/{filter}")
+    public long getFilteredAdsLength(@PathVariable("filter") String filter) {
+        return announcementService.getListOfAnnouncements(
+                announcementService.makeSearchCriteriaList(filter)
+        ).size();
+    }
+
+    @GetMapping("created")
+    public Page<Announcement> getAllAnnouncementsByAuthor(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, Authentication authentication) {
+        return announcementService.findAllByAuthor(pageable, authentication);
+    }
+
+    @GetMapping("my_favorites")
+    public Page<Announcement> getFavoritesByUser(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, Authentication authentication) {
+        return announcementService.getFavoriteAds(pageable, authentication);
+    }
 
 }
 

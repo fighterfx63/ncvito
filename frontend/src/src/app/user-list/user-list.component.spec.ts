@@ -12,11 +12,10 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {AppRoutingModule} from "../app-routing.module";
 import {SharedModule} from "../shared/shared.module";
 import {UserModel} from "../models/user.model";
-import {StorageService} from "../services/storage.service";
-import {Mock} from "protractor/built/driverProviders";
 import {HttpService} from "../services/http.service";
 import {of} from "rxjs";
 import {NavComponent} from "../nav/nav.component";
+import {AdSearchComponent} from "../usefull-buttons/ad-search/ad-search.component";
 
 describe('UserListComponent', () => {
   let component: UserListComponent;
@@ -29,7 +28,7 @@ describe('UserListComponent', () => {
     spyHttpService.getAllUsers.and.returnValue(of([]));
     TestBed.configureTestingModule({
       providers: [{provide: HttpService, useValue: spyHttpService}],
-      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent, NotFoundComponent, AnnouncementComponent, AnnouncementsListComponent, UserListComponent, NavComponent],
+      declarations: [FullAdComponent, SignUpComponent, SignInComponent, AnnouncementStepperComponent, NotFoundComponent, AnnouncementComponent, AnnouncementsListComponent, UserListComponent, NavComponent, AdSearchComponent],
 
       imports: [
         HttpClientTestingModule,

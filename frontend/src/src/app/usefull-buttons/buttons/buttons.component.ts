@@ -1,7 +1,11 @@
 import {Component} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
-
+import {AdSearchComponent} from "../ad-search/ad-search.component";
+import {MatDialog} from "@angular/material";
+import {DialogDataModel} from "../ad-search/models/dialog-data-model";
+import {SearchService} from "../../services/search.service";
+import {LoginService} from "../../sign-in/login.service";
 
 @Component({
   selector: 'ncvito-buttons',
@@ -10,14 +14,20 @@ import {filter} from 'rxjs/operators';
 })
 export class ButtonsComponent {
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private searchService: SearchService,
+    private loginService: LoginService) {
+
     router.events.pipe(
       filter((event: any) => event instanceof NavigationEnd)
     ).subscribe(event => {
       this.changeState(event.url);
     });
-  }
 
+    this.dialogDataModel = new DialogDataModel();
+  }
 
   private currentUrl: string;
   private arrow: boolean;
@@ -26,6 +36,8 @@ export class ButtonsComponent {
   private download: boolean;
   private searchShown: boolean;
 
+  private dialogDataModel: DialogDataModel;
+
   private changeState(event: string) {
     this.currentUrl = event;
     if (event === '/announcements' || event === '/') {
@@ -33,6 +45,7 @@ export class ButtonsComponent {
       this.arrow = this.download = false;
     } else {
       if (event.search('/announcement') !== -1) {
+        this.searchShown = false;
         this.download = this.common = this.arrow = true;
         this.search = false;
       } else {
@@ -46,17 +59,37 @@ export class ButtonsComponent {
       this.router.navigateByUrl('/announcements');
     } else {
       this.searchShown = false;
+      this.arrow = false;
+      this.search = true;
     }
   }
 
   private searchClicked() {
     this.searchShown = true;
-    this.arrow = true;
-    this.search = false;
+    this.openDialog();
   }
 
   // TODO: add component for extracting page
   private downloadClicked() {
+  }
+
+  private openDialog(): void {
+    const dialogRef = this.dialog.open(AdSearchComponent, {
+      maxWidth: '550px',
+      height: 'auto',
+      data: this.dialogDataModel
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.dialogDataModel = result;
+        this.searchService.setUrl(this.dialogDataModel.filterURL);
+
+        this.searchService.beginSearch();
+      }
+
+    });
+
   }
 
 }

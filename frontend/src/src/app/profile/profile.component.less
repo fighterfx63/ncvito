@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: row;
+
+  &__profile-card {
+    clear-side: left;
+    margin: 20px;
+    min-width: 200px;
+    width: 215px;
+    height: 500px;
+    color: rgba(108, 108, 108, 0.65);
+
+    &-title {
+      padding-left: 20px;
+      font-size: xx-large;
+      margin-bottom: 20px;
+
+    }
+
+    &__menu {
+      display: inline-list-item;
+      //flex-direction: column;
+      margin-left: 5px;
+
+      &-links {
+        margin-bottom: 10px;
+        margin-right: 20px;
+        font-size: large;
+      }
+    }
+  }
+  &__announcements-card {
+    position: relative;
+    margin-top: 20px;
+    margin-left: 10px;
+    min-width: 300px;
+    max-width: 90%;
+    width: 85%;
+    height: 800px;
+    color: rgba(108,108,108,0.65);
+
+    &-title {
+      margin-bottom: 20px;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    &__grid-list{
+      position: center;
+    }
+  }
+
+  &__user-list{
+    margin-top: 20px;
+  }
+}
