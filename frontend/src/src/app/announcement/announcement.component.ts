@@ -12,6 +12,7 @@ export class AnnouncementComponent implements OnInit {
   announcements: Announcement[];
   creationDate: string;
   isEditable: boolean;
+  isLogin:boolean;
 
   constructor(private loginService: LoginService, private httpService: HttpService) {
 
@@ -35,6 +36,8 @@ export class AnnouncementComponent implements OnInit {
   ngOnInit() {
     console.log(this.isFavorite, this.announcement.id);
     this.isEditable = this.loginService.getLogin() == this.announcement.author.login;
+    this.isLogin=this.loginService.getLogin()!=null;
+
 
   }
 

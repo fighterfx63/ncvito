@@ -30,6 +30,7 @@
 
 
   <mat-card-actions class="announcement-card__actions">
+    <div *ngIf="isLogin">
     <div *ngIf="isFavorite" class="announcement-card__favorites">
       <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon"
               (click)="deleteFavorites()">
@@ -49,6 +50,7 @@
       </i></button>
 
       <button mat-button class="announcement-card__edit" (click)="edit()">Edit</button>
+    </div>
     </div>
   </mat-card-actions>
 
