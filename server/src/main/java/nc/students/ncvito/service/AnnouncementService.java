@@ -245,6 +245,15 @@ public class AnnouncementService {
         List<Announcement> result = entityManager.createQuery(query).getResultList();
         return result;
     }
+    
+    public Announcement checkIfTheAdIsFavorite(Announcement announcement, Authentication authentication) {
+        User user = userRepository.findByLogin(authentication.getName())
+                .orElseThrow(() -> new IllegalStateException("User with login " + authentication.getName() + " not found."));
+        Favorites fav = favoritesRepository.findByAnnouncementAndUser(announcement, user);
+        return fav.getAnnouncement();
+    }
+
+}
 
     public Page<Announcement> findAllByAuthor(Pageable pageable, Authentication authentication) {
         User user = userRepository.findByLogin(authentication.getName())
