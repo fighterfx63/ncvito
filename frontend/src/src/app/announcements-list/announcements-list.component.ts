@@ -149,7 +149,7 @@ export class AnnouncementsListComponent implements OnInit {
     console.log(event);
     this.httpService.deleteFavorites(event).subscribe(data => {
       this.getFavorites();
-      this.snackBarService.openSnackBar("announcement has been delete to favorites", "OK");
+      this.snackBarService.openSnackBar("announcement has been delete from favorites", "OK");
 
     });
 
